@@ -6638,4 +6638,105 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tvMoviesAndSeries => 'Movies & Series';
+
+  @override
+  String get settingsProfilesAndAccount => 'Profiles & account';
+
+  @override
+  String settingsWatchingAs(String name, String status) {
+    return 'Watching as $name · $status';
+  }
+
+  @override
+  String get settingsSourcePriority => 'Source Priority';
+
+  @override
+  String get settingsSourcePrioritySubtitle =>
+      'Order Auto Resolve tries sources in';
+
+  @override
+  String get settingsGroupLook => 'Look';
+
+  @override
+  String get settingsGroupLayout => 'Layout';
+
+  @override
+  String get settingsGroupLanguage => 'Language';
+
+  @override
+  String get settingsThemeColour => 'Theme & colour';
+
+  @override
+  String get settingsThemeColourSubtitle => 'Accent colour, dark mode and font';
+
+  @override
+  String get settingsIconSplashBanner => 'Icon, splash & banner';
+
+  @override
+  String get settingsIconSplashBannerSubtitle =>
+      'How the app looks before you open it';
+
+  @override
+  String get settingsPosterCards => 'Poster cards';
+
+  @override
+  String get settingsPosterCardsSubtitle => 'Shape and labels for title cards';
+
+  @override
+  String get settingsSearchStyle => 'Search style';
+
+  @override
+  String get settingsSearchStyleSubtitle => 'Choose Classic or New for search';
+
+  @override
+  String get settingsSearchStyleNew => 'New';
+
+  @override
+  String get settingsSearchStyleClassic => 'Classic';
+
+  @override
+  String get settingsSearchLayoutSubtitle =>
+      'How results from different sources line up';
+
+  @override
+  String get settingsHomeRowsSubtitle =>
+      'Which rows show on Home, and their order';
+
+  @override
+  String get settingsBatchDownloadSubtitle =>
+      'How the sheet looks when you grab a batch of episodes';
+
+  @override
+  String get tvTabAnime => 'Anime';
+
+  @override
+  String tvEpisodeCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count episodes',
+      one: '$count episode',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String contWatchEpisodeSubtitle(String number) {
+    return 'Episode $number';
+  }
+
+  @override
+  String contWatchEpisodeProgress(String number, int percent) {
+    return 'Episode $number · $percent% watched';
+  }
+
+  @override
+  String get onboardingSignedIn => 'You\'re signed in';
+
+  @override
+  String get onboardingContinueWithoutAccount => 'Continue without an account';
+
+  @override
+  String get onboardingLocalOnlyNote =>
+      'Your data stays on this phone. An account syncs My List and history between devices.';
 }

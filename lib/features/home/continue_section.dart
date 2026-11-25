@@ -12,6 +12,7 @@ import '../../core/ui/content_row.dart';
 import '../../core/ui/continue_card.dart';
 import '../../core/ui/disintegrating_poster.dart';
 import '../../core/ui/placement_slide.dart';
+import '../../l10n/l10n.dart';
 
 /// Identity for an exiting continue card. Plain `sourceId::showId` — the set
 /// only lives for the animation inside this row, so it needs a stable string,
@@ -212,7 +213,7 @@ class ContinueWatchingRow extends StatelessWidget {
     }
     return SliverToBoxAdapter(
       child: ContentRow(
-        title: 'Продолжить просмотр',
+        title: context.l10n.continueWatching,
         // Compact 16:9 landscape card — same design, just smaller/tighter.
         itemWidth: 190,
         itemHeight: 107,
@@ -232,7 +233,9 @@ class ContinueWatchingRow extends StatelessWidget {
             progress: e.progress,
             cellWidth: 190,
             subtitle: e.episodeNumber != null
-                ? 'Серия ${e.episodeNumber!.toInt()}'
+                ? context.l10n.contWatchEpisodeSubtitle(
+                    '${e.episodeNumber!.toInt()}',
+                  )
                 : null,
             onTap: () => onResume(e),
             onLongPress: () => onLongPress(e),
@@ -279,7 +282,7 @@ class ContinueReadingRow extends StatelessWidget {
     }
     return SliverToBoxAdapter(
       child: ContentRow(
-        title: 'Продолжить чтение',
+        title: context.l10n.continueReading,
         // Compact horizontal "keep reading" chip (cover + title + chapter +
         // slim progress bar, NOT the landscape Continue Watching card nor a
         // full portrait poster — smaller and its own shape for reading.

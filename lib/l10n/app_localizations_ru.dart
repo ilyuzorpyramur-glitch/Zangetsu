@@ -135,7 +135,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dragDownToDismiss => 'Перетащите вниз, чтобы закрыть';
 
   @override
-  String get releaseToDismiss => 'Отпустить, чтобы уволить';
+  String get releaseToDismiss => 'Отпустите, чтобы закрыть';
 
   @override
   String get refresh => 'Обновить';
@@ -195,7 +195,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dub => 'Озвучка';
 
   @override
-  String get nsfw => 'НФВ';
+  String get nsfw => 'NSFW';
 
   @override
   String get system => 'Система';
@@ -355,7 +355,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get connections => 'Подключения';
 
   @override
-  String get discord => 'Раздор';
+  String get discord => 'Discord';
 
   @override
   String get discordSubtitle => 'Rich Presence — покажите свой статус';
@@ -418,7 +418,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get presenceButtonLabel => 'Текст кнопки';
 
   @override
-  String get presenceButtonLabelHint => 'Открыто в Зангецу';
+  String get presenceButtonLabelHint => 'Открыто в Zangetsu';
 
   @override
   String get presenceShowWhenPaused => 'Показывать во время паузы';
@@ -720,7 +720,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get installCloudStreamSources => 'Установите исходники CloudStream';
 
   @override
-  String get connectionsTvSubtitle => 'АниЛист, МойАнимеЛист, Симкл';
+  String get connectionsTvSubtitle => 'AniList, MyAnimeList, Simkl';
 
   @override
   String get profile => 'Профиль';
@@ -1062,7 +1062,7 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get bootErrorTitle => 'Зангецу не закончил, начиная';
+  String get bootErrorTitle => 'Zangetsu не удалось запустить';
 
   @override
   String get bootErrorBody =>
@@ -1076,7 +1076,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get resetAppDataBody =>
-      'При этом все, что Зангецу сохранил на этом устройстве, будет удалено, и оно сможет начать заново.\n\nВаша учетная запись и все, что синхронизируется с облаком, не будет затронуто — войдите в систему еще раз, и ваша библиотека вернется.';
+      'При этом всё, что Zangetsu сохранил на этом устройстве, будет удалено, и оно сможет начать заново.\n\nВаша учетная запись и все, что синхронизируется с облаком, не будет затронуто — войдите в систему еще раз, и ваша библиотека вернется.';
 
   @override
   String get resetAppDataDone =>
@@ -1623,7 +1623,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Отключите Material You, чтобы выбрать цвет самостоятельно';
 
   @override
-  String get downloadsZangetsu => 'Загрузки › Зангецу';
+  String get downloadsZangetsu => 'Загрузки › Zangetsu';
 
   @override
   String get removableDrive => 'Съёмный диск';
@@ -2442,7 +2442,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Также присылайте свои трекеры (AniList, MyAnimeList, Simkl)';
 
   @override
-  String get yourTVIsSignedIn => 'Ваш телевизор выполнен в системе';
+  String get yourTVIsSignedIn => 'Телевизор подключён к аккаунту';
 
   @override
   String get itShouldSwitchToYourAccountInAMoment =>
@@ -2653,7 +2653,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get aniyomiIsnTAvailableOnThisDevice =>
-      'Функция «Аниеми» недоступна на этом устройстве.';
+      'Aniyomi недоступен на этом устройстве.';
 
   @override
   String get installed => 'Установлено';
@@ -2719,7 +2719,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Исходники CloudStream не установлены.';
 
   @override
-  String get cloudstream => 'облачный поток';
+  String get cloudstream => 'CloudStream';
 
   @override
   String get sourceSettings => 'Настройки источника';
@@ -2812,7 +2812,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Поставщик будет удален из установленных источников.';
 
   @override
-  String get addMihonRepo => 'Добавить репозиторий Михона';
+  String get addMihonRepo => 'Добавить репозиторий Mihon';
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
@@ -6700,4 +6700,108 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tvMoviesAndSeries => 'Фильмы и сериалы';
+
+  @override
+  String get settingsProfilesAndAccount => 'Профили и аккаунт';
+
+  @override
+  String settingsWatchingAs(String name, String status) {
+    return 'Профиль: $name · $status';
+  }
+
+  @override
+  String get settingsSourcePriority => 'Приоритет источников';
+
+  @override
+  String get settingsSourcePrioritySubtitle =>
+      'Порядок, в котором Автовыбор перебирает источники';
+
+  @override
+  String get settingsGroupLook => 'Вид';
+
+  @override
+  String get settingsGroupLayout => 'Раскладка';
+
+  @override
+  String get settingsGroupLanguage => 'Язык';
+
+  @override
+  String get settingsThemeColour => 'Тема и цвет';
+
+  @override
+  String get settingsThemeColourSubtitle =>
+      'Акцентный цвет, тёмная тема и шрифт';
+
+  @override
+  String get settingsIconSplashBanner => 'Иконка, заставка и баннер';
+
+  @override
+  String get settingsIconSplashBannerSubtitle =>
+      'Как приложение выглядит до запуска';
+
+  @override
+  String get settingsPosterCards => 'Карточки плакатов';
+
+  @override
+  String get settingsPosterCardsSubtitle => 'Форма и подписи карточек тайтлов';
+
+  @override
+  String get settingsSearchStyle => 'Стиль поиска';
+
+  @override
+  String get settingsSearchStyleSubtitle => 'Классический или новый поиск';
+
+  @override
+  String get settingsSearchStyleNew => 'Новый';
+
+  @override
+  String get settingsSearchStyleClassic => 'Классический';
+
+  @override
+  String get settingsSearchLayoutSubtitle =>
+      'Как выстраиваются результаты из разных источников';
+
+  @override
+  String get settingsHomeRowsSubtitle =>
+      'Какие ряды видны на главной и в каком порядке';
+
+  @override
+  String get settingsBatchDownloadSubtitle =>
+      'Как выглядит окно при выборе пачки серий';
+
+  @override
+  String get tvTabAnime => 'Аниме';
+
+  @override
+  String tvEpisodeCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count серии',
+      many: '$count серий',
+      few: '$count серии',
+      one: '$count серия',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String contWatchEpisodeSubtitle(String number) {
+    return 'Серия $number';
+  }
+
+  @override
+  String contWatchEpisodeProgress(String number, int percent) {
+    return 'Серия $number · просмотрено $percent%';
+  }
+
+  @override
+  String get onboardingSignedIn => 'Вы вошли в аккаунт';
+
+  @override
+  String get onboardingContinueWithoutAccount => 'Продолжить без аккаунта';
+
+  @override
+  String get onboardingLocalOnlyNote =>
+      'Данные хранятся только на этом телефоне. Аккаунт синхронизирует «Мой список» и историю между устройствами.';
 }

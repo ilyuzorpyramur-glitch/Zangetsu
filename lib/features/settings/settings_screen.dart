@@ -470,8 +470,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final selected = await showDialog<String>(
       context: context,
       builder: (ctx) => _TvOptionPicker<String>(
-        title: 'Search style',
-        options: const [('classic', 'Classic'), ('new', 'New')],
+        title: context.l10n.settingsSearchStyle,
+        options: [
+          ('classic', context.l10n.settingsSearchStyleClassic),
+          ('new', context.l10n.settingsSearchStyleNew),
+        ],
         current: prefs.tvSearchStyle,
       ),
     );
@@ -708,7 +711,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 _accountRow(
                   onTap: () => _push(const ViewerProfilesScreen()),
                   autofocus: _isTv,
-                  semanticLabel: 'Profiles & account',
+                  semanticLabel: context.l10n.settingsProfilesAndAccount,
                   avatar: CircleAvatar(
                     radius: 24,
                     backgroundColor: viewerProfileAvatarColor(profile.avatar),
@@ -722,8 +725,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       photoDiameter: 48,
                     ),
                   ),
-                  title: 'Profiles & account',
-                  subtitle: 'Watching as ${profile.name} · $accountStatus',
+                  title: context.l10n.settingsProfilesAndAccount,
+                  subtitle: context.l10n.settingsWatchingAs(
+                    profile.name,
+                    accountStatus,
+                  ),
                   trailing: const Icon(
                     Icons.chevron_right_rounded,
                     color: AppColors.textTertiary,
@@ -985,8 +991,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _SettingsEntry(
       section: SettingsSection.sources,
       icon: Icons.low_priority_rounded,
-      title: 'Source Priority',
-      subtitle: 'Order Auto Resolve tries sources in',
+      title: l10n.settingsSourcePriority,
+      subtitle: l10n.settingsSourcePrioritySubtitle,
       keywords: 'source priority order auto resolve sweep anime movies tv',
       onTap: () => _push(const SourcePriorityScreen()),
     ),
@@ -1103,10 +1109,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _SettingsEntry(
       section: SettingsSection.interface,
       id: LeafParent.appearance,
-      group: 'Look',
+      group: l10n.settingsGroupLook,
       icon: Icons.palette_outlined,
-      title: 'Theme & colour',
-      subtitle: 'Accent colour, dark mode and font',
+      title: l10n.settingsThemeColour,
+      subtitle: l10n.settingsThemeColourSubtitle,
       keywords:
           'appearance accent colour color theme highlight personalise '
           'dark amoled black font type animation motion',
@@ -1131,10 +1137,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!_isTv)
       _SettingsEntry(
         section: SettingsSection.interface,
-        group: 'Look',
+        group: l10n.settingsGroupLook,
         icon: Icons.auto_awesome_outlined,
-        title: 'Icon, splash & banner',
-        subtitle: 'How the app looks before you open it',
+        title: l10n.settingsIconSplashBanner,
+        subtitle: l10n.settingsIconSplashBannerSubtitle,
         keywords:
             'app icon launcher splash startup animation bankai wordmark '
             'home banner card panels face',
@@ -1142,10 +1148,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Look',
+      group: l10n.settingsGroupLook,
       icon: Icons.view_carousel_outlined,
-      title: 'Poster cards',
-      subtitle: 'Shape and labels for title cards',
+      title: l10n.settingsPosterCards,
+      subtitle: l10n.settingsPosterCardsSubtitle,
       keywords:
           'poster landscape portrait wide badges quality sub dub '
           'score genre age 18 progress customize cards',
@@ -1154,17 +1160,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (!_isTv)
       _SettingsEntry(
         section: SettingsSection.interface,
-        group: 'Layout',
+        group: l10n.settingsGroupLayout,
         icon: Icons.view_agenda_outlined,
         title: l10n.homeRows,
-        subtitle: 'Which rows show on Home, and their order',
+        subtitle: l10n.settingsHomeRowsSubtitle,
         keywords: 'home rows order hide show continue watching trending',
         onTap: () => _push(const HomeRowsScreen()),
       ),
     if (!_isTv)
       _SettingsEntry(
         section: SettingsSection.interface,
-        group: 'Layout',
+        group: l10n.settingsGroupLayout,
         icon: Icons.dashboard_customize_outlined,
         title: l10n.navigationBar,
         subtitle: l10n.navigationBarSubtitle,
@@ -1176,32 +1182,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (_isTv)
       _SettingsEntry(
         section: SettingsSection.interface,
-        group: 'Layout',
+        group: l10n.settingsGroupLayout,
         icon: Icons.keyboard_alt_outlined,
-        title: 'Search style',
-        subtitle: 'Choose Classic or New for search',
+        title: l10n.settingsSearchStyle,
+        subtitle: l10n.settingsSearchStyleSubtitle,
         keywords: 'tv search style keyboard classic new alphabet letters input',
         trailing: _value(
-          sl<SearchPrefs>().tvSearchStyle == 'new' ? 'New' : 'Classic',
+          sl<SearchPrefs>().tvSearchStyle == 'new'
+              ? l10n.settingsSearchStyleNew
+              : l10n.settingsSearchStyleClassic,
         ),
         onTap: _pickTvSearchStyle,
       ),
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Layout',
+      group: l10n.settingsGroupLayout,
       icon: Icons.grid_view_rounded,
       title: l10n.searchLayout,
-      subtitle: 'How results from different sources line up',
+      subtitle: l10n.settingsSearchLayoutSubtitle,
       keywords: 'search layout grid list results view interface',
       trailing: _value(sl<SearchPrefs>().layout.localizedLabel(context)),
       onTap: _pickSearchLayout,
     ),
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Layout',
+      group: l10n.settingsGroupLayout,
       icon: Icons.download_rounded,
       title: l10n.batchDownloadStyle,
-      subtitle: 'How the sheet looks when you grab a batch of episodes',
+      subtitle: l10n.settingsBatchDownloadSubtitle,
       keywords:
           'batch download style sheet minimal classic wheel episodes multi',
       trailing: _value(
@@ -1213,7 +1221,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ),
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Language',
+      group: l10n.settingsGroupLanguage,
       icon: Icons.translate_rounded,
       title: l10n.titleLanguage,
       subtitle: l10n.titleLanguageSubtitle,
@@ -1229,7 +1237,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // is what keeps the two entry points from drifting apart.
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Language',
+      group: l10n.settingsGroupLanguage,
       icon: Icons.hub_outlined,
       title: l10n.metadata,
       subtitle: _malNeedsLogin ? l10n.malLoginForLists : l10n.metadataSubtitle,
@@ -1242,7 +1250,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         HomeCataloguePrefs.stremioSelected
             ? 'Stremio'
             : HomeCataloguePrefs.sourceSelected
-            ? 'Source Catalogue'
+            ? l10n.metadataSourceCatalogue
             : '${_animeProviderLabel()} · ${_videoProviderLabel()}',
       ),
       onTap: () async {
@@ -1266,7 +1274,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ),
     _SettingsEntry(
       section: SettingsSection.interface,
-      group: 'Language',
+      group: l10n.settingsGroupLanguage,
       icon: Icons.language_rounded,
       title: l10n.appLanguage,
       subtitle: l10n.appLanguageSubtitle,
@@ -1707,7 +1715,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               // Pop the section via cubit — don't Navigator.pop (that used to
               // bubble to the TV shell and leave the Settings tab entirely).
               TvFocusable(
-                semanticLabel: 'Back',
+                semanticLabel: context.l10n.back,
                 onTap: _settingsCubit.back,
                 child: ExcludeSemantics(
                   child: Padding(

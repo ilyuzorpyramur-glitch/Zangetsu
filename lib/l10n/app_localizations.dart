@@ -11375,6 +11375,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Movies & Series'**
   String get tvMoviesAndSeries;
+
+  /// No description provided for @settingsProfilesAndAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Profiles & account'**
+  String get settingsProfilesAndAccount;
+
+  /// No description provided for @settingsWatchingAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching as {name} · {status}'**
+  String settingsWatchingAs(String name, String status);
+
+  /// No description provided for @settingsSourcePriority.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Priority'**
+  String get settingsSourcePriority;
+
+  /// No description provided for @settingsSourcePrioritySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Auto Resolve tries sources in'**
+  String get settingsSourcePrioritySubtitle;
+
+  /// No description provided for @settingsGroupLook.
+  ///
+  /// In en, this message translates to:
+  /// **'Look'**
+  String get settingsGroupLook;
+
+  /// No description provided for @settingsGroupLayout.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get settingsGroupLayout;
+
+  /// No description provided for @settingsGroupLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsGroupLanguage;
+
+  /// No description provided for @settingsThemeColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme & colour'**
+  String get settingsThemeColour;
+
+  /// No description provided for @settingsThemeColourSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accent colour, dark mode and font'**
+  String get settingsThemeColourSubtitle;
+
+  /// No description provided for @settingsIconSplashBanner.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon, splash & banner'**
+  String get settingsIconSplashBanner;
+
+  /// No description provided for @settingsIconSplashBannerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How the app looks before you open it'**
+  String get settingsIconSplashBannerSubtitle;
+
+  /// No description provided for @settingsPosterCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Poster cards'**
+  String get settingsPosterCards;
+
+  /// No description provided for @settingsPosterCardsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shape and labels for title cards'**
+  String get settingsPosterCardsSubtitle;
+
+  /// No description provided for @settingsSearchStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search style'**
+  String get settingsSearchStyle;
+
+  /// No description provided for @settingsSearchStyleSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Classic or New for search'**
+  String get settingsSearchStyleSubtitle;
+
+  /// No description provided for @settingsSearchStyleNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get settingsSearchStyleNew;
+
+  /// No description provided for @settingsSearchStyleClassic.
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get settingsSearchStyleClassic;
+
+  /// No description provided for @settingsSearchLayoutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How results from different sources line up'**
+  String get settingsSearchLayoutSubtitle;
+
+  /// No description provided for @settingsHomeRowsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Which rows show on Home, and their order'**
+  String get settingsHomeRowsSubtitle;
+
+  /// No description provided for @settingsBatchDownloadSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How the sheet looks when you grab a batch of episodes'**
+  String get settingsBatchDownloadSubtitle;
+
+  /// No description provided for @tvTabAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime'**
+  String get tvTabAnime;
+
+  /// No description provided for @tvEpisodeCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} episode} other{{count} episodes}}'**
+  String tvEpisodeCount(int count);
+
+  /// No description provided for @contWatchEpisodeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {number}'**
+  String contWatchEpisodeSubtitle(String number);
+
+  /// No description provided for @contWatchEpisodeProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {number} · {percent}% watched'**
+  String contWatchEpisodeProgress(String number, int percent);
+
+  /// No description provided for @onboardingSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re signed in'**
+  String get onboardingSignedIn;
+
+  /// No description provided for @onboardingContinueWithoutAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue without an account'**
+  String get onboardingContinueWithoutAccount;
+
+  /// No description provided for @onboardingLocalOnlyNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data stays on this phone. An account syncs My List and history between devices.'**
+  String get onboardingLocalOnlyNote;
 }
 
 class _AppLocalizationsDelegate

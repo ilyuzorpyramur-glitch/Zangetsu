@@ -267,7 +267,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         tab(
-                          'Аниме',
+                          context.l10n.tvTabAnime,
                           'tv-home-tab-anime',
                           !_sourceCatalogueSelected &&
                               ZModePrefs.streamKind == StreamKind.anime,
@@ -276,7 +276,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                           ),
                         ),
                         tab(
-                          'Фильмы и сериалы',
+                          context.l10n.tvMoviesAndSeries,
                           'tv-home-tab-movie',
                           !_sourceCatalogueSelected &&
                               ZModePrefs.streamKind == StreamKind.movie,
@@ -285,7 +285,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                           ),
                         ),
                         tab(
-                          'Каталог источников',
+                          context.l10n.metadataSourceCatalogue,
                           'tv-home-tab-source',
                           _sourceCatalogueSelected &&
                               !HomeCataloguePrefs.stremioSelected,

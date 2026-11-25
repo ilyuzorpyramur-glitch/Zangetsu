@@ -108,6 +108,7 @@ import '../tracker/relay/tracker_relay.dart';
 import '../app_mode.dart';
 import '../backup/backup_service.dart';
 import '../backup/sources_backup.dart';
+import '../backup/sources_sync.dart';
 import '../backup/library_backup.dart';
 import '../backup/settings_backup.dart';
 import '../download/chapter_download_store.dart';
@@ -841,23 +842,42 @@ Future<void> initDependencies({bool Function()? isOffline}) async {
   sl.registerSingleton<ProviderReposRegistry>(repos);
   sl.registerSingleton<ProviderSettingsRepository>(settings);
   sl.registerSingleton<ProviderRegistry>(registry);
+  // One codec instance for both paths: the explicit backup screen exports it,
+  // and SourcesSync ships the very same payload to the account. Two codecs
+  // would means two notions of "installed sources", which is exactly the drift
+  // this is meant to remove.
+  final sourcesBackup = SourcesBackup(
+    sl<ProviderReposRegistry>(),
+    sl<ProviderRegistry>(),
+    sl.isRegistered<CloudStreamManager>() ? sl<CloudStreamManager>() : null,
+    aniyomi: AniyomiExtensionService(),
+    mihon: MihonExtensionService(),
+    lnreader: lnrService,
+    mangayomi: mangayomiManager,
+  );
   sl.registerSingleton<BackupService>(
     BackupService(
-      SourcesBackup(
-        sl<ProviderReposRegistry>(),
-        sl<ProviderRegistry>(),
-        sl.isRegistered<CloudStreamManager>() ? sl<CloudStreamManager>() : null,
-        aniyomi: AniyomiExtensionService(),
-        mihon: MihonExtensionService(),
-        lnreader: lnrService,
-        mangayomi: mangayomiManager,
-      ),
+      sourcesBackup,
       LibraryBackup(),
       SettingsBackup(),
       stremio: () => sl<StremioBackup>(),
       authorize: () => (sl<ProfileLockStore>() as SyncedProfileLockStore)
           .requireBackupAccess(),
     ),
+  );
+  sl.registerSingleton<SourcesSync>(
+    SourcesSync(
+      sourcesBackup,
+      currentUserId,
+      remote: SourcesSyncRemote(
+        sl<SupabaseService>(),
+        vpsClient: vpsClient,
+        accessToken: cloudAccessToken,
+      ),
+      // Mangayomi installs and removals don't go through a Hive box this
+      // service watches, so its notifier is the signal for them.
+      signals: [mangayomiManager],
+    )..attach(),
   );
 
   // Load bundled extractor BEFORE the providers so getVideoSources can resolve.

@@ -1193,6 +1193,17 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
                                       for (final n in detail.cast)
                                         CastMember(name: n),
                                     ],
+                              // Characters are the one tab whose cards were
+                              // also the one D-pad dead end: plain
+                              // GestureDetector cells, nothing focusable.
+                              onOpenPerson: (ref) => Navigator.of(context)
+                                  .push(
+                                    PersonPage.route(
+                                      ref,
+                                      sourceId: item.sourceId,
+                                    ),
+                                  ),
+                              tvFocus: true,
                             ),
                             // ── Relations ──────────────────────────────────
                             _RelationsTab(

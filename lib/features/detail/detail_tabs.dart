@@ -54,7 +54,12 @@ class _PressableCardState extends State<_PressableCard> {
 }
 
 class _CastTab extends StatelessWidget {
-  const _CastTab({required this.cast, this.onOpenPerson, this.loading = false});
+  const _CastTab({
+    required this.cast,
+    this.onOpenPerson,
+    this.loading = false,
+    this.tvFocus = false,
+  });
   final List<CastMember> cast;
 
   /// Still fetching. Cast arrives on its own request after the detail does, so
@@ -66,6 +71,12 @@ class _CastTab extends StatelessWidget {
   /// (character/actor). Cards without a person id (source-supplied cast) stay
   /// non-tappable.
   final void Function(PersonRef)? onOpenPerson;
+
+  /// When true, each card is wrapped in [TvFocusable] so D-pad can navigate the
+  /// grid and OK opens the person — same treatment [_RelationsTab.tvFocus]
+  /// gives the relations grid. Defaults to false: no phone caller passes it, so
+  /// the phone render stays byte-identical.
+  final bool tvFocus;
 
   @override
   Widget build(BuildContext context) {
@@ -187,8 +198,27 @@ class _CastTab extends StatelessWidget {
           ],
         );
         final ref = m.person;
-        if (ref == null || onOpenPerson == null) return card;
-        return _PressableCard(onTap: () => onOpenPerson!(ref), child: card);
+        final open = onOpenPerson;
+        if (tvFocus) {
+          // A card with no person has nothing to open, so it stays out of the
+          // focus order — the same reason it isn't tappable on the phone. A
+          // card that CAN open still gets focus, which is what makes the tab
+          // reachable by remote at all.
+          if (ref == null || open == null) return card;
+          return TvFocusable(
+            key: ValueKey('tv-cast-${m.name}-$i'),
+            variant: TvFocusVariant.float,
+            scale: 1.04,
+            borderRadius: 12,
+            onTap: () => open(ref),
+            semanticLabel: (m.role != null && m.role!.isNotEmpty)
+                ? '${m.name}, ${MetaRu.instance.text(m.role)}'
+                : m.name,
+            child: ExcludeSemantics(child: card),
+          );
+        }
+        if (ref == null || open == null) return card;
+        return _PressableCard(onTap: () => open(ref), child: card);
       },
     );
   }

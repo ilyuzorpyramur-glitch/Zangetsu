@@ -567,7 +567,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Restore to cloud'),
+            child: Text(context.l10n.profileRestoreToCloud),
           ),
         ],
       ),

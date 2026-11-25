@@ -338,7 +338,7 @@ class _TvHeroState extends State<_TvHero> {
               ...m.genres.take(3).map(MetaRu.instance.text),
             ];
             if (m.episodeCount > 1) {
-              parts.add('${m.episodeCount} Серии');
+              parts.add(context.l10n.tvEpisodeCount(m.episodeCount));
             } else if ((m.year ?? '').isNotEmpty) {
               parts.add(m.year!);
             }
@@ -372,7 +372,7 @@ class _TvHeroState extends State<_TvHero> {
         Icon(Icons.play_arrow_rounded, color: AppColors.bg, size: 24),
         const SizedBox(width: 8),
         Text(
-          'Смотреть',
+          context.l10n.tvWatch,
           style: TextStyle(
             fontFamily: AppText.fontFamily,
             fontFamilyFallback: AppText.fontFamilyFallback,

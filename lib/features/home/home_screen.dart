@@ -629,11 +629,14 @@ class _HomeViewState extends State<_HomeView> {
       headers: e.coverHeaders,
       detail: _detailOf(e.showUrl, e.sourceId),
       inMyList: _myList.contains(stub),
-      playLabel: 'Продолжить',
+      playLabel: context.l10n.continueLabel,
       progress: e.progress,
       progressLabel: e.episodeNumber != null
-          ? 'Серия ${e.episodeNumber!.toInt()} · $pct% просмотрено'
-          : '$pct% просмотрено',
+          ? context.l10n.contWatchEpisodeProgress(
+              '${e.episodeNumber!.toInt()}',
+              pct,
+            )
+          : context.l10n.percentWatched(pct),
       onPlay: () => _resume(e),
       onOpenDetail: () => _openDetail(stub),
       onToggleMyList: () async {

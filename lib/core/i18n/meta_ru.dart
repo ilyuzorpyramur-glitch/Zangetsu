@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:collection';
+import 'dart:ui' show PlatformDispatcher;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../locale/locale_controller.dart';
 import '../metadata/tmdb.dart';
 import '../translation/plain_text_translation_service.dart';
 
@@ -68,6 +70,24 @@ class MetaRu extends ChangeNotifier {
   bool get isReady => _ready;
   int get knownCount => _cache.length;
 
+  /// Whether Russian metadata should be shown at all.
+  ///
+  /// This service is the RUSSIAN layer over catalogue metadata — genres,
+  /// statuses, cast roles, synopses. It has no idea which UI language the app
+  /// is in, and it used to answer every caller unconditionally, so an English
+  /// (or German, or Arabic) interface showed Russian genre chips and Russian
+  /// roles. Gate the whole layer on the current app language instead of at
+  /// each of the ~40 call sites: [text] and [synopsis] then return the
+  /// original English string, which is exactly right for a non-Russian build.
+  ///
+  /// "System (auto)" needs the device locale, which is only reachable through
+  /// the platform dispatcher — that is why this is a getter, not a constant.
+  static bool get isRussian {
+    final tag = LocaleController.tag;
+    if (tag != LocaleController.systemTag) return tag == 'ru';
+    return PlatformDispatcher.instance.locale.languageCode == 'ru';
+  }
+
   Future<void> init() async {
     try {
       _box = Hive.isBoxOpen(boxName)
@@ -90,6 +110,7 @@ class MetaRu extends ChangeNotifier {
   String text(String? raw) {
     final t = (raw ?? '').trim();
     if (t.isEmpty) return '';
+    if (!isRussian) return t;
     final vocab = _vocab[_norm(t)];
     if (vocab != null) return vocab;
     if (!_needsTranslation(t)) return t;
@@ -100,6 +121,7 @@ class MetaRu extends ChangeNotifier {
   /// the title's [malId] / [tmdbId] for an official translation when possible.
   String synopsis(String? raw, {int? malId, int? tmdbId, bool tmdbIsTv = false}) {
     final t = (raw ?? '').trim();
+    if (!isRussian) return t;
     final idKey = _synopsisKey(malId: malId, tmdbId: tmdbId, tmdbIsTv: tmdbIsTv);
     if (idKey != null) {
       final hit = _cache[idKey];
@@ -112,7 +134,7 @@ class MetaRu extends ChangeNotifier {
 
   /// Queue a translation for a short metadata string. Safe from `build`.
   void request(String? raw, {bool label = true}) {
-    if (!_ready) return;
+    if (!_ready || !isRussian) return;
     final t = (raw ?? '').trim();
     if (t.isEmpty || t.length > 2400) return;
     if (!_needsTranslation(t)) return;
@@ -133,7 +155,7 @@ class MetaRu extends ChangeNotifier {
     int? tmdbId,
     bool tmdbIsTv = false,
   }) {
-    if (!_ready) return;
+    if (!_ready || !isRussian) return;
     final t = (text ?? '').trim();
     final idKey = _synopsisKey(malId: malId, tmdbId: tmdbId, tmdbIsTv: tmdbIsTv);
     if (idKey != null) {

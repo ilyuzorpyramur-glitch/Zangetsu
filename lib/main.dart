@@ -18,6 +18,7 @@ import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 import 'core/analytics/analytics.dart';
 import 'core/app_config.dart';
 import 'core/app_mode.dart';
+import 'core/backup/sources_sync.dart';
 import 'core/boot_network.dart';
 import 'core/di/injector.dart';
 import 'core/ui/splash_style.dart';
@@ -790,6 +791,7 @@ class _WatchAppState extends State<WatchApp> with WidgetsBindingObserver {
         sl<MyListStore>().seedCloudIfNeeded(),
         sl<WatchHistory>().seedCloudIfNeeded(),
         sl<ReadHistory>().seedCloudIfNeeded(),
+        sl<SourcesSync>().seedCloudIfNeeded(),
       ]).timeout(const Duration(seconds: 8));
       if (!isCurrentUser() || sl<ViewerProfileStore>().activeId != profileId) {
         return;
@@ -801,6 +803,10 @@ class _WatchAppState extends State<WatchApp> with WidgetsBindingObserver {
         sl<CategoryStore>().pullFromCloudIfStale(maxAge: _syncFreshness),
         sl<SeriesGroupStore>().pullFromCloudIfStale(maxAge: _syncFreshness),
       ]).timeout(const Duration(seconds: 6));
+      // Not in the Future.wait above: the source restore installs extensions,
+      // which can take far longer than the library pull and must not be cut
+      // off by its 6-second budget.
+      unawaited(sl<SourcesSync>().pullFromCloud());
       if (!isCurrentUser() || sl<ViewerProfileStore>().activeId != profileId) {
         return;
       }
@@ -835,10 +841,15 @@ class _WatchAppState extends State<WatchApp> with WidgetsBindingObserver {
         await sl<MyListStore>().seedCloudIfNeeded();
         await sl<WatchHistory>().seedCloudIfNeeded();
         await sl<ReadHistory>().seedCloudIfNeeded();
+        await sl<SourcesSync>().seedCloudIfNeeded();
         await sl<MyListStore>().pullFromCloud();
         await sl<WatchHistory>().pullFromCloud();
         await sl<ReadHistory>().pullFromCloud();
         await sl<CategoryStore>().pullFromCloud();
+        // Sources are device-wide, not per profile, and the restore re-fetches
+        // repos over the network — last, so a slow source never holds up the
+        // list/history the user actually opened the app for.
+        unawaited(sl<SourcesSync>().pullFromCloud());
         unawaited(
           Future.wait([
             sl<MyListStore>().retryPending(),
