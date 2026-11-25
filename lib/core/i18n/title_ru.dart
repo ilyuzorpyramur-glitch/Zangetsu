@@ -118,7 +118,11 @@ class TitleRu extends ChangeNotifier {
   void request(String title, {int? year, bool anime = true, int? malId}) {
     if (!_ready) return;
     final t = title.trim();
-    if (t.length < 2 || t.length > 120) return;
+    // AniList's romaji titles run long — the full official name of a 2026
+    // series easily passes 120 characters, and those were silently skipped
+    // (never requested, never shown in Russian). The search itself only ever
+    // uses trimmed-down variants, so the ceiling can be generous.
+    if (t.length < 2 || t.length > 400) return;
     if (!_latin.hasMatch(t) && !_cyrillic.hasMatch(t)) return;
     if (_cyrillic.hasMatch(t)) {
       // Already Russian — nothing to do, but remember it so the row above

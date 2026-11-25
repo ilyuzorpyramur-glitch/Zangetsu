@@ -20,7 +20,12 @@ Future<void> main(List<String> args) async {
   for (final k in empties) {
     print('EMPTY: $k');
   }
-  for (final k in box.keys.take(10)) {
+  for (final k in box.keys) {
+    if ('$k'.contains('tsuih') || '$k'.length > 90) {
+      print('LONG: $k => ${box.get(k)}');
+    }
+  }
+  for (final k in box.keys.take(3)) {
     print('$k => ${box.get(k)}');
   }
   exit(0);
