@@ -31,6 +31,7 @@ class LocaleController {
     ('tr', 'Türkçe'),
     ('id', 'Bahasa Indonesia'),
     ('ar', 'العربية'),
+    ('ru', 'Русский'),
   ];
 
   static Box get _box => Hive.box(boxName);
@@ -109,6 +110,7 @@ class LocaleController {
       Locale('de'),
       Locale('fr'),
       Locale('it'),
+      Locale('ru'),
     ]);
     if (resolved.languageCode == 'zh' && resolved.countryCode == 'TW') {
       return nativeNameFor('zh_TW')!;
