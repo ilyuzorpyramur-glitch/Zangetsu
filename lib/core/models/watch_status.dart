@@ -7,24 +7,11 @@ extension WatchStatusX on WatchStatus {
   /// Persisted key (the enum name).
   String get key => name;
 
-  /// Human label for the sheet + section headers.
-  String get label => switch (this) {
-    WatchStatus.planning => 'В планах',
-    WatchStatus.watching => 'Смотрю',
-    WatchStatus.completed => 'Завершено',
-    WatchStatus.paused => 'Отложено',
-    WatchStatus.dropped => 'Брошено',
-  };
-
-  /// Short label for filter chips / section headers.
-  String get shortLabel => switch (this) {
-    WatchStatus.planning => 'Планы',
-    WatchStatus.watching => 'Смотрю',
-    WatchStatus.completed => 'Завершено',
-    WatchStatus.paused => 'Отложено',
-    WatchStatus.dropped => 'Брошено',
-  };
-
+  // NOTE: display labels are NOT here any more. They live in
+  // `lib/l10n/ui_strings.dart` (`watchStatusLabel` / `watchStatusShortLabel`),
+  // because this file used to hold Russian literals that leaked into every
+  // other UI language. Only the persisted key and the per-tracker protocol
+  // values below stay on the enum — those are data, never display text.
   /// AniList `MediaListStatus` value.
   String get anilist => switch (this) {
     WatchStatus.planning => 'PLANNING',
@@ -53,40 +40,10 @@ extension WatchStatusX on WatchStatus {
   };
 }
 
-/// [WatchStatusX.label], but reading-aware: in a reading mode (manga/novel),
-/// Watching reads as "Reading" and Plan to Watch as "Plan to Read" —
-/// Completed/Paused/Dropped don't need a reading-specific word, so they pass
-/// through unchanged. Display-only: the persisted [WatchStatusX.key] (the
-/// enum `.name`) never changes, so cloud sync/backup are untouched.
-String labelFor(WatchStatus s, {required bool reading}) {
-  if (!reading) return s.label;
-  return switch (s) {
-    WatchStatus.watching => 'Читаю',
-    WatchStatus.planning => 'В планах',
-    WatchStatus.completed || WatchStatus.paused || WatchStatus.dropped => s.label,
-  };
-}
-
-/// [WatchStatusX.shortLabel], but reading-aware — the compact form used by the
-/// My List status tabs, where "Plan to Read" is too wide. Only `watching`
-/// needs a reading word ("Reading"); `planning` already reads fine as
-/// "Planning" in both modes. Display-only, exactly like [labelFor]:
-/// `reading: false` is byte-identical to [WatchStatusX.shortLabel].
-String shortLabelFor(WatchStatus s, {required bool reading}) {
-  if (!reading) return s.shortLabel;
-  return switch (s) {
-    WatchStatus.watching => 'Читаю',
-    WatchStatus.planning ||
-    WatchStatus.completed ||
-    WatchStatus.paused ||
-    WatchStatus.dropped => s.shortLabel,
-  };
-}
-
 /// [WatchStatusX.mal], but reading-aware: MyAnimeList's manga list uses
 /// `reading`/`plan_to_read` instead of `watching`/`plan_to_watch` —
-/// `completed`/`on_hold`/`dropped` are shared. Mirrors [labelFor]'s pattern;
-/// `reading: false` is byte-identical to [WatchStatusX.mal].
+/// `completed`/`on_hold`/`dropped` are shared. Protocol data, like [WatchStatusX.mal],
+/// so `reading: false` is byte-identical to it.
 String malStatusFor(WatchStatus s, {required bool reading}) {
   if (!reading) return s.mal;
   return switch (s) {

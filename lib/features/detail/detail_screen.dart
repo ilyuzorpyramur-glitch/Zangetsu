@@ -141,6 +141,7 @@ import '../trailer/trailer_screen.dart';
 import 'cubit/detail_cubit.dart';
 import 'wrong_title_sheet.dart';
 import '../../l10n/l10n.dart';
+import '../../l10n/ui_strings.dart';
 
 part 'detail_hero.dart';
 part 'detail_native_trailer.dart';
@@ -2914,7 +2915,11 @@ class _DetailViewState extends State<_DetailView>
                   // unchanged for anime.
                   label: _status == null
                       ? context.l10n.myList
-                      : shortLabelFor(_status!, reading: isReading),
+                      : watchStatusShortLabel(
+                          context.l10n,
+                          _status!,
+                          reading: isReading,
+                        ),
                   tooltip: _inMyList
                       ? context.l10n.changeStatus
                       : context.l10n.addToMyList,

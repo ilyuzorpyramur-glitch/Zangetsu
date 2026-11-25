@@ -2252,7 +2252,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get openZangetsuOnYourNphoneAndScan =>
-      'スマホで Zangetsu を開き、\\nスキャンしてください';
+      'スマホで Zangetsu を開き、\nスキャンしてください';
 
   @override
   String get noApp => 'アプリがありませんか？';
@@ -2311,7 +2311,7 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      'スマホの Zangetsu で「テレビをペアリング」を開き、\\nこのコードを入力するか、QR をスキャンしてください。';
+      'スマホの Zangetsu で「テレビをペアリング」を開き、\nこのコードを入力するか、QR をスキャンしてください。';
 
   @override
   String get signingIn => 'サインイン中…';
@@ -2330,7 +2330,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get signInToYourAccountFirstNthenPairYourTV =>
-      '先にアカウントにサインインし、\\nテレビをペアリングしてください。';
+      '先にアカウントにサインインし、\nテレビをペアリングしてください。';
 
   @override
   String get enterTheCodeFromYourTV => 'テレビに表示されたコードを入力';
@@ -2572,7 +2572,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      'Aniyomi リポジトリはまだありません。\\n「Aniyomi リポジトリを追加」で追加してください。';
+      'Aniyomi リポジトリはまだありません。\n「Aniyomi リポジトリを追加」で追加してください。';
 
   @override
   String get addRepository => 'リポジトリを追加';
@@ -2707,7 +2707,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      'Mihon リポジトリはまだありません。\\n「Mihon リポジトリを追加」をタップしてください。';
+      'Mihon リポジトリはまだありません。\n「Mihon リポジトリを追加」をタップしてください。';
 
   @override
   String get n1Update => '1件の更新';
@@ -2724,7 +2724,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      'Aniyomi リポジトリはまだありません。\\n「Aniyomi リポジトリを追加」をタップしてください。';
+      'Aniyomi リポジトリはまだありません。\n「Aniyomi リポジトリを追加」をタップしてください。';
 
   @override
   String get clearAll => 'すべてクリア';
@@ -2866,7 +2866,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      'トラッカーが未接続です。\\n設定 → 連携 で接続してください。';
+      'トラッカーが未接続です。\n設定 → 連携 で接続してください。';
 
   @override
   String get syncAllAtOnce => 'まとめて同期';
@@ -6595,4 +6595,16 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Your data stays on this phone. An account syncs My List and history between devices.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get statusReadingNow => 'Reading';
 }

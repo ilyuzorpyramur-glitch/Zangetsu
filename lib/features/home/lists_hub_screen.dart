@@ -114,6 +114,8 @@ class ListsHubScreen extends StatelessWidget {
     'AniList' => const Color(0xFF02A9FF),
     'MyAnimeList' => const Color(0xFF2E51A2),
     'Simkl' => const Color(0xFF00B4E4),
+    // Shikimori's own brand orange.
+    'Shikimori' => const Color(0xFFF0653C),
     _ => AppColors.accent,
   };
 }

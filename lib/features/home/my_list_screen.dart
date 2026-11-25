@@ -1270,7 +1270,11 @@ class _MyListViewState extends State<_MyListView> with WidgetsBindingObserver {
       for (final st in presentStatuses)
         LibraryTab(
           id: 'status:${st.name}',
-          label: shortLabelFor(st, reading: mode.isReading),
+          label: watchStatusShortLabel(
+            context.l10n,
+            st,
+            reading: mode.isReading,
+          ),
           count: modeEntries.where((e) => e.status == st).length,
           test: (e) => e.status == st,
         ),

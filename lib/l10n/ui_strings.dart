@@ -165,7 +165,9 @@ String watchStatusLabel(
     };
   }
   return switch (s) {
-    WatchStatus.watching => l10n.statusReading,
+    // The long, sheet-style label: "Reading" as a state the user is in, not
+    // the section noun ("Reading") used for settings groups.
+    WatchStatus.watching => l10n.statusReadingNow,
     WatchStatus.planning => l10n.statusPlanToRead,
     WatchStatus.completed => l10n.statusCompleted,
     WatchStatus.paused => l10n.statusPaused,

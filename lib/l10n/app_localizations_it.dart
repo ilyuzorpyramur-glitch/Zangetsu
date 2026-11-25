@@ -2315,7 +2315,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get openZangetsuOnYourNphoneAndScan =>
-      'Apri Zangetsu sul tuo\\ntelefono e scansiona';
+      'Apri Zangetsu sul tuo\ntelefono e scansiona';
 
   @override
   String get noApp => 'Niente app?';
@@ -2374,7 +2374,7 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      'Nell’app Zangetsu sul telefono, apri\\n«Associa una TV» e inserisci questo codice — oppure scansiona il QR.';
+      'Nell’app Zangetsu sul telefono, apri\n«Associa una TV» e inserisci questo codice — oppure scansiona il QR.';
 
   @override
   String get signingIn => 'Accesso…';
@@ -2393,7 +2393,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get signInToYourAccountFirstNthenPairYourTV =>
-      'Accedi prima al tuo account,\\npoi associa la TV.';
+      'Accedi prima al tuo account,\npoi associa la TV.';
 
   @override
   String get enterTheCodeFromYourTV => 'Inserisci il codice della TV';
@@ -2646,7 +2646,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      'Nessun repo Aniyomi aggiunto ancora.\\nPremi «Aggiungi repo Aniyomi» per aggiungerne uno.';
+      'Nessun repo Aniyomi aggiunto ancora.\nPremi «Aggiungi repo Aniyomi» per aggiungerne uno.';
 
   @override
   String get addRepository => 'Aggiungi repository';
@@ -2787,7 +2787,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      'Nessun repo Mihon aggiunto ancora.\\nTocca «Aggiungi repo Mihon» per aggiungerne uno.';
+      'Nessun repo Mihon aggiunto ancora.\nTocca «Aggiungi repo Mihon» per aggiungerne uno.';
 
   @override
   String get n1Update => '1 aggiornamento';
@@ -2805,7 +2805,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      'Nessun repo Aniyomi aggiunto ancora.\\nTocca «Aggiungi repo Aniyomi» per aggiungerne uno.';
+      'Nessun repo Aniyomi aggiunto ancora.\nTocca «Aggiungi repo Aniyomi» per aggiungerne uno.';
 
   @override
   String get clearAll => 'Cancella tutto';
@@ -2954,7 +2954,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      'Nessun tracker connesso.\\nConnettine uno in Impostazioni → Connessioni.';
+      'Nessun tracker connesso.\nConnettine uno in Impostazioni → Connessioni.';
 
   @override
   String get syncAllAtOnce => 'Sincronizza tutto insieme';
@@ -6728,4 +6728,16 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Your data stays on this phone. An account syncs My List and history between devices.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get statusReadingNow => 'Reading';
 }

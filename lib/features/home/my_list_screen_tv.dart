@@ -32,6 +32,7 @@ import 'cubit/my_list_cubit.dart';
 import 'cubit/tracker_list_cubit.dart';
 import 'library_filter.dart';
 import 'search_screen.dart';
+import '../../l10n/ui_strings.dart';
 
 /// TV My List: a full-screen focusable poster grid backed by [MyListCubit]
 /// (own list) and [TrackerListCubit] (AniList / MAL / Simkl when connected).
@@ -513,7 +514,7 @@ class _FilterChips extends StatelessWidget {
           borderRadius: 20,
           onTap: () => onSelect('status:${st.name}'),
           child: _Chip(
-            label: shortLabelFor(st, reading: reading),
+            label: watchStatusShortLabel(context.l10n, st, reading: reading),
             selected: selectedId == 'status:${st.name}',
           ),
         ),

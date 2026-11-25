@@ -2313,7 +2313,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get openZangetsuOnYourNphoneAndScan =>
-      'Buka Zangetsu di\\nponselmu dan pindai';
+      'Buka Zangetsu di\nponselmu dan pindai';
 
   @override
   String get noApp => 'Belum punya aplikasi?';
@@ -2372,7 +2372,7 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      'Di aplikasi Zangetsu di ponselmu, buka\\n\"Pasangkan TV\" lalu masukkan kode ini — atau pindai QR-nya.';
+      'Di aplikasi Zangetsu di ponselmu, buka\n\"Pasangkan TV\" lalu masukkan kode ini — atau pindai QR-nya.';
 
   @override
   String get signingIn => 'Sedang masuk…';
@@ -2391,7 +2391,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get signInToYourAccountFirstNthenPairYourTV =>
-      'Masuk ke akunmu dulu,\\nlalu pasangkan TV-mu.';
+      'Masuk ke akunmu dulu,\nlalu pasangkan TV-mu.';
 
   @override
   String get enterTheCodeFromYourTV => 'Masukkan kode dari TV-mu';
@@ -2644,7 +2644,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      'Belum ada repo Aniyomi ditambahkan.\\nTekan \"Tambah repo Aniyomi\" untuk menambahnya.';
+      'Belum ada repo Aniyomi ditambahkan.\nTekan \"Tambah repo Aniyomi\" untuk menambahnya.';
 
   @override
   String get addRepository => 'Tambah repositori';
@@ -2784,7 +2784,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      'Belum ada repo Mihon ditambahkan.\\nKetuk \"Tambah repo Mihon\" untuk menambahnya.';
+      'Belum ada repo Mihon ditambahkan.\nKetuk \"Tambah repo Mihon\" untuk menambahnya.';
 
   @override
   String get n1Update => '1 pembaruan';
@@ -2802,7 +2802,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      'Belum ada repo Aniyomi ditambahkan.\\nKetuk \"Tambah repo Aniyomi\" untuk menambahnya.';
+      'Belum ada repo Aniyomi ditambahkan.\nKetuk \"Tambah repo Aniyomi\" untuk menambahnya.';
 
   @override
   String get clearAll => 'Bersihkan semua';
@@ -2949,7 +2949,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      'Belum ada pelacak terhubung.\\nHubungkan di Pengaturan → Koneksi.';
+      'Belum ada pelacak terhubung.\nHubungkan di Pengaturan → Koneksi.';
 
   @override
   String get syncAllAtOnce => 'Sinkronkan sekaligus';
@@ -6715,4 +6715,16 @@ class AppLocalizationsId extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Your data stays on this phone. An account syncs My List and history between devices.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get statusReadingNow => 'Reading';
 }

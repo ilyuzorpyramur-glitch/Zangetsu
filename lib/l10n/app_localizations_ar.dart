@@ -6775,4 +6775,16 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Your data stays on this phone. An account syncs My List and history between devices.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get statusReadingNow => 'Reading';
 }

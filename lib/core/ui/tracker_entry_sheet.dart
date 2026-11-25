@@ -15,6 +15,7 @@ import 'anilist_custom_lists_sheet.dart';
 import '../tracker/tracker.dart';
 import '../tracker/tracker_item_url.dart';
 import '../../l10n/l10n.dart';
+import '../../l10n/ui_strings.dart';
 
 /// Per-card editor for ONE tracker's library entry (AniList / MAL). Unlike the
 /// own-list sheet ([showListStatusSheet]) — which mirrors a change to every
@@ -467,7 +468,7 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
         borderRadius: BorderRadius.circular(18),
       ),
       child: Text(
-        s.shortLabel,
+        watchStatusShortLabel(context.l10n, s, reading: false),
         style: AppText.body.copyWith(
           fontSize: 13.5,
           fontWeight: FontWeight.w600,

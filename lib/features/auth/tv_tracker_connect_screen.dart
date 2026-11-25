@@ -31,6 +31,8 @@ class _TvTrackerConnectScreenState extends State<TvTrackerConnectScreen> {
     'anilist' => context.l10n.anilist,
     'mal' => context.l10n.myAnimeList,
     'simkl' => context.l10n.simkl,
+    'shikimori' => context.l10n.shikimori,
+    'mangabaka' => context.l10n.mangabaka,
     _ => widget.trackerId,
   };
 

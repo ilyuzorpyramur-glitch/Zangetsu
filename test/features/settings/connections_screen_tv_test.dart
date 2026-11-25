@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:watch_app/core/anilist/anilist_service.dart';
 import 'package:watch_app/core/tracker/mal_service.dart';
 import 'package:watch_app/core/tracker/mangabaka_service.dart';
+import 'package:watch_app/core/tracker/shikimori_service.dart';
 import 'package:watch_app/core/tracker/simkl_service.dart';
 import 'package:watch_app/features/settings/connections_screen_tv.dart';
 
@@ -106,6 +107,31 @@ class _FakeMangaBakaService extends ChangeNotifier
   Future<void> disconnect() async {}
 }
 
+class _FakeShikimoriService extends ChangeNotifier
+    implements ShikimoriService {
+  _FakeShikimoriService({this.connected = false, this.name});
+  final bool connected;
+  final String? name;
+
+  @override
+  noSuchMethod(Invocation i) => super.noSuchMethod(i);
+
+  @override
+  bool get isConnected => connected;
+
+  @override
+  String get displayName => 'Shikimori';
+
+  @override
+  String? get viewerName => name;
+
+  @override
+  String? get viewerAvatar => null;
+
+  @override
+  Future<void> disconnect() async {}
+}
+
 void _register(
   GetIt sl, {
   bool aniConnected = false,
@@ -116,6 +142,8 @@ void _register(
   String? simklName,
   bool mbConnected = false,
   String? mbName,
+  bool shikiConnected = false,
+  String? shikiName,
 }) {
   sl.registerSingleton<AniListService>(
       _FakeAniListService(connected: aniConnected, name: aniName));
@@ -125,6 +153,8 @@ void _register(
       _FakeSimklService(connected: simklConnected, name: simklName));
   sl.registerSingleton<MangaBakaService>(
       _FakeMangaBakaService(connected: mbConnected, name: mbName));
+  sl.registerSingleton<ShikimoriService>(
+      _FakeShikimoriService(connected: shikiConnected, name: shikiName));
 }
 
 void main() {
@@ -140,7 +170,8 @@ void main() {
     expect(find.text('MyAnimeList'), findsOneWidget);
     expect(find.text('Simkl'), findsOneWidget);
     expect(find.text('MangaBaka'), findsOneWidget);
-    expect(find.text('Connect'), findsNWidgets(4));
+    expect(find.text('Shikimori'), findsOneWidget);
+    expect(find.text('Connect'), findsNWidgets(5));
   });
 
   testWidgets('shows Connected + viewer name and a Disconnect action',

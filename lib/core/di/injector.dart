@@ -101,6 +101,7 @@ import '../anilist/anilist_service.dart';
 import '../anilist/anilist_store.dart';
 import '../tracker/mal_service.dart';
 import '../tracker/mangabaka_service.dart';
+import '../tracker/shikimori_service.dart';
 import '../tracker/simkl_service.dart';
 import '../tracker/tracker_binding_store.dart';
 import '../tracker/tracker_hub.dart';
@@ -636,6 +637,8 @@ Future<void> initDependencies({bool Function()? isOffline}) async {
   sl.registerSingleton<SimklService>(SimklService(dio));
   await MangaBakaService.init();
   sl.registerSingleton<MangaBakaService>(MangaBakaService(dio));
+  await ShikimoriService.init();
+  sl.registerSingleton<ShikimoriService>(ShikimoriService(dio));
   sl.registerSingleton<TrackerHub>(
     TrackerHub([
       sl<AniListService>(),
@@ -645,6 +648,7 @@ Future<void> initDependencies({bool Function()? isOffline}) async {
       // keeps it out of anime contexts the way it already keeps Simkl out of
       // reading ones.
       sl<MangaBakaService>(),
+      sl<ShikimoriService>(),
     ]),
   );
   // Manual match corrections (the sync sheet's "Change match"): show → chosen
@@ -658,6 +662,7 @@ Future<void> initDependencies({bool Function()? isOffline}) async {
       'mal': sl<MalService>(),
       'simkl': sl<SimklService>(),
       'mangabaka': sl<MangaBakaService>(),
+      'shikimori': sl<ShikimoriService>(),
     }),
   );
 

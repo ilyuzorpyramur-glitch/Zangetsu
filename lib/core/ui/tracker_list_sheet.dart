@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../di/injector.dart';
 import '../mode/content_mode.dart';
-import '../models/watch_status.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 import '../tracker/tracker.dart';
@@ -15,6 +14,7 @@ import 'global_messenger.dart';
 import 'tracker_badge.dart';
 import 'tracker_sync_sheet.dart';
 import '../../l10n/l10n.dart';
+import '../../l10n/ui_strings.dart';
 
 /// Tracking entry point on phone: one row per connected tracker, each showing
 /// what that tracker matched and its own progress, plus a "Sync all at once"
@@ -294,7 +294,11 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
   String _subtitleFor(TrackerEntry e) {
     final bits = <String>[];
     final s = e.status;
-    if (s != null) bits.add(shortLabelFor(s, reading: widget.reading));
+    if (s != null) {
+      bits.add(
+        watchStatusShortLabel(context.l10n, s, reading: widget.reading),
+      );
+    }
     final progress = e.progress;
     if (progress != null) {
       final total = widget.reading ? e.chapters : e.maxEpisodes;

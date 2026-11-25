@@ -899,7 +899,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get playerInfoAudioBoost => 'Усиление звука';
 
   @override
-  String get statusPlanToWatch => 'Планируйте просмотр';
+  String get statusPlanToWatch => 'В планах';
 
   @override
   String get statusWatching => 'Смотрю';
@@ -920,7 +920,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get statusReading => 'Чтение';
 
   @override
-  String get statusPlanToRead => 'Планируйте чтение';
+  String get statusPlanToRead => 'В планах';
 
   @override
   String providerHavingAMoment(String name) {
@@ -2342,7 +2342,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get openZangetsuOnYourNphoneAndScan =>
-      'Откройте Zangetsu на\\nтелефоне и отсканируйте';
+      'Откройте Zangetsu на\nтелефоне и отсканируйте';
 
   @override
   String get noApp => 'Нет приложения?';
@@ -2402,7 +2402,7 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      'В приложении Zangetsu на телефоне откройте\\n\"Подключение к телевизору\" и введите этот код или отсканируйте QR.';
+      'В приложении Zangetsu на телефоне откройте\n\"Подключение к телевизору\" и введите этот код или отсканируйте QR.';
 
   @override
   String get signingIn => 'Вход…';
@@ -2421,7 +2421,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get signInToYourAccountFirstNthenPairYourTV =>
-      'Сначала войдите в свою учетную запись,\\nзатем выполните сопряжение телевизора.';
+      'Сначала войдите в свою учетную запись,\nзатем выполните сопряжение телевизора.';
 
   @override
   String get enterTheCodeFromYourTV => 'Введите код с вашего телевизора';
@@ -2675,7 +2675,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      'Репозитории Aniyomi пока не добавлены.\\nНажмите «Добавить репозиторий Aniyomi», чтобы добавить его.';
+      'Репозитории Aniyomi пока не добавлены.\nНажмите «Добавить репозиторий Aniyomi», чтобы добавить его.';
 
   @override
   String get addRepository => 'Добавить репозиторий';
@@ -2816,7 +2816,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      'Репозитории Mihon пока не добавлены.\\nНажмите «Добавить репозиторий Mihon», чтобы добавить его.';
+      'Репозитории Mihon пока не добавлены.\nНажмите «Добавить репозиторий Mihon», чтобы добавить его.';
 
   @override
   String get n1Update => '1 обновление';
@@ -2834,7 +2834,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      'Репозитории Aniyomi пока не добавлены.\\nНажмите «Добавить репозиторий Aniyomi», чтобы добавить его.';
+      'Репозитории Aniyomi пока не добавлены.\nНажмите «Добавить репозиторий Aniyomi», чтобы добавить его.';
 
   @override
   String get clearAll => 'Очистить всё';
@@ -2981,7 +2981,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      'Трекеры не подключены.\\nПодключите их в Настройках → Подключения.';
+      'Трекеры не подключены.\nПодключите их в Настройках → Подключения.';
 
   @override
   String get syncAllAtOnce => 'Синхронизировать все сразу';
@@ -6804,4 +6804,16 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Данные хранятся только на этом телефоне. Аккаунт синхронизирует «Мой список» и историю между устройствами.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'Подробнее';
+
+  @override
+  String get statusReadingNow => 'Читаю';
 }

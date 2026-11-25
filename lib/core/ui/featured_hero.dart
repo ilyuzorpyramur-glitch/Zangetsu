@@ -18,6 +18,7 @@ import '../models/media_item.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 import 'tmdb_hero_banner.dart';
+import '../../l10n/l10n.dart';
 
 /// Height of the floating home header the hero reserves room for, measured
 /// from the bottom of the status bar: 8px of top padding, a 48px icon row and
@@ -424,8 +425,8 @@ class _FeaturedHeroState extends State<FeaturedHero> {
                         widget.onToggleList,
                         active: widget.inList,
                         semanticLabel: widget.inList
-                            ? 'Remove from My List'
-                            : 'Add to My List',
+                            ? context.l10n.removeFromMyList
+                            : context.l10n.addToMyList,
                       ),
                       widget.onToggleList,
                     ),
@@ -434,7 +435,7 @@ class _FeaturedHeroState extends State<FeaturedHero> {
                       _circleBtn(
                         Icons.info_outline_rounded,
                         widget.onInfo,
-                        semanticLabel: 'Подробнее',
+                        semanticLabel: context.l10n.viewDetails,
                       ),
                       widget.onInfo,
                     ),

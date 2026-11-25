@@ -656,6 +656,15 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
       );
   }
 
+  /// The My List button's caption: the current status, or the list name when
+  /// the title isn't on it. Localized — watch_status.dart's own labels are
+  /// Russian-only and leaked into an English UI.
+  String get _statusLabel {
+    final s = _status;
+    if (s == null) return context.l10n.myList;
+    return watchStatusShortLabel(context.l10n, s, reading: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<DetailCubit, DetailState>(
@@ -964,8 +973,7 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
                                 key: const ValueKey('tv-detail-mylist'),
                                 variant: TvFocusVariant.pill,
                                 onTap: () => _openListSheet(detail),
-                                semanticLabel:
-                                    _status?.shortLabel ?? context.l10n.myList,
+                                semanticLabel: _statusLabel,
                                 // _IconAction is shared with the phone view —
                                 // exclude its own label, same as Play above.
                                 child: ExcludeSemantics(
@@ -974,9 +982,7 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
                                         ? Icons.check_rounded
                                         : Icons.add_rounded,
                                     active: _inMyList,
-                                    label:
-                                        _status?.shortLabel ??
-                                        context.l10n.myList,
+                                    label: _statusLabel,
                                     tooltip: _inMyList
                                         ? context.l10n.changeStatus
                                         : context.l10n.addToMyList,

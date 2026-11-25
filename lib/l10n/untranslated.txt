@@ -400,7 +400,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "de": [
@@ -918,7 +922,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "es": [
@@ -1436,7 +1444,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "fr": [
@@ -1954,7 +1966,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "id": [
@@ -2358,7 +2374,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "it": [
@@ -2876,7 +2896,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "ja": [
@@ -3394,7 +3418,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "pt": [
@@ -3798,7 +3826,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "tr": [
@@ -4202,7 +4234,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "zh": [
@@ -4720,7 +4756,11 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ],
 
   "zh_TW": [
@@ -5238,6 +5278,10 @@
     "contWatchEpisodeProgress",
     "onboardingSignedIn",
     "onboardingContinueWithoutAccount",
-    "onboardingLocalOnlyNote"
+    "onboardingLocalOnlyNote",
+    "shikimori",
+    "mangabaka",
+    "viewDetails",
+    "statusReadingNow"
   ]
 }

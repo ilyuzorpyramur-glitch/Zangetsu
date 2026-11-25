@@ -24,6 +24,7 @@ class _ConnectionsScreenState extends State<ConnectionsScreen> {
       sl<MalService>(),
       sl<SimklService>(),
       sl<MangaBakaService>(),
+      sl<ShikimoriService>(),
     ];
     return Scaffold(
       backgroundColor: AppColors.bg,

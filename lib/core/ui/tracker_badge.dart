@@ -25,6 +25,10 @@ class TrackerBadge extends StatelessWidget {
         return (bg: const Color(0xFF2E51A2), label: 'MAL', scale: 0.28);
       case 'simkl':
         return (bg: const Color(0xFF0B1622), label: 'SK', scale: 0.36);
+      // Shikimori's orange; two letters like the rest so the tile reads the
+      // same size next to them.
+      case 'shikimori':
+        return (bg: const Color(0xFFF0653C), label: 'SH', scale: 0.34);
       default:
         return (
           bg: const Color(0xFF3A3A3C),

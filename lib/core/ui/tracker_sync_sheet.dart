@@ -17,6 +17,7 @@ import '../tracker/tracker_hub.dart';
 import '../tv/tv_focusable.dart';
 import 'global_messenger.dart';
 import '../../l10n/l10n.dart';
+import '../../l10n/ui_strings.dart';
 
 /// Tracker sync sheet. Reads the user's current entry for one title from the
 /// connected trackers, lets them edit status / score / episode progress in one
@@ -622,7 +623,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
         borderRadius: BorderRadius.circular(11),
       ),
       child: Text(
-        s.shortLabel,
+        watchStatusShortLabel(context.l10n, s, reading: false),
         style: AppText.body.copyWith(
           color: selected ? Colors.white : AppColors.textSecondary,
           fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
@@ -635,7 +636,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
     return _focusable(
       onTap: toggle,
       autofocus: autofocus,
-      semantic: '${s.shortLabel} status',
+      semantic: '${watchStatusShortLabel(context.l10n, s, reading: false)} · ${s.key}',
       child: chip,
     );
   }

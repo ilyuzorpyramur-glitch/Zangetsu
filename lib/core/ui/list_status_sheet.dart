@@ -23,6 +23,7 @@ import '../theme/app_text.dart';
 import '../tracker/tracker.dart';
 import '../tracker/tracker_hub.dart';
 import '../../features/auth/auth_cubit.dart';
+import '../../l10n/ui_strings.dart';
 
 /// Sentinel popped by [ListStatusSheet] for the "Remove from list" row.
 const String _kRemove = '__remove__';
@@ -302,7 +303,11 @@ class ListStatusSheet extends StatelessWidget {
                           : AppColors.textSecondary,
                     ),
                     title: Text(
-                      labelFor(statuses[i], reading: reading),
+                      watchStatusLabel(
+                        context.l10n,
+                        statuses[i],
+                        reading: reading,
+                      ),
                       style: AppText.body.copyWith(
                         color: current == statuses[i]
                             ? AppColors.accent

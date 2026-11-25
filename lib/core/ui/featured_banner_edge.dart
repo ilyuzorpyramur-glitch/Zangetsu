@@ -16,6 +16,7 @@ import 'native_cover_provider.dart';
 import 'poster_palette.dart';
 import 'route_observer.dart';
 import 'tmdb_hero_banner.dart';
+import '../../l10n/l10n.dart';
 
 /// Full-bleed Home banner with centered title art and one details action.
 class FeaturedBannerEdge extends StatefulWidget {
@@ -357,7 +358,7 @@ class _FeaturedBannerEdgeState extends State<FeaturedBannerEdge>
                               borderRadius: BorderRadius.circular(24),
                               child: Center(
                                 child: Text(
-                                  'Подробнее',
+                                  context.l10n.viewDetails,
                                   style: TextStyle(
                                     color: AppColors.bg,
                                     fontSize: 15,

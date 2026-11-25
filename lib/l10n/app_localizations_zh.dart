@@ -2239,7 +2239,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get haveTheApp => '已有应用？';
 
   @override
-  String get openZangetsuOnYourNphoneAndScan => '在手机上打开 Zangetsu\\n并扫描';
+  String get openZangetsuOnYourNphoneAndScan => '在手机上打开 Zangetsu\n并扫描';
 
   @override
   String get noApp => '没有应用？';
@@ -2298,7 +2298,7 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      '在手机上的 Zangetsu 中打开「配对电视」，\\n输入此代码或扫描二维码。';
+      '在手机上的 Zangetsu 中打开「配对电视」，\n输入此代码或扫描二维码。';
 
   @override
   String get signingIn => '正在登录…';
@@ -2316,7 +2316,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sendToTV => '发送到电视';
 
   @override
-  String get signInToYourAccountFirstNthenPairYourTV => '请先登录账号，\\n然后再配对电视。';
+  String get signInToYourAccountFirstNthenPairYourTV => '请先登录账号，\n然后再配对电视。';
 
   @override
   String get enterTheCodeFromYourTV => '输入电视上的代码';
@@ -2558,7 +2558,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      '尚未添加 Aniyomi 仓库。\\n请按「添加 Aniyomi 仓库」来添加。';
+      '尚未添加 Aniyomi 仓库。\n请按「添加 Aniyomi 仓库」来添加。';
 
   @override
   String get addRepository => '添加仓库';
@@ -2689,7 +2689,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      '尚未添加 Mihon 仓库。\\n点按「添加 Mihon 仓库」来添加。';
+      '尚未添加 Mihon 仓库。\n点按「添加 Mihon 仓库」来添加。';
 
   @override
   String get n1Update => '1 个更新';
@@ -2706,7 +2706,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      '尚未添加 Aniyomi 仓库。\\n点按「添加 Aniyomi 仓库」来添加。';
+      '尚未添加 Aniyomi 仓库。\n点按「添加 Aniyomi 仓库」来添加。';
 
   @override
   String get clearAll => '全部清除';
@@ -2848,7 +2848,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      '尚未关联追番。\\n请到设置 → 关联账号 中连接。';
+      '尚未关联追番。\n请到设置 → 关联账号 中连接。';
 
   @override
   String get syncAllAtOnce => '一次性全部同步';
@@ -6553,6 +6553,18 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get onboardingLocalOnlyNote =>
       'Your data stays on this phone. An account syncs My List and history between devices.';
+
+  @override
+  String get shikimori => 'Shikimori';
+
+  @override
+  String get mangabaka => 'MangaBaka';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get statusReadingNow => 'Reading';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -8502,7 +8514,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get haveTheApp => '已有 App？';
 
   @override
-  String get openZangetsuOnYourNphoneAndScan => '在手機開啟 Zangetsu\\n並掃描';
+  String get openZangetsuOnYourNphoneAndScan => '在手機開啟 Zangetsu\n並掃描';
 
   @override
   String get noApp => '沒有 App？';
@@ -8561,7 +8573,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   @override
   String
   get onTheZangetsuAppOnYourPhoneOpenNPairATVAndEnterThisCodeOrScanTheQR =>
-      '在手機上的 Zangetsu 開啟「配對電視」，\\n輸入此代碼或掃描 QR。';
+      '在手機上的 Zangetsu 開啟「配對電視」，\n輸入此代碼或掃描 QR。';
 
   @override
   String get signingIn => '正在登入…';
@@ -8579,7 +8591,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get sendToTV => '傳送到電視';
 
   @override
-  String get signInToYourAccountFirstNthenPairYourTV => '請先登入帳號，\\n然後再配對電視。';
+  String get signInToYourAccountFirstNthenPairYourTV => '請先登入帳號，\n然後再配對電視。';
 
   @override
   String get enterTheCodeFromYourTV => '輸入電視上的代碼';
@@ -8821,7 +8833,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get noAniyomiReposAddedYetNPressAddAniyomiRepoToAddOne =>
-      '尚未新增 Aniyomi 儲庫。\\n請按「新增 Aniyomi 儲庫」來新增。';
+      '尚未新增 Aniyomi 儲庫。\n請按「新增 Aniyomi 儲庫」來新增。';
 
   @override
   String get addRepository => '新增儲庫';
@@ -8952,7 +8964,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get noMihonReposAddedYetNTapAddMihonRepoToAddOne =>
-      '尚未新增 Mihon 儲庫。\\n點一下「新增 Mihon 儲庫」來新增。';
+      '尚未新增 Mihon 儲庫。\n點一下「新增 Mihon 儲庫」來新增。';
 
   @override
   String get n1Update => '1 個更新';
@@ -8969,7 +8981,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get noAniyomiReposAddedYetNTapAddAniyomiRepoToAddOne =>
-      '尚未新增 Aniyomi 儲庫。\\n點一下「新增 Aniyomi 儲庫」來新增。';
+      '尚未新增 Aniyomi 儲庫。\n點一下「新增 Aniyomi 儲庫」來新增。';
 
   @override
   String get clearAll => '全部清除';
@@ -9105,7 +9117,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get noTrackersConnectedNConnectOneInSettingsConnections =>
-      '尚未連結追蹤。\\n請到設定 → 連線 中連接。';
+      '尚未連結追蹤。\n請到設定 → 連線 中連接。';
 
   @override
   String get syncAllAtOnce => '一次全部同步';

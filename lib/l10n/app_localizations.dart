@@ -11537,6 +11537,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your data stays on this phone. An account syncs My List and history between devices.'**
   String get onboardingLocalOnlyNote;
+
+  /// No description provided for @shikimori.
+  ///
+  /// In en, this message translates to:
+  /// **'Shikimori'**
+  String get shikimori;
+
+  /// No description provided for @mangabaka.
+  ///
+  /// In en, this message translates to:
+  /// **'MangaBaka'**
+  String get mangabaka;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// No description provided for @statusReadingNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get statusReadingNow;
 }
 
 class _AppLocalizationsDelegate
