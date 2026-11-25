@@ -827,8 +827,10 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              RuTitleText(
                                 detail.title,
+                                malId: detail.malId,
+                                anime: detail.type == ProviderType.anime,
                                 style: AppText.headline.copyWith(fontSize: 18),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
