@@ -1564,6 +1564,9 @@ class _EpisodeRow extends StatelessWidget {
     final srcTitle = displayTitle.trim();
     final titleText =
         episodeDisplayTitle(ep, sourceTitle: srcTitle, number: epNum) ?? '';
+    // Episode names ship in English from AniZip/TMDB; queue the translation
+    // here so the row shows it as soon as it lands.
+    if (!isMovie && titleText.isNotEmpty) MetaRu.instance.request(titleText);
     final heading = isMovie
         ? (srcTitle.isNotEmpty ? srcTitle : context.l10n.movie)
         : titleText.isNotEmpty
@@ -1705,6 +1708,10 @@ class _EpisodeRow extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // "3. Title" as ONE text node (semantics/test parity
+                      // with the original heading): the title half is the
+                      // machine-translated one once it lands, the number stays
+                      // literal.
                       if (isMovie || titleText.isEmpty)
                         Text(
                           heading,
@@ -1718,35 +1725,19 @@ class _EpisodeRow extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         )
                       else
-                        // "3. " stays numeric; the title itself goes through the
-                        // same machine-translation layer as episode synopses
-                        // (the catalogues ship episode names in English only).
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '$epNum. ',
-                              style: AppText.body.copyWith(
-                                color: titleColor,
-                                fontWeight: isResume
-                                    ? FontWeight.w800
-                                    : FontWeight.w700,
-                              ),
+                        ListenableBuilder(
+                          listenable: MetaRu.instance,
+                          builder: (context, _) => Text(
+                            '$epNum. ${MetaRu.instance.text(titleText)}',
+                            style: AppText.body.copyWith(
+                              color: titleColor,
+                              fontWeight: isResume
+                                  ? FontWeight.w800
+                                  : FontWeight.w700,
                             ),
-                            Expanded(
-                              child: RuMetaText(
-                                titleText,
-                                style: AppText.body.copyWith(
-                                  color: titleColor,
-                                  fontWeight: isResume
-                                      ? FontWeight.w800
-                                      : FontWeight.w700,
-                                ),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       if (metaLine.isNotEmpty) ...[
                         const SizedBox(height: 4),
