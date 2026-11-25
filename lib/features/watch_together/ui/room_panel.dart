@@ -60,7 +60,7 @@ class _RoomParticipantsSheet extends StatelessWidget {
                       const Icon(Icons.group, color: Colors.white70, size: 18),
                       const SizedBox(width: 8),
                       Text(
-                        'Participants (${participants.length})',
+                        context.l10n.roomParticipantsCount(participants.length),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,

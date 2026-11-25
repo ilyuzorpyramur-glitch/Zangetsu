@@ -2941,7 +2941,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
               const SizedBox(height: 10),
             ],
             Text(
-              'Up next in $_upNextLeft',
+              context.l10n.playerUpNextIn(_upNextLeft),
               style: AppText.caption.copyWith(color: Colors.white70),
             ),
             const SizedBox(height: 4),
@@ -2964,17 +2964,17 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         borderRadius: BorderRadius.circular(9),
                       ),
                       alignment: Alignment.center,
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.play_arrow_rounded,
                             color: Colors.white,
                             size: 20,
                           ),
-                          SizedBox(width: 4),
+                          const SizedBox(width: 4),
                           Text(
-                            'Play now',
+                            context.l10n.playNow,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
@@ -3041,13 +3041,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: AppColors.hairline, width: 0.5),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.skip_next, color: Colors.white, size: 20),
-                  SizedBox(width: 6),
+                  const Icon(Icons.skip_next, color: Colors.white, size: 20),
+                  const SizedBox(width: 6),
                   Text(
-                    'Next Episode',
+                    context.l10n.nextEpisode,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -4248,7 +4248,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       TextButton(
                         onPressed: () => _c.openEpisode(state.currentIndex),
                         child: Text(
-                          'Try again',
+                          context.l10n.tryAgain,
                           style: AppText.body.copyWith(color: AppColors.accent),
                         ),
                       ),
@@ -4726,7 +4726,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                'Tap to unlock',
+                                context.l10n.tapToUnlock,
                                 style: AppText.caption.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,

@@ -71,7 +71,7 @@ class _TitleSearchDialog extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Search for this title?',
+                    context.l10n.detailSearchForTitle,
                     style: AppText.body.copyWith(
                       color: AppColors.textSecondary,
                     ),
@@ -83,13 +83,13 @@ class _TitleSearchDialog extends StatelessWidget {
                       TextButton(
                         onPressed: () => Navigator.of(context)
                             .pop(TitleSearchChoice.searchAll),
-                        child: const Text('Search all sources'),
+                        child: Text(context.l10n.detailSearchAllSources),
                       ),
                       const SizedBox(width: 8),
                       FilledButton(
                         onPressed: () => Navigator.of(context)
                             .pop(TitleSearchChoice.search),
-                        child: const Text('Search'),
+                        child: Text(context.l10n.search),
                       ),
                     ],
                   ),

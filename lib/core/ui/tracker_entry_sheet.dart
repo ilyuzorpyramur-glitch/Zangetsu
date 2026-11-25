@@ -14,6 +14,7 @@ import '../tv/tv_list_focusable.dart';
 import 'anilist_custom_lists_sheet.dart';
 import '../tracker/tracker.dart';
 import '../tracker/tracker_item_url.dart';
+import '../../l10n/l10n.dart';
 
 /// Per-card editor for ONE tracker's library entry (AniList / MAL). Unlike the
 /// own-list sheet ([showListStatusSheet]) — which mirrors a change to every
@@ -157,8 +158,8 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
       if (!mounted) return;
       setState(() => _busy = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not save changes. Please try again.'),
+        SnackBar(
+          content: Text(context.l10n.trackerCouldNotSave),
         ),
       );
       return;
@@ -240,10 +241,8 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
                 _customListsRow(context),
                 if (widget.tracker is AniListService)
                   SwitchListTile.adaptive(
-                    title: const Text('Private'),
-                    subtitle: const Text(
-                      'Only you can see this entry on AniList',
-                    ),
+                    title: Text(context.l10n.trackerPrivate),
+                    subtitle: Text(context.l10n.trackerPrivateAniListHint),
                     value: _private,
                     onChanged: _busy
                         ? null
@@ -374,7 +373,7 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  'on ${widget.tracker.displayName}',
+                  context.l10n.trackerOnName(widget.tracker.displayName),
                   style: AppText.caption.copyWith(
                     color: AppColors.textTertiary,
                   ),
@@ -417,7 +416,7 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
           Icons.playlist_add_rounded,
           color: AppColors.textSecondary,
         ),
-        title: const Text('Custom lists'),
+        title: Text(context.l10n.customLists),
         subtitle: Text(
           n == 0 ? 'Not in any' : widget.customLists.join(', '),
           maxLines: 1,
@@ -441,7 +440,7 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'STATUS',
+            context.l10n.status2,
             style: AppText.caption.copyWith(
               color: AppColors.textTertiary,
               fontWeight: FontWeight.w700,
@@ -576,7 +575,7 @@ class _TrackerEntrySheetState extends State<_TrackerEntrySheet> {
               ),
             )
           : Text(
-              'Apply changes',
+              context.l10n.applyChanges,
               style: AppText.body.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,

@@ -671,7 +671,7 @@ class _SearchScreenTvState extends State<SearchScreenTv> {
             ),
           ),
           child: Text(
-            'NSFW',
+            context.l10n.nsfw,
             style: TextStyle(
               color: active ? AppColors.accent : AppColors.textSecondary,
               fontSize: 15,

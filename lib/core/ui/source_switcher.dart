@@ -29,6 +29,7 @@ import '../zmode/zmode_ids.dart';
 import '../zmode/zmode_module.dart';
 import '../zmode/zmode_prefs.dart';
 import 'states.dart';
+import '../../l10n/l10n.dart';
 
 /// Installed-and-enabled sources bucketed by category, each as an `(id, label)`
 /// row. Reused by the source switcher and the search source picker.
@@ -931,7 +932,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
             ),
             const SizedBox(height: 12),
             Text(
-              'No ${widget.mode.label} sources yet',
+              context.l10n.switcherNoModeSources(widget.mode.label),
               textAlign: TextAlign.center,
               style: AppText.body,
             ),
@@ -952,7 +953,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
                     vertical: 12,
                   ),
                   child: Text(
-                    'Browse repositories',
+                    context.l10n.browseRepositories,
                     style: AppText.button.copyWith(
                       color: focused ? Colors.black : Colors.white,
                     ),
@@ -966,7 +967,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
     }
     return EmptyState(
       icon: Icons.source_outlined,
-      message: 'No ${widget.mode.label} sources yet',
+      message: context.l10n.switcherNoModeSources(widget.mode.label),
       actionLabel: install == null ? null : 'Browse repositories',
       onAction: install == null ? null : openInstall,
     );
@@ -1194,11 +1195,11 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Auto Resolve', style: AppText.headline),
+                  Text(context.l10n.switcherAutoResolve, style: AppText.headline),
                   Padding(
                     padding: const EdgeInsets.only(top: 2),
                     child: Text(
-                      'Try every installed source until one matches',
+                      context.l10n.switcherAutoResolveHint,
                       style: AppText.body.copyWith(
                         fontSize: 11.5,
                         height: 1.0,
@@ -1218,7 +1219,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
       return TvListFocusable(
         autofocus: widget.autoSelected,
         onTap: widget.onAutoResolve!,
-        semanticLabel: 'Auto Resolve',
+        semanticLabel: context.l10n.switcherAutoResolve,
         child: ExcludeSemantics(child: body),
       );
     }
@@ -1269,7 +1270,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
                   child: Text(
-                    'Select Source',
+                    context.l10n.selectSource,
                     style: AppText.title.copyWith(color: AppColors.textPrimary),
                   ),
                 ),
@@ -1292,7 +1293,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'Hold Select to pin a source to the top',
+                        context.l10n.switcherHoldSelectPin,
                         style: AppText.caption,
                       ),
                     ],
@@ -1365,7 +1366,7 @@ class _SourcePickerSheetState extends State<_SourcePickerSheet> {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'Long-press a source to pin it to the top',
+                        context.l10n.longPressASourceToPinItToTheTop,
                         style: AppText.caption,
                       ),
                     ],
@@ -1395,7 +1396,7 @@ class _PickerSearchField extends StatelessWidget {
       style: AppText.body,
       cursorColor: AppColors.accent,
       decoration: InputDecoration(
-        hintText: 'Search sources',
+        hintText: context.l10n.searchSources,
         hintStyle: AppText.body.copyWith(color: AppColors.textSecondary),
         prefixIcon: const Icon(
           Icons.search,

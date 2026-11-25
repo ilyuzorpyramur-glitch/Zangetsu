@@ -241,23 +241,26 @@ class _TvHeroState extends State<_TvHero> {
                           _playBtn(),
                           () => widget.onPlay(item),
                           autofocus: true,
-                          semanticLabel: 'Смотреть',
+                          semanticLabel: context.l10n.tvWatch,
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(
                           _glassBtn(
                             inList ? Icons.check_rounded : Icons.add_rounded,
-                            'Мой список',
+                            context.l10n.tvMyList,
                             active: inList,
                           ),
                           () => widget.onToggleList(item),
-                          semanticLabel: 'Мой список',
+                          semanticLabel: context.l10n.tvMyList,
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(
-                          _glassBtn(Icons.info_outline_rounded, 'Подробнее'),
+                          _glassBtn(
+                            Icons.info_outline_rounded,
+                            context.l10n.tvDetails,
+                          ),
                           () => widget.onInfo(item),
-                          semanticLabel: 'Подробнее',
+                          semanticLabel: context.l10n.tvDetails,
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(

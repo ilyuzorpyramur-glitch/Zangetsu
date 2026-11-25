@@ -10127,6 +10127,1254 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'More features are on their way with Zoro… he just got lost again.'**
   String get profileComingSoon;
+
+  /// No description provided for @tvCouldntCheckEverySource.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t check every source'**
+  String get tvCouldntCheckEverySource;
+
+  /// No description provided for @tvNoSourcesHaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'None of your installed sources have this title. Try another source from the detail screen, or install more in Providers.'**
+  String get tvNoSourcesHaveTitle;
+
+  /// No description provided for @tvCouldntLoadEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this episode'**
+  String get tvCouldntLoadEpisode;
+
+  /// No description provided for @tvLoadContentFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'There was an issue loading this content. If this continues, try changing sources.'**
+  String get tvLoadContentFailed;
+
+  /// No description provided for @tvCouldntPlaySource.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t play this source'**
+  String get tvCouldntPlaySource;
+
+  /// No description provided for @tvPlaybackDecodeFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} failed to play. The stream was found but the player couldn\'t decode it ({code}). Try another source, or pick one manually.'**
+  String tvPlaybackDecodeFailed(String title, String code);
+
+  /// No description provided for @tvPlaybackDecodeFailedNoCode.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} failed to play. The stream was found but the player couldn\'t decode it. Try another source, or pick one manually.'**
+  String tvPlaybackDecodeFailedNoCode(String title);
+
+  /// No description provided for @tvClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get tvClose;
+
+  /// No description provided for @tvSelectSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Select source'**
+  String get tvSelectSource;
+
+  /// No description provided for @tvNextSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Next source'**
+  String get tvNextSource;
+
+  /// No description provided for @triStateInclude.
+  ///
+  /// In en, this message translates to:
+  /// **'Include'**
+  String get triStateInclude;
+
+  /// No description provided for @triStateExclude.
+  ///
+  /// In en, this message translates to:
+  /// **'Exclude'**
+  String get triStateExclude;
+
+  /// No description provided for @bootConnectionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection settings unavailable'**
+  String get bootConnectionUnavailable;
+
+  /// No description provided for @bootConnectToInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to the internet and try again.'**
+  String get bootConnectToInternet;
+
+  /// No description provided for @profileWhoIsWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Who\'s watching?'**
+  String get profileWhoIsWatching;
+
+  /// No description provided for @profilePickUpWhereLeftOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick up where you left off.'**
+  String get profilePickUpWhereLeftOff;
+
+  /// No description provided for @profileReadyForNextWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready for the next watch, {name}?'**
+  String profileReadyForNextWatch(String name);
+
+  /// No description provided for @profileAddProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Add profile'**
+  String get profileAddProfile;
+
+  /// No description provided for @profileManageProfiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage profiles'**
+  String get profileManageProfiles;
+
+  /// No description provided for @profileKidsBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'KIDS'**
+  String get profileKidsBadge;
+
+  /// No description provided for @profileAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profileAccount;
+
+  /// No description provided for @profileChooseWhoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose who is watching. Each profile keeps its own list and progress.'**
+  String get profileChooseWhoBody;
+
+  /// No description provided for @profileKidsDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Kids profiles hide adult-rated catalogue titles. Third-party source catalogs may not have age ratings, so this is not a parental lock.'**
+  String get profileKidsDisclaimer;
+
+  /// No description provided for @profileTurnOffWhoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off Who\'s watching?'**
+  String get profileTurnOffWhoTitle;
+
+  /// No description provided for @profileTurnOffWhoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The app will open straight into the active profile — no PIN at launch. Profile PINs stay on for switching profiles inside the app.'**
+  String get profileTurnOffWhoBody;
+
+  /// No description provided for @profileDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete profile?'**
+  String get profileDeleteTitle;
+
+  /// No description provided for @profileDeleteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {name} and its saved lists and progress from this account?'**
+  String profileDeleteBody(String name);
+
+  /// No description provided for @profileOnlyOnThisDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is on this phone only'**
+  String profileOnlyOnThisDevice(String name);
+
+  /// No description provided for @profileRecoveryBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This profile is missing from cloud sync. It may have been created offline or deleted on another device. Restore it only if you want it on all your devices. Its local data is safe either way.'**
+  String get profileRecoveryBody;
+
+  /// No description provided for @profileRestoreToCloud.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore to cloud'**
+  String get profileRestoreToCloud;
+
+  /// No description provided for @profileCouldNotRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not restore profile. Try again later.'**
+  String get profileCouldNotRestore;
+
+  /// No description provided for @profileCouldNotUpdateName.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update account name'**
+  String get profileCouldNotUpdateName;
+
+  /// No description provided for @profileSavedOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved on this device; cloud sync will retry.'**
+  String get profileSavedOnDevice;
+
+  /// No description provided for @profileChooseAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose avatar'**
+  String get profileChooseAvatar;
+
+  /// No description provided for @profilePhotoFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo from gallery'**
+  String get profilePhotoFromGallery;
+
+  /// No description provided for @profileChooseImageOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an image on this device'**
+  String get profileChooseImageOnDevice;
+
+  /// No description provided for @profileAnimatedGif.
+  ///
+  /// In en, this message translates to:
+  /// **'Animated GIF file'**
+  String get profileAnimatedGif;
+
+  /// No description provided for @profileChooseGifOnDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a GIF on this device'**
+  String get profileChooseGifOnDevice;
+
+  /// No description provided for @profileSearchGifs.
+  ///
+  /// In en, this message translates to:
+  /// **'Search GIFs'**
+  String get profileSearchGifs;
+
+  /// No description provided for @profileFindAvatarOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Find an animated avatar online'**
+  String get profileFindAvatarOnline;
+
+  /// No description provided for @profileAvatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile avatar'**
+  String get profileAvatar;
+
+  /// No description provided for @profileCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile cover'**
+  String get profileCover;
+
+  /// No description provided for @profileCoverOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional image for your profile'**
+  String get profileCoverOptional;
+
+  /// No description provided for @profileRemoveCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove cover'**
+  String get profileRemoveCover;
+
+  /// No description provided for @profileKidsDisclaimerRatings.
+  ///
+  /// In en, this message translates to:
+  /// **'Kids profiles hide adult-rated catalogue titles only when ratings are available. This is not a parental lock.'**
+  String get profileKidsDisclaimerRatings;
+
+  /// No description provided for @profileSaveRecoveryCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your recovery code'**
+  String get profileSaveRecoveryCode;
+
+  /// No description provided for @profileRecoveryCodeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep this code private. You will need it if you forget this profile’s PIN. Changing the PIN replaces this code.'**
+  String get profileRecoveryCodeBody;
+
+  /// No description provided for @profileISavedIt.
+  ///
+  /// In en, this message translates to:
+  /// **'I saved it'**
+  String get profileISavedIt;
+
+  /// No description provided for @profileLegacyPinBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If this device used a different PIN before sync, enter that previous PIN too.'**
+  String get profileLegacyPinBody;
+
+  /// No description provided for @profilePreviousPinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous PIN on this device'**
+  String get profilePreviousPinHint;
+
+  /// No description provided for @profileForgotPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot PIN?'**
+  String get profileForgotPin;
+
+  /// No description provided for @profileChangePinSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new 4 or 6 digit PIN'**
+  String get profileChangePinSubtitle;
+
+  /// No description provided for @profileUseFingerprint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use fingerprint on this phone'**
+  String get profileUseFingerprint;
+
+  /// No description provided for @profileFingerprintSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your PIN still works. Other devices keep their own setting.'**
+  String get profileFingerprintSubtitle;
+
+  /// No description provided for @profilePinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your PIN length'**
+  String get profilePinLength;
+
+  /// No description provided for @profilePinDigits.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} digit} other{{count} digits}}'**
+  String profilePinDigits(int count);
+
+  /// No description provided for @profileEditCurrentPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit current PIN'**
+  String get profileEditCurrentPin;
+
+  /// No description provided for @profileChangePinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Change PIN length'**
+  String get profileChangePinLength;
+
+  /// No description provided for @profileRecoverPinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recover profile PIN'**
+  String get profileRecoverPinTitle;
+
+  /// No description provided for @profileRecoverPinBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the private recovery code saved when this profile’s PIN was set.'**
+  String get profileRecoverPinBody;
+
+  /// No description provided for @posterLayoutPortrait.
+  ///
+  /// In en, this message translates to:
+  /// **'Portrait'**
+  String get posterLayoutPortrait;
+
+  /// No description provided for @posterLayoutLandscape.
+  ///
+  /// In en, this message translates to:
+  /// **'Landscape'**
+  String get posterLayoutLandscape;
+
+  /// No description provided for @posterLandscapeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Landscape uses a backdrop when available. Otherwise the full poster fits without cropping.'**
+  String get posterLandscapeHint;
+
+  /// No description provided for @posterSize.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get posterSize;
+
+  /// No description provided for @posterSizeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Card size applies to poster rows and grids throughout the app.'**
+  String get posterSizeHint;
+
+  /// No description provided for @posterTitlePlacement.
+  ///
+  /// In en, this message translates to:
+  /// **'Title placement'**
+  String get posterTitlePlacement;
+
+  /// No description provided for @posterTitleAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Automatic'**
+  String get posterTitleAuto;
+
+  /// No description provided for @posterTitleInside.
+  ///
+  /// In en, this message translates to:
+  /// **'Inside image'**
+  String get posterTitleInside;
+
+  /// No description provided for @posterTitleBelow.
+  ///
+  /// In en, this message translates to:
+  /// **'Below image'**
+  String get posterTitleBelow;
+
+  /// No description provided for @posterSizeSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get posterSizeSmall;
+
+  /// No description provided for @posterSizeLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large'**
+  String get posterSizeLarge;
+
+  /// No description provided for @navBarVisibility.
+  ///
+  /// In en, this message translates to:
+  /// **'Navbar visibility'**
+  String get navBarVisibility;
+
+  /// No description provided for @navBarGlassHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Darkens the whole glass background for clearer icons.'**
+  String get navBarGlassHint;
+
+  /// No description provided for @navGlassTint.
+  ///
+  /// In en, this message translates to:
+  /// **'Glass tint'**
+  String get navGlassTint;
+
+  /// No description provided for @navBarAdjustHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust the tab bar and mode button together.'**
+  String get navBarAdjustHint;
+
+  /// No description provided for @sourcePriorityDragHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag a source to keep it where you put it. Everything else is sorted by what has actually worked for you. A title pinned from its own Detail screen ignores this list.'**
+  String get sourcePriorityDragHint;
+
+  /// No description provided for @autoResolveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Resolve tries them in order and stops at the first one that has the title. Fewer means Play starts sooner when nothing has it.'**
+  String get autoResolveHint;
+
+  /// No description provided for @unpinAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpin all'**
+  String get unpinAll;
+
+  /// No description provided for @backgroundColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Background colour'**
+  String get backgroundColour;
+
+  /// No description provided for @appFont.
+  ///
+  /// In en, this message translates to:
+  /// **'App font'**
+  String get appFont;
+
+  /// No description provided for @trackerAutoSyncHint.
+  ///
+  /// In en, this message translates to:
+  /// **'When you start an anime it’s marked Watching, each episode you finish updates the count, and a status you set on a title is pushed to {tracker}. Anime only.'**
+  String trackerAutoSyncHint(String tracker);
+
+  /// No description provided for @appearanceBackgroundColour.
+  ///
+  /// In en, this message translates to:
+  /// **'Background colour'**
+  String get appearanceBackgroundColour;
+
+  /// No description provided for @appearanceBackgroundColourHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Behind every screen; Home and Detail use the adaptive tint while it is on. Kept dark for readable text'**
+  String get appearanceBackgroundColourHint;
+
+  /// No description provided for @appearanceFontFont.
+  ///
+  /// In en, this message translates to:
+  /// **'Font'**
+  String get appearanceFontFont;
+
+  /// No description provided for @appearanceAppFont.
+  ///
+  /// In en, this message translates to:
+  /// **'App font'**
+  String get appearanceAppFont;
+
+  /// No description provided for @appearanceAppFontHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in the app is drawn in this'**
+  String get appearanceAppFontHint;
+
+  /// No description provided for @stremioUpdateAddon.
+  ///
+  /// In en, this message translates to:
+  /// **'Update {name}'**
+  String stremioUpdateAddon(String name);
+
+  /// No description provided for @stremioConfiguredUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Configured addon URL'**
+  String get stremioConfiguredUrl;
+
+  /// No description provided for @stremioPasteSettingsUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste the URL from the addon settings page'**
+  String get stremioPasteSettingsUrl;
+
+  /// No description provided for @stremioRemoveAddon.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove addon?'**
+  String get stremioRemoveAddon;
+
+  /// No description provided for @stremioNoSettingsPage.
+  ///
+  /// In en, this message translates to:
+  /// **'This addon has no settings page'**
+  String get stremioNoSettingsPage;
+
+  /// No description provided for @stremioCouldNotOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the settings page'**
+  String get stremioCouldNotOpenSettings;
+
+  /// No description provided for @stremioAddonsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Stremio Addons'**
+  String get stremioAddonsTitle;
+
+  /// No description provided for @stremioSyncPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon sync pending'**
+  String get stremioSyncPending;
+
+  /// No description provided for @stremioRetrySync.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry sync'**
+  String get stremioRetrySync;
+
+  /// No description provided for @stremioOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get stremioOverview;
+
+  /// No description provided for @stremioAddAddon.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Addon'**
+  String get stremioAddAddon;
+
+  /// No description provided for @stremioStatAddons.
+  ///
+  /// In en, this message translates to:
+  /// **'Addons'**
+  String get stremioStatAddons;
+
+  /// No description provided for @stremioStatActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get stremioStatActive;
+
+  /// No description provided for @stremioStatCatalogues.
+  ///
+  /// In en, this message translates to:
+  /// **'Catalogues'**
+  String get stremioStatCatalogues;
+
+  /// No description provided for @stremioAddonUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon URL'**
+  String get stremioAddonUrl;
+
+  /// No description provided for @stremioNoAddons.
+  ///
+  /// In en, this message translates to:
+  /// **'No addons yet. Add an addon to get started.'**
+  String get stremioNoAddons;
+
+  /// No description provided for @stremioVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String stremioVersion(String version);
+
+  /// No description provided for @stremioHomeRows.
+  ///
+  /// In en, this message translates to:
+  /// **'Home rows'**
+  String get stremioHomeRows;
+
+  /// No description provided for @stremioHomeRowsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide rows while keeping metadata available'**
+  String get stremioHomeRowsHint;
+
+  /// No description provided for @stremioFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Addons supply catalogues, metadata, links and subtitles. Configured URLs are stored only on this device.'**
+  String get stremioFooter;
+
+  /// No description provided for @stremioAddonRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon removed'**
+  String get stremioAddonRemoved;
+
+  /// No description provided for @stremioAddonInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon installed'**
+  String get stremioAddonInstalled;
+
+  /// No description provided for @stremioAddonRequestFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon request failed'**
+  String get stremioAddonRequestFailed;
+
+  /// No description provided for @stremioHomeRowShown.
+  ///
+  /// In en, this message translates to:
+  /// **'Home row shown'**
+  String get stremioHomeRowShown;
+
+  /// No description provided for @stremioHomeRowHidden.
+  ///
+  /// In en, this message translates to:
+  /// **'Home row hidden'**
+  String get stremioHomeRowHidden;
+
+  /// No description provided for @stremioAddonUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Addon updated'**
+  String get stremioAddonUpdated;
+
+  /// No description provided for @mangayomiUpdatesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Mangayomi extension updates available'**
+  String get mangayomiUpdatesAvailable;
+
+  /// No description provided for @sourcesAddedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sources added'**
+  String sourcesAddedCount(int count);
+
+  /// No description provided for @couldNotAddRepository.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add repository: {error}'**
+  String couldNotAddRepository(String error);
+
+  /// No description provided for @uninstallSourceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall source?'**
+  String get uninstallSourceTitle;
+
+  /// No description provided for @uninstallSourceBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This removes its downloaded extension code. Saved list and history entries stay.'**
+  String get uninstallSourceBody;
+
+  /// No description provided for @noInstalledSourcesFiltered.
+  ///
+  /// In en, this message translates to:
+  /// **'No installed sources match the selected filters.'**
+  String get noInstalledSourcesFiltered;
+
+  /// No description provided for @noInstalledSourcesMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'No installed sources match \"{query}\".'**
+  String noInstalledSourcesMatch(String query);
+
+  /// No description provided for @couldNotLoadRepository.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load repository'**
+  String get couldNotLoadRepository;
+
+  /// No description provided for @providersSourcesReady.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sources ready'**
+  String providersSourcesReady(int count);
+
+  /// No description provided for @providersEcosystemsSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} ecosystem} other{{count} ecosystems}} · Active: {active}'**
+  String providersEcosystemsSummary(int count, String active);
+
+  /// No description provided for @providersUpdatesAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} update available} other{{count} updates available}}'**
+  String providersUpdatesAvailable(int count);
+
+  /// No description provided for @providersActiveBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'ACTIVE'**
+  String get providersActiveBadge;
+
+  /// No description provided for @providersInlineUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'· {count, plural, one{{count} update} other{{count} updates}}'**
+  String providersInlineUpdates(int count);
+
+  /// No description provided for @searchResultCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{{count} result} other{{count} results}}'**
+  String searchResultCount(int count);
+
+  /// No description provided for @searchXofY.
+  ///
+  /// In en, this message translates to:
+  /// **'{on} of {total}'**
+  String searchXofY(int on, int total);
+
+  /// No description provided for @searchCatalogueFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load this catalogue'**
+  String get searchCatalogueFailed;
+
+  /// No description provided for @searchNoTitlesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No titles found'**
+  String get searchNoTitlesFound;
+
+  /// No description provided for @searchRetryLoadMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry loading more'**
+  String get searchRetryLoadMore;
+
+  /// No description provided for @seriesChooseCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose cover'**
+  String get seriesChooseCover;
+
+  /// No description provided for @seriesCoverTitleN.
+  ///
+  /// In en, this message translates to:
+  /// **'Title {n}'**
+  String seriesCoverTitleN(int n);
+
+  /// No description provided for @seriesNoEpisodes.
+  ///
+  /// In en, this message translates to:
+  /// **'No episodes found'**
+  String get seriesNoEpisodes;
+
+  /// No description provided for @stremioBrowseCatalogues.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse catalogues'**
+  String get stremioBrowseCatalogues;
+
+  /// No description provided for @stremioBrowseAddonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an addon catalogue to browse. Search filters are separate.'**
+  String get stremioBrowseAddonHint;
+
+  /// No description provided for @stremioNoBrowseCatalogues.
+  ///
+  /// In en, this message translates to:
+  /// **'No browseable addon catalogues are available.'**
+  String get stremioNoBrowseCatalogues;
+
+  /// No description provided for @stremioBrowse.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse'**
+  String get stremioBrowse;
+
+  /// No description provided for @stremioSearchFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Search result filters'**
+  String get stremioSearchFilters;
+
+  /// No description provided for @metadataSourceCatalogue.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Catalogue'**
+  String get metadataSourceCatalogue;
+
+  /// No description provided for @metadataSourceCatalogueHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Show installed source lists in Home'**
+  String get metadataSourceCatalogueHint;
+
+  /// No description provided for @detailCloudflareProtected.
+  ///
+  /// In en, this message translates to:
+  /// **'This source is protected by Cloudflare'**
+  String get detailCloudflareProtected;
+
+  /// No description provided for @detailCloudflareSolveOnce.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete the Cloudflare check once and this title will load normally from then on.'**
+  String get detailCloudflareSolveOnce;
+
+  /// No description provided for @detailSearchForTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for this title?'**
+  String get detailSearchForTitle;
+
+  /// No description provided for @detailSearchAllSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Search all sources'**
+  String get detailSearchAllSources;
+
+  /// No description provided for @detailInstallSourceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Install a source from the Sources tab and this will show which of them has each episode.'**
+  String get detailInstallSourceHint;
+
+  /// No description provided for @detailNoLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'No links'**
+  String get detailNoLinks;
+
+  /// No description provided for @detailNoPlayableLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'No playable links found'**
+  String get detailNoPlayableLinks;
+
+  /// No description provided for @detailBestMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'BEST MATCH'**
+  String get detailBestMatch;
+
+  /// No description provided for @communityJoinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the Zangetsu community'**
+  String get communityJoinTitle;
+
+  /// No description provided for @communityJoinBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates, requests, and help — come say hi.'**
+  String get communityJoinBody;
+
+  /// No description provided for @communityMaybeLater.
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe later'**
+  String get communityMaybeLater;
+
+  /// No description provided for @klipyChooseGif.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a GIF'**
+  String get klipyChooseGif;
+
+  /// No description provided for @klipySearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search KLIPY'**
+  String get klipySearch;
+
+  /// No description provided for @klipyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'GIF search is unavailable right now.'**
+  String get klipyUnavailable;
+
+  /// No description provided for @klipySignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to search for GIFs.'**
+  String get klipySignIn;
+
+  /// No description provided for @klipyLoadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load GIFs. Check your connection.'**
+  String get klipyLoadFailed;
+
+  /// No description provided for @playerEpisodesSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Episodes'**
+  String get playerEpisodesSheetTitle;
+
+  /// No description provided for @playerSeasonShort.
+  ///
+  /// In en, this message translates to:
+  /// **'S{season}'**
+  String playerSeasonShort(int season);
+
+  /// No description provided for @playerNoEpisodeMatches.
+  ///
+  /// In en, this message translates to:
+  /// **'No episode matches “{query}”'**
+  String playerNoEpisodeMatches(String query);
+
+  /// No description provided for @playerSeasonHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'SEASON {season}'**
+  String playerSeasonHeading(int season);
+
+  /// No description provided for @playerLoadingAddonSubtitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading addon subtitles…'**
+  String get playerLoadingAddonSubtitles;
+
+  /// No description provided for @playerUpNextIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Up next in {seconds} s'**
+  String playerUpNextIn(int seconds);
+
+  /// No description provided for @readerUpNext.
+  ///
+  /// In en, this message translates to:
+  /// **'UP NEXT'**
+  String get readerUpNext;
+
+  /// No description provided for @readerFinished.
+  ///
+  /// In en, this message translates to:
+  /// **'FINISHED'**
+  String get readerFinished;
+
+  /// No description provided for @trackerCouldNotSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save changes. Please try again.'**
+  String get trackerCouldNotSave;
+
+  /// No description provided for @trackerPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Private'**
+  String get trackerPrivate;
+
+  /// No description provided for @trackerPrivateAniListHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Only you can see this entry on AniList'**
+  String get trackerPrivateAniListHint;
+
+  /// No description provided for @trackerOnName.
+  ///
+  /// In en, this message translates to:
+  /// **'on {tracker}'**
+  String trackerOnName(String tracker);
+
+  /// No description provided for @trackerPrivateAniList.
+  ///
+  /// In en, this message translates to:
+  /// **'Private on AniList'**
+  String get trackerPrivateAniList;
+
+  /// No description provided for @trackerProgressShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{tracker}  ·  {kind} {progress}'**
+  String trackerProgressShort(String tracker, String kind, int progress);
+
+  /// No description provided for @trackerChapterShort.
+  ///
+  /// In en, this message translates to:
+  /// **'ch'**
+  String get trackerChapterShort;
+
+  /// No description provided for @trackerEpisodeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'ep'**
+  String get trackerEpisodeShort;
+
+  /// No description provided for @trackerEpAirsIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Ep {episode} airs in {time}'**
+  String trackerEpAirsIn(int episode, String time);
+
+  /// No description provided for @trackerMatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Matched: {title}'**
+  String trackerMatched(String title);
+
+  /// No description provided for @switcherNoModeSources.
+  ///
+  /// In en, this message translates to:
+  /// **'No {mode} sources yet'**
+  String switcherNoModeSources(String mode);
+
+  /// No description provided for @switcherAutoResolve.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto Resolve'**
+  String get switcherAutoResolve;
+
+  /// No description provided for @switcherAutoResolveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every installed source until one matches'**
+  String get switcherAutoResolveHint;
+
+  /// No description provided for @switcherHoldSelectPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold Select to pin a source to the top'**
+  String get switcherHoldSelectPin;
+
+  /// No description provided for @homeNoLabelSources.
+  ///
+  /// In en, this message translates to:
+  /// **'No {label} sources yet'**
+  String homeNoLabelSources(String label);
+
+  /// No description provided for @homeAddSourceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a source from Providers and your {noun} will show up here.'**
+  String homeAddSourceHint(String noun);
+
+  /// No description provided for @shellCouldNotSwitchProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t switch profile. Try again.'**
+  String get shellCouldNotSwitchProfile;
+
+  /// No description provided for @authEnterEmailReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your account email and we\'ll send a link to set a new password.'**
+  String get authEnterEmailReset;
+
+  /// No description provided for @authGifTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'This GIF is too large to optimize safely. Try a smaller file.'**
+  String get authGifTooLarge;
+
+  /// No description provided for @authCouldNotReadGif.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not read that GIF file.'**
+  String get authCouldNotReadGif;
+
+  /// No description provided for @reconnectLogoutWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your library isn\'t saved to the cloud yet, so logging out will keep it on this device only.'**
+  String get reconnectLogoutWarning;
+
+  /// No description provided for @reconnectSessionExpiredPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session expired. Enter your password to reconnect.'**
+  String get reconnectSessionExpiredPassword;
+
+  /// No description provided for @backupCouldNotSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save the backup. Your current data is unchanged.'**
+  String get backupCouldNotSave;
+
+  /// No description provided for @backupWhatIsSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your sources, list and settings — to a file on your device or to the cloud.'**
+  String get backupWhatIsSaved;
+
+  /// No description provided for @backupLastCloudBackup.
+  ///
+  /// In en, this message translates to:
+  /// **'Last cloud backup: {date}'**
+  String backupLastCloudBackup(String date);
+
+  /// No description provided for @updateVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String updateVersion(String version);
+
+  /// No description provided for @mangayomiPasteIndexHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste the matching index link. Each category is saved separately.'**
+  String get mangayomiPasteIndexHint;
+
+  /// No description provided for @mangayomiHttpsRepoUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'HTTPS repository URL'**
+  String get mangayomiHttpsRepoUrl;
+
+  /// No description provided for @mangayomiRemoveRepoBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed sources stay on this device. Only this repository entry is removed.'**
+  String get mangayomiRemoveRepoBody;
+
+  /// No description provided for @readerMangayomiCloudflare.
+  ///
+  /// In en, this message translates to:
+  /// **'This Mangayomi chapter is protected by Cloudflare.'**
+  String get readerMangayomiCloudflare;
+
+  /// No description provided for @filterAscending.
+  ///
+  /// In en, this message translates to:
+  /// **'Ascending'**
+  String get filterAscending;
+
+  /// No description provided for @filterTypeUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This filter type is not supported yet'**
+  String get filterTypeUnsupported;
+
+  /// No description provided for @tvSourcePickerTryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Try every installed source until one matches'**
+  String get tvSourcePickerTryAll;
+
+  /// No description provided for @tvSourcePickerAppleTvFail.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load that source on Apple TV'**
+  String get tvSourcePickerAppleTvFail;
+
+  /// No description provided for @roomParticipantsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants ({count})'**
+  String roomParticipantsCount(int count);
+
+  /// No description provided for @roomWatchingCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} watching'**
+  String roomWatchingCount(int count);
+
+  /// No description provided for @partyCouldNotCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create party: {error}'**
+  String partyCouldNotCreate(String error);
+
+  /// No description provided for @sourceRemovedFromSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} removed from search'**
+  String sourceRemovedFromSearch(String name);
+
+  /// No description provided for @seekerCastingTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Casting to {device}'**
+  String seekerCastingTo(String device);
+
+  /// No description provided for @tvWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch'**
+  String get tvWatch;
+
+  /// No description provided for @tvMyList.
+  ///
+  /// In en, this message translates to:
+  /// **'My list'**
+  String get tvMyList;
+
+  /// No description provided for @tvDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get tvDetails;
+
+  /// No description provided for @tvSelectSourceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select source'**
+  String get tvSelectSourceTitle;
+
+  /// No description provided for @tvMoviesAndSeries.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies & Series'**
+  String get tvMoviesAndSeries;
 }
 
 class _AppLocalizationsDelegate

@@ -1299,7 +1299,7 @@ class _JumpDialogState extends State<_JumpDialog> {
         TextButton(
           onPressed: _submit,
           child: Text(
-            'Go',
+            context.l10n.go,
             style: AppText.body.copyWith(color: AppColors.accent),
           ),
         ),

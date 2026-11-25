@@ -9,6 +9,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
 import '../../core/ui/poster_card.dart';
 import '../../core/ui/settings_widgets.dart';
+import '../../l10n/l10n.dart';
 
 const _previewItem = MediaItem(
   id: 'tmdb:tv:76479',
@@ -168,16 +169,16 @@ class _PosterCardSettingsScreenState extends State<PosterCardSettingsScreen> {
                 child: SizedBox(
                   width: double.infinity,
                   child: SegmentedButton<PosterCardLayout>(
-                    segments: const [
+                    segments: [
                       ButtonSegment(
                         value: PosterCardLayout.portrait,
-                        label: Text('Portrait'),
-                        icon: Icon(Icons.crop_portrait_rounded),
+                        label: Text(context.l10n.posterLayoutPortrait),
+                        icon: const Icon(Icons.crop_portrait_rounded),
                       ),
                       ButtonSegment(
                         value: PosterCardLayout.wide,
-                        label: Text('Landscape'),
-                        icon: Icon(Icons.crop_landscape_rounded),
+                        label: Text(context.l10n.posterLayoutLandscape),
+                        icon: const Icon(Icons.crop_landscape_rounded),
                       ),
                     ],
                     selected: {prefs.posterCardLayout},
@@ -191,11 +192,11 @@ class _PosterCardSettingsScreenState extends State<PosterCardSettingsScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
             child: Text(
-              'Landscape uses a backdrop when available. Otherwise the full poster fits without cropping.',
+              context.l10n.posterLandscapeHint,
               style: AppText.caption,
             ),
           ),
-          const SettingsSectionLabel('Size'),
+          SettingsSectionLabel(context.l10n.posterSize),
           SettingsCard(
             children: [
               _sizeControl(
@@ -213,7 +214,7 @@ class _PosterCardSettingsScreenState extends State<PosterCardSettingsScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
             child: Text(
-              'Card size applies to poster rows and grids throughout the app.',
+              context.l10n.posterSizeHint,
               style: AppText.caption,
             ),
           ),
@@ -225,25 +226,25 @@ class _PosterCardSettingsScreenState extends State<PosterCardSettingsScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Text('Title placement'),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(context.l10n.posterTitlePlacement),
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: SegmentedButton<PosterTitlePlacement>(
-                        segments: const [
+                        segments: [
                           ButtonSegment(
                             value: PosterTitlePlacement.adaptive,
-                            label: Text('Automatic'),
+                            label: Text(context.l10n.posterTitleAuto),
                           ),
                           ButtonSegment(
                             value: PosterTitlePlacement.inside,
-                            label: Text('Inside image'),
+                            label: Text(context.l10n.posterTitleInside),
                           ),
                           ButtonSegment(
                             value: PosterTitlePlacement.below,
-                            label: Text('Below image'),
+                            label: Text(context.l10n.posterTitleBelow),
                           ),
                         ],
                         selected: {prefs.posterTitlePlacement},
@@ -333,13 +334,19 @@ class _PosterCardSettingsScreenState extends State<PosterCardSettingsScreen> {
         SizedBox(
           width: double.infinity,
           child: SegmentedButton<PosterCardSize>(
-            segments: const [
-              ButtonSegment(value: PosterCardSize.small, label: Text('Small')),
+            segments: [
+              ButtonSegment(
+                value: PosterCardSize.small,
+                label: Text(context.l10n.posterSizeSmall),
+              ),
               ButtonSegment(
                 value: PosterCardSize.standard,
-                label: Text('Default'),
+                label: Text(context.l10n.defaultLabel),
               ),
-              ButtonSegment(value: PosterCardSize.large, label: Text('Large')),
+              ButtonSegment(
+                value: PosterCardSize.large,
+                label: Text(context.l10n.posterSizeLarge),
+              ),
             ],
             selected: {size},
             onSelectionChanged: (selected) => _change(save(selected.first)),

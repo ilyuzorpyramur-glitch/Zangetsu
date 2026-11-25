@@ -72,14 +72,12 @@ Future<void> _showRecoveryCode(
     builder: (context) => PopScope(
       canPop: false,
       child: AlertDialog(
-        title: const Text('Save your recovery code'),
+        title: Text(context.l10n.profileSaveRecoveryCode),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Keep this code private. You will need it if you forget this profile’s PIN. Changing the PIN replaces this code.',
-            ),
+            Text(context.l10n.profileRecoveryCodeBody),
             const SizedBox(height: 16),
             SelectableText(code),
           ],
@@ -88,11 +86,11 @@ Future<void> _showRecoveryCode(
           TextButton.icon(
             onPressed: () => Clipboard.setData(ClipboardData(text: code)),
             icon: const Icon(Icons.copy_rounded),
-            label: const Text('Copy'),
+            label: Text(context.l10n.copy),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('I saved it'),
+            child: Text(context.l10n.profileISavedIt),
           ),
         ],
       ),
@@ -584,13 +582,11 @@ class _PinUnlockSheetState extends State<_PinUnlockSheet> {
           ),
           if (_needsLegacyPin) ...[
             const SizedBox(height: 10),
-            const Text(
-              'If this device used a different PIN before sync, enter that previous PIN too.',
-            ),
+            Text(context.l10n.profileLegacyPinBody),
             const SizedBox(height: 8),
             _pinField(
               controller: _localPin,
-              hint: 'Previous PIN on this device',
+              hint: context.l10n.profilePreviousPinHint,
               numeric: false,
               onSubmitted: (_) => _tryUnlock(),
             ),
@@ -661,7 +657,7 @@ class _PinUnlockSheetState extends State<_PinUnlockSheet> {
                       Navigator.of(context).pop(true);
                     }
                   },
-            child: const Text('Forgot PIN?'),
+            child: Text(context.l10n.profileForgotPin),
           ),
         ],
       ),
@@ -927,7 +923,7 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
                   contentPadding: EdgeInsets.zero,
                   leading: const Icon(Icons.pin_outlined),
                   title: Text(l10n.changeProfilePin),
-                  subtitle: const Text('Choose a new 4 or 6 digit PIN'),
+                  subtitle: Text(context.l10n.profileChangePinSubtitle),
                   trailing: const Icon(Icons.chevron_right_rounded),
                   onTap: _busy
                       ? null
@@ -939,10 +935,8 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
                 if (_supportsBiometrics)
                   SwitchListTile.adaptive(
                     contentPadding: EdgeInsets.zero,
-                    title: const Text('Use fingerprint on this phone'),
-                    subtitle: const Text(
-                      'Your PIN still works. Other devices keep their own setting.',
-                    ),
+                    title: Text(context.l10n.profileUseFingerprint),
+                    subtitle: Text(context.l10n.profileFingerprintSubtitle),
                     value: _fingerprint,
                     onChanged: _busy ? null : _toggleFingerprint,
                   ),
@@ -963,7 +957,7 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
               children: [
                 if (_pinLength == null) ...[
                   Text(
-                    'Choose your PIN length',
+                    context.l10n.profilePinLength,
                     textAlign: TextAlign.center,
                     style: AppText.caption.copyWith(
                       color: AppColors.textSecondary,
@@ -979,7 +973,7 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
                             child: OutlinedButton(
                               onPressed: () =>
                                   setState(() => _pinLength = length),
-                              child: Text('$length digits'),
+                              child: Text(l10n.profilePinDigits(length)),
                             ),
                           ),
                         ),
@@ -1033,7 +1027,7 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
                                   _currentEntered = false;
                                   _error = null;
                                 }),
-                          child: const Text('Edit current PIN'),
+                          child: Text(l10n.profileEditCurrentPin),
                         ),
                       TextButton(
                         onPressed: _busy
@@ -1045,7 +1039,7 @@ class _PinSetupSheetState extends State<_PinSetupSheet> {
                                 _confirming = false;
                                 _error = null;
                               }),
-                        child: const Text('Change PIN length'),
+                        child: Text(l10n.profileChangePinLength),
                       ),
                     ],
                   ),
@@ -1155,7 +1149,7 @@ class _PinConfirmationSheetState extends State<_PinConfirmationSheet> {
           ),
           TextButton(
             onPressed: _busy ? null : () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
         ],
       ),
@@ -1238,13 +1232,11 @@ class _PinRecoverySheetState extends State<_PinRecoverySheet> {
 
   @override
   Widget build(BuildContext context) => _SheetShell(
-    title: 'Recover profile PIN',
+    title: context.l10n.profileRecoverPinTitle,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text(
-          'Use the private recovery code saved when this profile’s PIN was set.',
-        ),
+        Text(context.l10n.profileRecoverPinBody),
         const SizedBox(height: 12),
         _pinField(
           controller: _code,

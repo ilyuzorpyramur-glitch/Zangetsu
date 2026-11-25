@@ -5865,4 +5865,777 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get profileComingSoon =>
       'More features are on their way with Zoro… he just got lost again.';
+
+  @override
+  String get tvCouldntCheckEverySource => 'Couldn\'t check every source';
+
+  @override
+  String get tvNoSourcesHaveTitle =>
+      'None of your installed sources have this title. Try another source from the detail screen, or install more in Providers.';
+
+  @override
+  String get tvCouldntLoadEpisode => 'Couldn\'t load this episode';
+
+  @override
+  String get tvLoadContentFailed =>
+      'There was an issue loading this content. If this continues, try changing sources.';
+
+  @override
+  String get tvCouldntPlaySource => 'Couldn\'t play this source';
+
+  @override
+  String tvPlaybackDecodeFailed(String title, String code) {
+    return '$title failed to play. The stream was found but the player couldn\'t decode it ($code). Try another source, or pick one manually.';
+  }
+
+  @override
+  String tvPlaybackDecodeFailedNoCode(String title) {
+    return '$title failed to play. The stream was found but the player couldn\'t decode it. Try another source, or pick one manually.';
+  }
+
+  @override
+  String get tvClose => 'Close';
+
+  @override
+  String get tvSelectSource => 'Select source';
+
+  @override
+  String get tvNextSource => 'Next source';
+
+  @override
+  String get triStateInclude => 'Include';
+
+  @override
+  String get triStateExclude => 'Exclude';
+
+  @override
+  String get bootConnectionUnavailable => 'Connection settings unavailable';
+
+  @override
+  String get bootConnectToInternet => 'Connect to the internet and try again.';
+
+  @override
+  String get profileWhoIsWatching => 'Who\'s watching?';
+
+  @override
+  String get profilePickUpWhereLeftOff => 'Pick up where you left off.';
+
+  @override
+  String profileReadyForNextWatch(String name) {
+    return 'Ready for the next watch, $name?';
+  }
+
+  @override
+  String get profileAddProfile => 'Add profile';
+
+  @override
+  String get profileManageProfiles => 'Manage profiles';
+
+  @override
+  String get profileKidsBadge => 'KIDS';
+
+  @override
+  String get profileAccount => 'Account';
+
+  @override
+  String get profileChooseWhoBody =>
+      'Choose who is watching. Each profile keeps its own list and progress.';
+
+  @override
+  String get profileKidsDisclaimer =>
+      'Kids profiles hide adult-rated catalogue titles. Third-party source catalogs may not have age ratings, so this is not a parental lock.';
+
+  @override
+  String get profileTurnOffWhoTitle => 'Turn off Who\'s watching?';
+
+  @override
+  String get profileTurnOffWhoBody =>
+      'The app will open straight into the active profile — no PIN at launch. Profile PINs stay on for switching profiles inside the app.';
+
+  @override
+  String get profileDeleteTitle => 'Delete profile?';
+
+  @override
+  String profileDeleteBody(String name) {
+    return 'Delete $name and its saved lists and progress from this account?';
+  }
+
+  @override
+  String profileOnlyOnThisDevice(String name) {
+    return '$name is on this phone only';
+  }
+
+  @override
+  String get profileRecoveryBody =>
+      'This profile is missing from cloud sync. It may have been created offline or deleted on another device. Restore it only if you want it on all your devices. Its local data is safe either way.';
+
+  @override
+  String get profileRestoreToCloud => 'Restore to cloud';
+
+  @override
+  String get profileCouldNotRestore =>
+      'Could not restore profile. Try again later.';
+
+  @override
+  String get profileCouldNotUpdateName => 'Could not update account name';
+
+  @override
+  String get profileSavedOnDevice =>
+      'Saved on this device; cloud sync will retry.';
+
+  @override
+  String get profileChooseAvatar => 'Choose avatar';
+
+  @override
+  String get profilePhotoFromGallery => 'Photo from gallery';
+
+  @override
+  String get profileChooseImageOnDevice => 'Choose an image on this device';
+
+  @override
+  String get profileAnimatedGif => 'Animated GIF file';
+
+  @override
+  String get profileChooseGifOnDevice => 'Choose a GIF on this device';
+
+  @override
+  String get profileSearchGifs => 'Search GIFs';
+
+  @override
+  String get profileFindAvatarOnline => 'Find an animated avatar online';
+
+  @override
+  String get profileAvatar => 'Profile avatar';
+
+  @override
+  String get profileCover => 'Profile cover';
+
+  @override
+  String get profileCoverOptional => 'Optional image for your profile';
+
+  @override
+  String get profileRemoveCover => 'Remove cover';
+
+  @override
+  String get profileKidsDisclaimerRatings =>
+      'Kids profiles hide adult-rated catalogue titles only when ratings are available. This is not a parental lock.';
+
+  @override
+  String get profileSaveRecoveryCode => 'Save your recovery code';
+
+  @override
+  String get profileRecoveryCodeBody =>
+      'Keep this code private. You will need it if you forget this profile’s PIN. Changing the PIN replaces this code.';
+
+  @override
+  String get profileISavedIt => 'I saved it';
+
+  @override
+  String get profileLegacyPinBody =>
+      'If this device used a different PIN before sync, enter that previous PIN too.';
+
+  @override
+  String get profilePreviousPinHint => 'Previous PIN on this device';
+
+  @override
+  String get profileForgotPin => 'Forgot PIN?';
+
+  @override
+  String get profileChangePinSubtitle => 'Choose a new 4 or 6 digit PIN';
+
+  @override
+  String get profileUseFingerprint => 'Use fingerprint on this phone';
+
+  @override
+  String get profileFingerprintSubtitle =>
+      'Your PIN still works. Other devices keep their own setting.';
+
+  @override
+  String get profilePinLength => 'Choose your PIN length';
+
+  @override
+  String profilePinDigits(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count digits',
+      one: '$count digit',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileEditCurrentPin => 'Edit current PIN';
+
+  @override
+  String get profileChangePinLength => 'Change PIN length';
+
+  @override
+  String get profileRecoverPinTitle => 'Recover profile PIN';
+
+  @override
+  String get profileRecoverPinBody =>
+      'Use the private recovery code saved when this profile’s PIN was set.';
+
+  @override
+  String get posterLayoutPortrait => 'Portrait';
+
+  @override
+  String get posterLayoutLandscape => 'Landscape';
+
+  @override
+  String get posterLandscapeHint =>
+      'Landscape uses a backdrop when available. Otherwise the full poster fits without cropping.';
+
+  @override
+  String get posterSize => 'Size';
+
+  @override
+  String get posterSizeHint =>
+      'Card size applies to poster rows and grids throughout the app.';
+
+  @override
+  String get posterTitlePlacement => 'Title placement';
+
+  @override
+  String get posterTitleAuto => 'Automatic';
+
+  @override
+  String get posterTitleInside => 'Inside image';
+
+  @override
+  String get posterTitleBelow => 'Below image';
+
+  @override
+  String get posterSizeSmall => 'Small';
+
+  @override
+  String get posterSizeLarge => 'Large';
+
+  @override
+  String get navBarVisibility => 'Navbar visibility';
+
+  @override
+  String get navBarGlassHint =>
+      'Darkens the whole glass background for clearer icons.';
+
+  @override
+  String get navGlassTint => 'Glass tint';
+
+  @override
+  String get navBarAdjustHint => 'Adjust the tab bar and mode button together.';
+
+  @override
+  String get sourcePriorityDragHint =>
+      'Drag a source to keep it where you put it. Everything else is sorted by what has actually worked for you. A title pinned from its own Detail screen ignores this list.';
+
+  @override
+  String get autoResolveHint =>
+      'Auto Resolve tries them in order and stops at the first one that has the title. Fewer means Play starts sooner when nothing has it.';
+
+  @override
+  String get unpinAll => 'Unpin all';
+
+  @override
+  String get backgroundColour => 'Background colour';
+
+  @override
+  String get appFont => 'App font';
+
+  @override
+  String trackerAutoSyncHint(String tracker) {
+    return 'When you start an anime it’s marked Watching, each episode you finish updates the count, and a status you set on a title is pushed to $tracker. Anime only.';
+  }
+
+  @override
+  String get appearanceBackgroundColour => 'Background colour';
+
+  @override
+  String get appearanceBackgroundColourHint =>
+      'Behind every screen; Home and Detail use the adaptive tint while it is on. Kept dark for readable text';
+
+  @override
+  String get appearanceFontFont => 'Font';
+
+  @override
+  String get appearanceAppFont => 'App font';
+
+  @override
+  String get appearanceAppFontHint => 'Everything in the app is drawn in this';
+
+  @override
+  String stremioUpdateAddon(String name) {
+    return 'Update $name';
+  }
+
+  @override
+  String get stremioConfiguredUrl => 'Configured addon URL';
+
+  @override
+  String get stremioPasteSettingsUrl =>
+      'Paste the URL from the addon settings page';
+
+  @override
+  String get stremioRemoveAddon => 'Remove addon?';
+
+  @override
+  String get stremioNoSettingsPage => 'This addon has no settings page';
+
+  @override
+  String get stremioCouldNotOpenSettings => 'Could not open the settings page';
+
+  @override
+  String get stremioAddonsTitle => 'Stremio Addons';
+
+  @override
+  String get stremioSyncPending => 'Addon sync pending';
+
+  @override
+  String get stremioRetrySync => 'Retry sync';
+
+  @override
+  String get stremioOverview => 'Overview';
+
+  @override
+  String get stremioAddAddon => 'Add Addon';
+
+  @override
+  String get stremioStatAddons => 'Addons';
+
+  @override
+  String get stremioStatActive => 'Active';
+
+  @override
+  String get stremioStatCatalogues => 'Catalogues';
+
+  @override
+  String get stremioAddonUrl => 'Addon URL';
+
+  @override
+  String get stremioNoAddons => 'No addons yet. Add an addon to get started.';
+
+  @override
+  String stremioVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get stremioHomeRows => 'Home rows';
+
+  @override
+  String get stremioHomeRowsHint =>
+      'Hide rows while keeping metadata available';
+
+  @override
+  String get stremioFooter =>
+      'Addons supply catalogues, metadata, links and subtitles. Configured URLs are stored only on this device.';
+
+  @override
+  String get stremioAddonRemoved => 'Addon removed';
+
+  @override
+  String get stremioAddonInstalled => 'Addon installed';
+
+  @override
+  String get stremioAddonRequestFailed => 'Addon request failed';
+
+  @override
+  String get stremioHomeRowShown => 'Home row shown';
+
+  @override
+  String get stremioHomeRowHidden => 'Home row hidden';
+
+  @override
+  String get stremioAddonUpdated => 'Addon updated';
+
+  @override
+  String get mangayomiUpdatesAvailable =>
+      'Mangayomi extension updates available';
+
+  @override
+  String sourcesAddedCount(int count) {
+    return '$count sources added';
+  }
+
+  @override
+  String couldNotAddRepository(String error) {
+    return 'Could not add repository: $error';
+  }
+
+  @override
+  String get uninstallSourceTitle => 'Uninstall source?';
+
+  @override
+  String get uninstallSourceBody =>
+      'This removes its downloaded extension code. Saved list and history entries stay.';
+
+  @override
+  String get noInstalledSourcesFiltered =>
+      'No installed sources match the selected filters.';
+
+  @override
+  String noInstalledSourcesMatch(String query) {
+    return 'No installed sources match \"$query\".';
+  }
+
+  @override
+  String get couldNotLoadRepository => 'Could not load repository';
+
+  @override
+  String providersSourcesReady(int count) {
+    return '$count sources ready';
+  }
+
+  @override
+  String providersEcosystemsSummary(int count, String active) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ecosystems',
+      one: '$count ecosystem',
+    );
+    return '$_temp0 · Active: $active';
+  }
+
+  @override
+  String providersUpdatesAvailable(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count updates available',
+      one: '$count update available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get providersActiveBadge => 'ACTIVE';
+
+  @override
+  String providersInlineUpdates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count updates',
+      one: '$count update',
+    );
+    return '· $_temp0';
+  }
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '$count result',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchXofY(int on, int total) {
+    return '$on of $total';
+  }
+
+  @override
+  String get searchCatalogueFailed => 'Could not load this catalogue';
+
+  @override
+  String get searchNoTitlesFound => 'No titles found';
+
+  @override
+  String get searchRetryLoadMore => 'Retry loading more';
+
+  @override
+  String get seriesChooseCover => 'Choose cover';
+
+  @override
+  String seriesCoverTitleN(int n) {
+    return 'Title $n';
+  }
+
+  @override
+  String get seriesNoEpisodes => 'No episodes found';
+
+  @override
+  String get stremioBrowseCatalogues => 'Browse catalogues';
+
+  @override
+  String get stremioBrowseAddonHint =>
+      'Choose an addon catalogue to browse. Search filters are separate.';
+
+  @override
+  String get stremioNoBrowseCatalogues =>
+      'No browseable addon catalogues are available.';
+
+  @override
+  String get stremioBrowse => 'Browse';
+
+  @override
+  String get stremioSearchFilters => 'Search result filters';
+
+  @override
+  String get metadataSourceCatalogue => 'Source Catalogue';
+
+  @override
+  String get metadataSourceCatalogueHint =>
+      'Show installed source lists in Home';
+
+  @override
+  String get detailCloudflareProtected =>
+      'This source is protected by Cloudflare';
+
+  @override
+  String get detailCloudflareSolveOnce =>
+      'Complete the Cloudflare check once and this title will load normally from then on.';
+
+  @override
+  String get detailSearchForTitle => 'Search for this title?';
+
+  @override
+  String get detailSearchAllSources => 'Search all sources';
+
+  @override
+  String get detailInstallSourceHint =>
+      'Install a source from the Sources tab and this will show which of them has each episode.';
+
+  @override
+  String get detailNoLinks => 'No links';
+
+  @override
+  String get detailNoPlayableLinks => 'No playable links found';
+
+  @override
+  String get detailBestMatch => 'BEST MATCH';
+
+  @override
+  String get communityJoinTitle => 'Join the Zangetsu community';
+
+  @override
+  String get communityJoinBody => 'Updates, requests, and help — come say hi.';
+
+  @override
+  String get communityMaybeLater => 'Maybe later';
+
+  @override
+  String get klipyChooseGif => 'Choose a GIF';
+
+  @override
+  String get klipySearch => 'Search KLIPY';
+
+  @override
+  String get klipyUnavailable => 'GIF search is unavailable right now.';
+
+  @override
+  String get klipySignIn => 'Sign in to search for GIFs.';
+
+  @override
+  String get klipyLoadFailed => 'Could not load GIFs. Check your connection.';
+
+  @override
+  String get playerEpisodesSheetTitle => 'Episodes';
+
+  @override
+  String playerSeasonShort(int season) {
+    return 'S$season';
+  }
+
+  @override
+  String playerNoEpisodeMatches(String query) {
+    return 'No episode matches “$query”';
+  }
+
+  @override
+  String playerSeasonHeading(int season) {
+    return 'SEASON $season';
+  }
+
+  @override
+  String get playerLoadingAddonSubtitles => 'Loading addon subtitles…';
+
+  @override
+  String playerUpNextIn(int seconds) {
+    return 'Up next in $seconds s';
+  }
+
+  @override
+  String get readerUpNext => 'UP NEXT';
+
+  @override
+  String get readerFinished => 'FINISHED';
+
+  @override
+  String get trackerCouldNotSave => 'Could not save changes. Please try again.';
+
+  @override
+  String get trackerPrivate => 'Private';
+
+  @override
+  String get trackerPrivateAniListHint =>
+      'Only you can see this entry on AniList';
+
+  @override
+  String trackerOnName(String tracker) {
+    return 'on $tracker';
+  }
+
+  @override
+  String get trackerPrivateAniList => 'Private on AniList';
+
+  @override
+  String trackerProgressShort(String tracker, String kind, int progress) {
+    return '$tracker  ·  $kind $progress';
+  }
+
+  @override
+  String get trackerChapterShort => 'ch';
+
+  @override
+  String get trackerEpisodeShort => 'ep';
+
+  @override
+  String trackerEpAirsIn(int episode, String time) {
+    return 'Ep $episode airs in $time';
+  }
+
+  @override
+  String trackerMatched(String title) {
+    return 'Matched: $title';
+  }
+
+  @override
+  String switcherNoModeSources(String mode) {
+    return 'No $mode sources yet';
+  }
+
+  @override
+  String get switcherAutoResolve => 'Auto Resolve';
+
+  @override
+  String get switcherAutoResolveHint =>
+      'Try every installed source until one matches';
+
+  @override
+  String get switcherHoldSelectPin => 'Hold Select to pin a source to the top';
+
+  @override
+  String homeNoLabelSources(String label) {
+    return 'No $label sources yet';
+  }
+
+  @override
+  String homeAddSourceHint(String noun) {
+    return 'Add a source from Providers and your $noun will show up here.';
+  }
+
+  @override
+  String get shellCouldNotSwitchProfile =>
+      'Couldn\'t switch profile. Try again.';
+
+  @override
+  String get authEnterEmailReset =>
+      'Enter your account email and we\'ll send a link to set a new password.';
+
+  @override
+  String get authGifTooLarge =>
+      'This GIF is too large to optimize safely. Try a smaller file.';
+
+  @override
+  String get authCouldNotReadGif => 'Could not read that GIF file.';
+
+  @override
+  String get reconnectLogoutWarning =>
+      'Your library isn\'t saved to the cloud yet, so logging out will keep it on this device only.';
+
+  @override
+  String get reconnectSessionExpiredPassword =>
+      'Your session expired. Enter your password to reconnect.';
+
+  @override
+  String get backupCouldNotSave =>
+      'Could not save the backup. Your current data is unchanged.';
+
+  @override
+  String get backupWhatIsSaved =>
+      'Save your sources, list and settings — to a file on your device or to the cloud.';
+
+  @override
+  String backupLastCloudBackup(String date) {
+    return 'Last cloud backup: $date';
+  }
+
+  @override
+  String updateVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get mangayomiPasteIndexHint =>
+      'Paste the matching index link. Each category is saved separately.';
+
+  @override
+  String get mangayomiHttpsRepoUrl => 'HTTPS repository URL';
+
+  @override
+  String get mangayomiRemoveRepoBody =>
+      'Installed sources stay on this device. Only this repository entry is removed.';
+
+  @override
+  String get readerMangayomiCloudflare =>
+      'This Mangayomi chapter is protected by Cloudflare.';
+
+  @override
+  String get filterAscending => 'Ascending';
+
+  @override
+  String get filterTypeUnsupported => 'This filter type is not supported yet';
+
+  @override
+  String get tvSourcePickerTryAll =>
+      'Try every installed source until one matches';
+
+  @override
+  String get tvSourcePickerAppleTvFail =>
+      'Could not load that source on Apple TV';
+
+  @override
+  String roomParticipantsCount(int count) {
+    return 'Participants ($count)';
+  }
+
+  @override
+  String roomWatchingCount(int count) {
+    return '$count watching';
+  }
+
+  @override
+  String partyCouldNotCreate(String error) {
+    return 'Couldn\'t create party: $error';
+  }
+
+  @override
+  String sourceRemovedFromSearch(String name) {
+    return '$name removed from search';
+  }
+
+  @override
+  String seekerCastingTo(String device) {
+    return 'Casting to $device';
+  }
+
+  @override
+  String get tvWatch => 'Watch';
+
+  @override
+  String get tvMyList => 'My list';
+
+  @override
+  String get tvDetails => 'Details';
+
+  @override
+  String get tvSelectSourceTitle => 'Select source';
+
+  @override
+  String get tvMoviesAndSeries => 'Movies & Series';
 }

@@ -15,6 +15,7 @@ import '../../core/stremio/stremio_ref.dart';
 import '../../core/stremio/stremio_stream_mapping.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
+import '../../l10n/l10n.dart';
 
 /// Stremio-owned titles bypass the normal extension resolver: Play, Resume
 /// and episode taps open this grouped links sheet instead.
@@ -368,7 +369,7 @@ class _StremioLinksSheetState extends State<_StremioLinksSheet> {
                             ),
                             TextButton(
                               onPressed: _start,
-                              child: const Text('Retry'),
+                              child: Text(context.l10n.retry),
                             ),
                           ],
                         ),
@@ -390,20 +391,20 @@ class _StremioLinksSheetState extends State<_StremioLinksSheet> {
                     case _EmptyRow():
                       return Padding(
                         padding: const EdgeInsets.only(top: 4),
-                        child: Text('No links', style: AppText.caption),
+                        child: Text(context.l10n.detailNoLinks, style: AppText.caption),
                       );
                     case _DoneEmptyRow(:final showRetry):
                       return Column(
                         children: [
                           const SizedBox(height: 12),
                           Text(
-                            'No playable links found',
+                            context.l10n.detailNoPlayableLinks,
                             style: AppText.caption,
                           ),
                           if (showRetry)
                             TextButton(
                               onPressed: _start,
-                              child: const Text('Retry'),
+                              child: Text(context.l10n.retry),
                             ),
                         ],
                       );
@@ -594,7 +595,7 @@ class _BestCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'BEST MATCH',
+                      context.l10n.detailBestMatch,
                       style: AppText.caption.copyWith(
                         color: AppColors.accent,
                         fontWeight: FontWeight.w800,

@@ -1481,7 +1481,7 @@ class _HomeViewState extends State<_HomeView> {
                     children: [
                       Text(context.l10n.reconnectToSync, style: AppText.body),
                       Text(
-                        'Your session expired — tap to sign in and sync your library.',
+                        context.l10n.yourSessionExpiredTapToSignInAndSyncYourLibrary,
                         style: AppText.caption,
                       ),
                     ],
@@ -2015,13 +2015,13 @@ class _NoSourcesGuide extends StatelessWidget {
             ),
             const SizedBox(height: 22),
             Text(
-              'No $label sources yet',
+              context.l10n.homeNoLabelSources(label),
               textAlign: TextAlign.center,
               style: AppText.headline.copyWith(fontSize: 20),
             ),
             const SizedBox(height: 10),
             Text(
-              'Add a source from Providers and your $noun will show up here.',
+              context.l10n.homeAddSourceHint(noun),
               textAlign: TextAlign.center,
               style: AppText.body.copyWith(
                 color: AppColors.textSecondary,

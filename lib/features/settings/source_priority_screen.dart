@@ -13,6 +13,7 @@ import '../../core/zmode/source_order_prefs.dart';
 import '../../core/zmode/source_score_store.dart';
 import '../../core/zmode/zmode_ids.dart';
 import '../../core/zmode/zmode_module.dart' show sweepCandidates;
+import '../../l10n/l10n.dart';
 
 /// Why a source sits where it does, in one short line.
 ///
@@ -246,9 +247,7 @@ class _SourcePriorityScreenState extends State<SourcePriorityScreen> {
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 0),
             child: Text(
-              'Drag a source to keep it where you put it. Everything else is '
-              'sorted by what has actually worked for you. A title pinned from '
-              'its own Detail screen ignores this list.',
+              context.l10n.sourcePriorityDragHint,
               style: AppText.caption.copyWith(color: AppColors.textTertiary),
             ),
           ),
@@ -345,8 +344,7 @@ class _SourcePriorityScreenState extends State<SourcePriorityScreen> {
       Padding(
         padding: const EdgeInsets.fromLTRB(16, 2, 16, 14),
         child: Text(
-          'Auto Resolve tries them in order and stops at the first one that '
-          'has the title. Fewer means Play starts sooner when nothing has it.',
+          context.l10n.autoResolveHint,
           style: AppText.caption.copyWith(color: AppColors.textTertiary),
         ),
       ),
@@ -376,12 +374,12 @@ class _SourcePriorityScreenState extends State<SourcePriorityScreen> {
     if (_isTv) {
       return TvListFocusable(
         onTap: () => _reset(kind),
-        semanticLabel: 'Unpin all',
+        semanticLabel: context.l10n.unpinAll,
         child: ExcludeSemantics(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Text(
-              'Unpin all',
+              context.l10n.unpinAll,
               style: AppText.caption.copyWith(color: AppColors.textSecondary),
             ),
           ),
@@ -390,7 +388,7 @@ class _SourcePriorityScreenState extends State<SourcePriorityScreen> {
     }
     return TextButton(
       onPressed: () => _reset(kind),
-      child: const Text('Unpin all'),
+      child: Text(context.l10n.unpinAll),
     );
   }
 
@@ -412,7 +410,7 @@ class _SourcePriorityScreenState extends State<SourcePriorityScreen> {
             padding: const EdgeInsets.symmetric(vertical: 18),
             child: Center(
               child: Text(
-                'No sources installed',
+                context.l10n.noSourcesInstalled,
                 style: AppText.caption.copyWith(color: AppColors.textTertiary),
               ),
             ),

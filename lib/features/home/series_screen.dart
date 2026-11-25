@@ -511,7 +511,10 @@ class _CoverPickerSheet extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 18, 20, 6),
             child: Align(
               alignment: AlignmentDirectional.centerStart,
-              child: Text('Choose cover', style: AppText.headline),
+              child: Text(
+                context.l10n.seriesChooseCover,
+                style: AppText.headline,
+              ),
             ),
           ),
           Flexible(
@@ -523,7 +526,7 @@ class _CoverPickerSheet extends StatelessWidget {
                   groupValue: currentKey ?? autoSentinel,
                   activeColor: AppColors.accent,
                   title: Text(
-                    'Automatic',
+                    context.l10n.posterTitleAuto,
                     style: AppText.body.copyWith(color: AppColors.textPrimary),
                   ),
                   onChanged: (_) => Navigator.pop(context, autoSentinel),
@@ -657,7 +660,7 @@ class _MemberRow extends StatelessWidget {
                             borderRadius: BorderRadius.circular(999),
                           ),
                           child: Text(
-                            'Title ${index + 1}',
+                            context.l10n.seriesCoverTitleN(index + 1),
                             style: AppText.caption.copyWith(
                               color: AppColors.accent,
                               fontWeight: FontWeight.w700,
@@ -792,7 +795,7 @@ class _MemberEpisodesState extends State<_MemberEpisodes> {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'No episodes found',
+                  context.l10n.seriesNoEpisodes,
                   style: AppText.body.copyWith(color: AppColors.textSecondary),
                 ),
               );
@@ -944,7 +947,7 @@ class _EpisodeRow extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(999),
                                 ),
                                 child: Text(
-                                  'FILLER',
+                                  context.l10n.fillerBadge,
                                   style: AppText.caption.copyWith(
                                     color: Colors.orange,
                                     fontWeight: FontWeight.w700,

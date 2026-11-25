@@ -1725,7 +1725,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          'Back',
+                          context.l10n.back,
                           style: AppText.body.copyWith(
                             color: AppColors.textPrimary,
                           ),

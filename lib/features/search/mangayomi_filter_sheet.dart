@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../l10n/l10n.dart';
 
 Future<List<Map<String, dynamic>>?> showMangayomiFilterSheet(
   BuildContext context,
@@ -25,9 +26,9 @@ Future<List<Map<String, dynamic>>?> showMangayomiFilterSheet(
                 padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: Text(
-                        'Source filters',
+                        context.l10n.sourceFilters,
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -36,7 +37,7 @@ Future<List<Map<String, dynamic>>?> showMangayomiFilterSheet(
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context, selected),
-                      child: const Text('Apply'),
+                      child: Text(context.l10n.apply),
                     ),
                   ],
                 ),
@@ -44,7 +45,8 @@ Future<List<Map<String, dynamic>>?> showMangayomiFilterSheet(
               Expanded(
                 child: ListView(
                   children: [
-                    for (final filter in selected) _filterRow(filter, update),
+                    for (final filter in selected)
+                      _filterRow(context, filter, update),
                   ],
                 ),
               ),
@@ -56,7 +58,11 @@ Future<List<Map<String, dynamic>>?> showMangayomiFilterSheet(
   );
 }
 
-Widget _filterRow(Map<String, dynamic> filter, StateSetter update) {
+Widget _filterRow(
+  BuildContext context,
+  Map<String, dynamic> filter,
+  StateSetter update,
+) {
   final name = filter['name']?.toString() ?? '';
   final kind = filter['type_name']?.toString() ?? '';
   switch (kind) {
@@ -97,10 +103,16 @@ Widget _filterRow(Map<String, dynamic> filter, StateSetter update) {
         title: Text(name),
         trailing: DropdownButton<int>(
           value: state.clamp(0, 2),
-          items: const [
-            DropdownMenuItem(value: 0, child: Text('Any')),
-            DropdownMenuItem(value: 1, child: Text('Include')),
-            DropdownMenuItem(value: 2, child: Text('Exclude')),
+          items: [
+            DropdownMenuItem(value: 0, child: Text(context.l10n.any)),
+            DropdownMenuItem(
+              value: 1,
+              child: Text(context.l10n.triStateInclude),
+            ),
+            DropdownMenuItem(
+              value: 2,
+              child: Text(context.l10n.triStateExclude),
+            ),
           ],
           onChanged: (value) => update(() => filter['state'] = value),
         ),
@@ -122,7 +134,8 @@ Widget _filterRow(Map<String, dynamic> filter, StateSetter update) {
         title: Text(name),
         children: [
           for (final child in children)
-            if (child is Map) _filterRow(child.cast<String, dynamic>(), update),
+            if (child is Map)
+              _filterRow(context, child.cast<String, dynamic>(), update),
         ],
       );
     case 'SortFilter':
@@ -156,7 +169,7 @@ Widget _filterRow(Map<String, dynamic> filter, StateSetter update) {
             ),
           ),
           SwitchListTile(
-            title: const Text('Ascending'),
+            title: Text(context.l10n.filterAscending),
             value: state['ascending'] == true,
             onChanged: (value) => update(() => state['ascending'] = value),
           ),
@@ -172,7 +185,7 @@ Widget _filterRow(Map<String, dynamic> filter, StateSetter update) {
     default:
       return ListTile(
         title: Text(name.isEmpty ? 'Source filter' : name),
-        subtitle: const Text('This filter type is not supported yet'),
+        subtitle: Text(context.l10n.filterTypeUnsupported),
       );
   }
 }

@@ -24,6 +24,7 @@ import '../search/browse_source_screen.dart' show canonicalTargetFor;
 import '../sources/providers_hub_screen.dart';
 import '../sources/stremio_sources_screen.dart';
 import 'see_all_screen.dart';
+import '../../l10n/l10n.dart';
 
 /// Use the same metadata identity as source browsing, or keep source-only
 /// titles available when matching is off, slow, or uncertain.
@@ -568,7 +569,7 @@ class SourceCatalogueHomeContentState
             Icon(Icons.extension_outlined, color: AppColors.accent, size: 20),
             const SizedBox(width: 10),
             Text(
-              'Source',
+              context.l10n.playerInfoSource,
               style: AppText.caption.copyWith(color: AppColors.textSecondary),
             ),
             const SizedBox(width: 12),

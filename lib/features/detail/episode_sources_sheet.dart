@@ -13,6 +13,7 @@ import '../../core/theme/app_text.dart';
 import '../../core/tv/tv_focusable.dart';
 import '../../core/ui/source_switcher.dart';
 import '../../core/zmode/playback_resolver.dart';
+import '../../l10n/l10n.dart';
 
 /// "Where can I watch this one?" — the sources that HAVE the episode, listed
 /// as they answer.
@@ -267,8 +268,7 @@ class _EpisodeSourcesBodyState extends State<_EpisodeSourcesBody> {
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Text(
-                    'Install a source from the Sources tab and this will show '
-                    'which of them has each episode.',
+                    context.l10n.detailInstallSourceHint,
                     style: AppText.caption.copyWith(
                       color: AppColors.textTertiary,
                     ),

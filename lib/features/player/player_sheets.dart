@@ -332,17 +332,19 @@ class _AudioSubsSheetState extends State<_AudioSubsSheet> {
               ),
               if (c.sourceId == stremioSourceId) ...[
                 if (c.state.loadingAddonSubtitles)
-                  const Padding(
-                    padding: EdgeInsets.all(12),
+                  Padding(
+                    padding: const EdgeInsets.all(12),
                     child: Row(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                           height: 16,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         ),
-                        SizedBox(width: 8),
-                        Expanded(child: Text('Loading addon subtitles…')),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(context.l10n.playerLoadingAddonSubtitles),
+                        ),
                       ],
                     ),
                   )

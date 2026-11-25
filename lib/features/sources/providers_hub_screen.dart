@@ -377,12 +377,12 @@ class _HubHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '$total sources ready',
+                context.l10n.providersSourcesReady(total),
                 style: AppText.headline.copyWith(fontSize: 18),
               ),
               const SizedBox(height: 3),
               Text(
-                '$ecoCount ecosystems · Active: $activeName',
+                context.l10n.providersEcosystemsSummary(ecoCount, activeName),
                 style: AppText.caption,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -399,7 +399,7 @@ class _HubHeader extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '$totalUpdates update${totalUpdates == 1 ? '' : 's'} available',
+                      context.l10n.providersUpdatesAvailable(totalUpdates),
                       style: AppText.caption.copyWith(
                         color: AppColors.accent,
                         fontWeight: FontWeight.w600,
@@ -488,7 +488,7 @@ class _EcoRow extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              'ACTIVE',
+                              context.l10n.providersActiveBadge,
                               style: AppText.overline.copyWith(
                                 color: AppColors.accent,
                                 fontWeight: FontWeight.w700,
@@ -519,7 +519,7 @@ class _EcoRow extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsetsDirectional.only(start: 6),
                             child: Text(
-                              '· $updateCount update${updateCount == 1 ? '' : 's'}',
+                              context.l10n.providersInlineUpdates(updateCount),
                               style: AppText.caption.copyWith(
                                 color: AppColors.accent,
                                 fontWeight: FontWeight.w600,

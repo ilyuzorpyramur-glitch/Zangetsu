@@ -258,7 +258,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 8, 12, 0),
           child: Row(
             children: [
-              Text('Profile', style: AppText.title),
+              Text(context.l10n.profile, style: AppText.title),
               const Spacer(),
               IconButton(
                 tooltip: context.l10n.profileMenu,

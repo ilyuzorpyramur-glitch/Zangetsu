@@ -69,7 +69,7 @@ class _CastRemotePanelState extends State<_CastRemotePanel> {
                             ),
                             const SizedBox(width: 6),
                             Text(
-                              'Casting to ${widget.deviceName}',
+                              context.l10n.seekerCastingTo(widget.deviceName),
                               style: AppText.caption.copyWith(
                                 color: AppColors.accent,
                                 fontWeight: FontWeight.w700,
@@ -119,8 +119,8 @@ class _CastRemotePanelState extends State<_CastRemotePanel> {
                                       size: 56,
                                     ),
                                     const SizedBox(height: 20),
-                                    const Text(
-                                      "This source can't be cast — try another source.",
+                                    Text(
+                                      context.l10n.thisSourceCanTBeCastTryAnotherSource,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         color: Colors.white70,
@@ -374,8 +374,8 @@ class _CastRemotePanelState extends State<_CastRemotePanel> {
                           color: Colors.white70,
                           size: 18,
                         ),
-                        label: const Text(
-                          'Stop casting',
+                        label: Text(
+                          context.l10n.stopCasting,
                           style: TextStyle(color: Colors.white70),
                         ),
                         style: TextButton.styleFrom(

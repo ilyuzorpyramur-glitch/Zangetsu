@@ -369,12 +369,12 @@ class _ProfileAccountSectionState extends State<ProfileAccountSection> {
           children: [
             ListTile(
               leading: const Icon(Icons.photo_outlined),
-              title: const Text('Photo from gallery'),
+              title: Text(context.l10n.profilePhotoFromGallery),
               onTap: () => Navigator.of(context).pop(false),
             ),
             ListTile(
               leading: const Icon(Icons.movie_filter_outlined),
-              title: const Text('Animated GIF file'),
+              title: Text(context.l10n.profileAnimatedGif),
               onTap: () => Navigator.of(context).pop(true),
             ),
             const SizedBox(height: 8),
@@ -395,10 +395,8 @@ class _ProfileAccountSectionState extends State<ProfileAccountSection> {
         if (await file.length() > ProfileAvatarUploader.maxGifSourceBytes) {
           if (context.mounted) {
             ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-              const SnackBar(
-                content: Text(
-                  'This GIF is too large to optimize safely. Try a smaller file.',
-                ),
+              SnackBar(
+                content: Text(context.l10n.authGifTooLarge),
               ),
             );
           }
@@ -409,7 +407,7 @@ class _ProfileAccountSectionState extends State<ProfileAccountSection> {
       } catch (_) {
         if (context.mounted) {
           ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-            const SnackBar(content: Text('Could not read that GIF file.')),
+            SnackBar(content: Text(context.l10n.authCouldNotReadGif)),
           );
         }
         return;

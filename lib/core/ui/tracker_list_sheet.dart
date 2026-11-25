@@ -14,6 +14,7 @@ import 'app_dialog.dart';
 import 'global_messenger.dart';
 import 'tracker_badge.dart';
 import 'tracker_sync_sheet.dart';
+import '../../l10n/l10n.dart';
 
 /// Tracking entry point on phone: one row per connected tracker, each showing
 /// what that tracker matched and its own progress, plus a "Sync all at once"
@@ -270,18 +271,18 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
         PopupMenuItem<String>(
           value: 'open',
           enabled: hasUrl,
-          child: const Text('Open in browser'),
+          child: Text(context.l10n.openInBrowser),
         ),
         PopupMenuItem<String>(
           value: 'copy',
           enabled: hasUrl,
-          child: const Text('Copy link'),
+          child: Text(context.l10n.copyLink),
         ),
         if (onList)
           PopupMenuItem<String>(
             value: 'remove',
             child: Text(
-              'Remove tracking',
+              context.l10n.removeTracking,
               style: TextStyle(color: AppColors.accent),
             ),
           ),
@@ -324,7 +325,7 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
               ),
             ),
             const SizedBox(height: 14),
-            Text('Tracking', style: AppText.title),
+            Text(context.l10n.tracking, style: AppText.title),
             const SizedBox(height: 2),
             Text(
               widget.title,
@@ -349,7 +350,7 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
                 padding: const EdgeInsets.symmetric(vertical: 28),
                 child: Center(
                   child: Text(
-                    'No trackers connected.\nConnect one in Settings → Connections.',
+                    context.l10n.noTrackersConnectedNConnectOneInSettingsConnections,
                     textAlign: TextAlign.center,
                     style: AppText.body.copyWith(
                       color: AppColors.textSecondary,
@@ -368,7 +369,7 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
                     backgroundColor: AppColors.accent,
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  child: const Text('Sync all at once'),
+                  child: Text(context.l10n.syncAllAtOnce),
                 ),
               ),
             ],
@@ -424,7 +425,7 @@ class _TrackerListSheetState extends State<TrackerListSheet> {
                       const SizedBox(height: 3),
                       if (e == null)
                         Text(
-                          'Add tracking',
+                          context.l10n.addTracking,
                           style: AppText.body.copyWith(color: AppColors.accent),
                         )
                       else ...[

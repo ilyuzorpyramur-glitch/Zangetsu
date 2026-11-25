@@ -201,7 +201,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
                       children: [
                         if (quality == NavPrefs.defaultGlassQuality) ...[
                           Text(
-                            'Default',
+                            context.l10n.defaultLabel,
                             style: AppText.caption.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -348,7 +348,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'Navbar visibility',
+                  context.l10n.navBarVisibility,
                   style: AppText.body.copyWith(color: AppColors.textPrimary),
                 ),
               ),
@@ -362,7 +362,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
           ),
           const SizedBox(height: 4),
           Text(
-            'Darkens the whole glass background for clearer icons.',
+            context.l10n.navBarGlassHint,
             style: AppText.caption,
           ),
           Slider(
@@ -498,7 +498,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  'Glass tint',
+                  context.l10n.navGlassTint,
                   style: AppText.body.copyWith(
                     color: AppColors.textPrimary,
                     fontSize: 14.5,
@@ -507,7 +507,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
               ),
               if (_glassTint == NavPrefs.defaultGlassTint)
                 Text(
-                  'Default',
+                  context.l10n.defaultLabel,
                   style: AppText.caption.copyWith(
                     color: AppColors.textSecondary,
                   ),
@@ -515,13 +515,13 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
               else
                 TextButton(
                   onPressed: _resetGlassTint,
-                  child: const Text('Reset'),
+                  child: Text(context.l10n.reset),
                 ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            'Adjust the tab bar and mode button together.',
+            context.l10n.navBarAdjustHint,
             style: AppText.caption.copyWith(color: AppColors.textTertiary),
           ),
           const SizedBox(height: 8),
@@ -544,7 +544,7 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
                         ),
                         top: 0,
                         child: Text(
-                          'Default',
+                          context.l10n.defaultLabel,
                           style: AppText.caption.copyWith(
                             color: AppColors.textTertiary,
                             fontSize: 9,
@@ -609,14 +609,14 @@ class _NavTabsScreenState extends State<NavTabsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'White',
+                context.l10n.colourWhite,
                 style: AppText.caption.copyWith(
                   color: AppColors.textSecondary,
                   fontSize: 11,
                 ),
               ),
               Text(
-                'Black',
+                context.l10n.colourBlack,
                 style: AppText.caption.copyWith(
                   color: AppColors.textSecondary,
                   fontSize: 11,

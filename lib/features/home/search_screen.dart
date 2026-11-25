@@ -581,7 +581,7 @@ class _SearchViewState extends State<_SearchView>
             ),
           ),
           child: Text(
-            'NSFW',
+            context.l10n.nsfw,
             style: AppText.caption.copyWith(
               fontSize: 10.5,
               letterSpacing: 0.3,
@@ -1453,7 +1453,7 @@ class _SearchViewState extends State<_SearchView>
           return Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(
-              '$n result${n == 1 ? '' : 's'}',
+              context.l10n.searchResultCount(n),
               style: AppText.caption.copyWith(fontSize: 12.5),
             ),
           );
@@ -1475,7 +1475,7 @@ class _SearchViewState extends State<_SearchView>
           return Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(
-              '$n result${n == 1 ? '' : 's'}',
+              context.l10n.searchResultCount(n),
               style: AppText.caption.copyWith(fontSize: 12.5),
             ),
           );
@@ -3429,7 +3429,7 @@ class _SearchFilterSheet extends StatelessWidget {
                   _filterLabel(context.l10n.genreUpper),
                   const SizedBox(width: 6),
                   Text(
-                    '· from your results',
+                    context.l10n.fromYourResults,
                     style: AppText.caption.copyWith(
                       color: AppColors.textTertiary,
                       fontWeight: FontWeight.w400,
@@ -3468,7 +3468,7 @@ class _SearchFilterSheet extends StatelessWidget {
               if (state.genreFilter != null && state.hasItemsWithoutGenre) ...[
                 const SizedBox(height: 6),
                 Text(
-                  "some sources don't provide genres",
+                  context.l10n.someSourcesDonTProvideGenres,
                   style: AppText.caption.copyWith(
                     color: AppColors.textTertiary,
                   ),
@@ -3564,7 +3564,7 @@ class _SearchFilterSheet extends StatelessWidget {
             ),
             const Spacer(),
             Text(
-              '$onCount of ${allIds.length}',
+              context.l10n.searchXofY(onCount, allIds.length),
               style: AppText.caption.copyWith(color: AppColors.textTertiary),
             ),
             const SizedBox(width: 4),
@@ -3897,14 +3897,16 @@ class _StremioDiscoverGridState extends State<_StremioDiscoverGrid> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('Could not load this catalogue', style: AppText.body),
-            TextButton(onPressed: _load, child: const Text('Retry')),
+            Text(context.l10n.searchCatalogueFailed, style: AppText.body),
+            TextButton(onPressed: _load, child: Text(context.l10n.retry)),
           ],
         ),
       );
     }
     if (_items.isEmpty) {
-      return Center(child: Text('No titles found', style: AppText.body));
+      return Center(
+        child: Text(context.l10n.searchNoTitlesFound, style: AppText.body),
+      );
     }
     return Stack(
       children: [
@@ -3946,7 +3948,7 @@ class _StremioDiscoverGridState extends State<_StremioDiscoverGrid> {
               child: _failed
                   ? TextButton(
                       onPressed: _load,
-                      child: const Text('Retry loading more'),
+                      child: Text(context.l10n.searchRetryLoadMore),
                     )
                   : const SizedBox(
                       width: 20,

@@ -13,6 +13,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
 import '../../core/tv/tv_list_focusable.dart';
 import '../../core/ui/source_switcher.dart';
+import '../../l10n/l10n.dart';
 
 /// Full-screen D-pad-navigable source picker for TV.
 ///
@@ -63,8 +64,8 @@ class TvSourcePicker extends StatelessWidget {
       }
     }
 
-    addSection('Аниме', buckets.anime);
-    addSection('Movies & Series', buckets.movies);
+    addSection(context.l10n.modeStreaming, buckets.anime);
+    addSection(context.l10n.tvMoviesAndSeries, buckets.movies);
     addSection('NSFW', buckets.nsfw);
 
     if (rows.isEmpty) {
@@ -90,7 +91,7 @@ class TvSourcePicker extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
               child: Text(
-                'Выбрать источник',
+                context.l10n.tvSelectSourceTitle,
                 style: AppText.title.copyWith(color: AppColors.textPrimary),
               ),
             ),
@@ -98,7 +99,7 @@ class TvSourcePicker extends StatelessWidget {
             if (onAutoResolve != null) ...[
               TvListFocusable(
                 autofocus: autoSelected,
-                semanticLabel: 'Автовыбор',
+                semanticLabel: context.l10n.switcherAutoResolve,
                 onTap: () {
                   onAutoResolve!();
                   Navigator.of(context).pop();
@@ -116,11 +117,11 @@ class TvSourcePicker extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Автовыбор', style: AppText.headline),
+                            Text(context.l10n.switcherAutoResolve, style: AppText.headline),
                             Padding(
                               padding: const EdgeInsets.only(top: 2),
                               child: Text(
-                                'Try every installed source until one matches',
+                                context.l10n.tvSourcePickerTryAll,
                                 style: AppText.body.copyWith(
                                   fontSize: 11.5,
                                   height: 1.0,

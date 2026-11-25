@@ -222,7 +222,7 @@ class _AppearanceScreenState extends State<AppearanceScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text('Background colour', style: AppText.headline),
+                    Text(context.l10n.mangaTranslationBackgroundColour, style: AppText.headline),
                     const SizedBox(height: 16),
                     // A Stack, not `color` + `gradient` in one BoxDecoration:
                     // when a gradient is present Flutter ignores the colour, so
@@ -326,7 +326,7 @@ class _AppearanceScreenState extends State<AppearanceScreen> {
                           onPressed: () =>
                               Navigator.pop(ctx, AppColors.defaultBg),
                           child: Text(
-                            'Reset',
+                            context.l10n.reset,
                             style: TextStyle(color: AppColors.textSecondary),
                           ),
                         ),
@@ -475,9 +475,8 @@ class _AppearanceScreenState extends State<AppearanceScreen> {
               ),
               SettingsTile(
                 icon: Icons.format_color_fill_rounded,
-                title: 'Background colour',
-                subtitle:
-                    'Behind every screen; Home and Detail use the adaptive tint while it is on. Kept dark for readable text',
+                title: context.l10n.appearanceBackgroundColour,
+                subtitle: context.l10n.appearanceBackgroundColourHint,
                 subtitleMaxLines: null,
                 trailing: Container(
                   width: 22,
@@ -512,13 +511,13 @@ class _AppearanceScreenState extends State<AppearanceScreen> {
           ),
 
           // ── Font ──────────────────────────────────────────────────────────
-          SettingsSectionLabel('Font'),
+          SettingsSectionLabel(context.l10n.appearanceFontFont),
           SettingsCard(
             children: [
               SettingsTile(
                 icon: Icons.text_fields_rounded,
-                title: 'App font',
-                subtitle: 'Everything in the app is drawn in this',
+                title: context.l10n.appearanceAppFont,
+                subtitle: context.l10n.appearanceAppFontHint,
                 trailing: Text(AppFontPrefs.label, style: AppText.caption),
                 onTap: _pickFont,
               ),
@@ -612,7 +611,9 @@ class _AppearanceScreenState extends State<AppearanceScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
                 child: Row(
-                  children: [Text('App font', style: AppText.headline)],
+                  children: [
+                    Text(context.l10n.appearanceAppFont, style: AppText.headline),
+                  ],
                 ),
               ),
               const Divider(color: AppColors.hairline, height: 1),

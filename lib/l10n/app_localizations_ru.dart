@@ -5931,4 +5931,773 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get profileComingSoon =>
       'Скоро здесь появятся новые функции — Зоро снова заблудился по дороге.';
+
+  @override
+  String get tvCouldntCheckEverySource => 'Не удалось проверить все источники';
+
+  @override
+  String get tvNoSourcesHaveTitle =>
+      'Ни у одного установленного источника нет этого тайтла. Попробуйте другой источник на экране тайтла или установите ещё в разделе «Источники».';
+
+  @override
+  String get tvCouldntLoadEpisode => 'Не удалось загрузить эту серию';
+
+  @override
+  String get tvLoadContentFailed =>
+      'Не удалось загрузить содержимое. Если это повторяется, смените источник.';
+
+  @override
+  String get tvCouldntPlaySource => 'Не удалось воспроизвести этот источник';
+
+  @override
+  String tvPlaybackDecodeFailed(String title, String code) {
+    return '$title: воспроизведение не удалось. Поток найден, но плеер не смог его декодировать ($code). Попробуйте другой источник или выберите вручную.';
+  }
+
+  @override
+  String tvPlaybackDecodeFailedNoCode(String title) {
+    return '$title: воспроизведение не удалось. Поток найден, но плеер не смог его декодировать. Попробуйте другой источник или выберите вручную.';
+  }
+
+  @override
+  String get tvClose => 'Закрыть';
+
+  @override
+  String get tvSelectSource => 'Выбрать источник';
+
+  @override
+  String get tvNextSource => 'Следующий источник';
+
+  @override
+  String get triStateInclude => 'Включать';
+
+  @override
+  String get triStateExclude => 'Исключать';
+
+  @override
+  String get bootConnectionUnavailable => 'Настройки подключения недоступны';
+
+  @override
+  String get bootConnectToInternet =>
+      'Подключитесь к интернету и попробуйте снова.';
+
+  @override
+  String get profileWhoIsWatching => 'Кто смотрит?';
+
+  @override
+  String get profilePickUpWhereLeftOff =>
+      'Продолжите с того места, где остановились.';
+
+  @override
+  String profileReadyForNextWatch(String name) {
+    return '$name, посмотрим ещё что-нибудь?';
+  }
+
+  @override
+  String get profileAddProfile => 'Добавить профиль';
+
+  @override
+  String get profileManageProfiles => 'Управление профилями';
+
+  @override
+  String get profileKidsBadge => 'ДЕТИ';
+
+  @override
+  String get profileAccount => 'Аккаунт';
+
+  @override
+  String get profileChooseWhoBody =>
+      'Выберите, кто смотрит. У каждого профиля свой список и свой прогресс.';
+
+  @override
+  String get profileKidsDisclaimer =>
+      'Детские профили скрывают тайтлы для взрослых. У сторонних каталогов источников может не быть возрастных рейтингов, поэтому это не родительский контроль.';
+
+  @override
+  String get profileTurnOffWhoTitle => 'Отключить выбор профиля?';
+
+  @override
+  String get profileTurnOffWhoBody =>
+      'Приложение будет сразу открывать активный профиль — без PIN при запуске. PIN профилей продолжат работать при переключении внутри приложения.';
+
+  @override
+  String get profileDeleteTitle => 'Удалить профиль?';
+
+  @override
+  String profileDeleteBody(String name) {
+    return 'Удалить $name, его списки и прогресс из этого аккаунта?';
+  }
+
+  @override
+  String profileOnlyOnThisDevice(String name) {
+    return '$name есть только на этом телефоне';
+  }
+
+  @override
+  String get profileRecoveryBody =>
+      'Профиля нет в облачной синхронизации: он мог быть создан без сети или удалён на другом устройстве. Восстанавливайте, только если он нужен на всех устройствах. Локальные данные в любом случае целы.';
+
+  @override
+  String get profileRestoreToCloud => 'Восстановить в облаке';
+
+  @override
+  String get profileCouldNotRestore =>
+      'Не удалось восстановить профиль. Попробуйте позже.';
+
+  @override
+  String get profileCouldNotUpdateName => 'Не удалось обновить имя аккаунта';
+
+  @override
+  String get profileSavedOnDevice =>
+      'Сохранено на этом устройстве; облачная синхронизация повторит попытку.';
+
+  @override
+  String get profileChooseAvatar => 'Выбрать аватар';
+
+  @override
+  String get profilePhotoFromGallery => 'Фото из галереи';
+
+  @override
+  String get profileChooseImageOnDevice =>
+      'Выбрать изображение на этом устройстве';
+
+  @override
+  String get profileAnimatedGif => 'Анимированный GIF';
+
+  @override
+  String get profileChooseGifOnDevice => 'Выбрать GIF на этом устройстве';
+
+  @override
+  String get profileSearchGifs => 'Поиск GIF';
+
+  @override
+  String get profileFindAvatarOnline =>
+      'Найти анимированный аватар в интернете';
+
+  @override
+  String get profileAvatar => 'Аватар профиля';
+
+  @override
+  String get profileCover => 'Обложка профиля';
+
+  @override
+  String get profileCoverOptional => 'Необязательное изображение профиля';
+
+  @override
+  String get profileRemoveCover => 'Убрать обложку';
+
+  @override
+  String get profileKidsDisclaimerRatings =>
+      'Детские профили скрывают тайтлы для взрослых только там, где есть рейтинги. Это не родительский контроль.';
+
+  @override
+  String get profileSaveRecoveryCode => 'Сохраните код восстановления';
+
+  @override
+  String get profileRecoveryCodeBody =>
+      'Никому не показывайте этот код. Он понадобится, если вы забудете PIN профиля. При смене PIN код заменяется.';
+
+  @override
+  String get profileISavedIt => 'Я сохранил';
+
+  @override
+  String get profileLegacyPinBody =>
+      'Если на этом устройстве до синхронизации был другой PIN, введите и его.';
+
+  @override
+  String get profilePreviousPinHint => 'Прежний PIN на этом устройстве';
+
+  @override
+  String get profileForgotPin => 'Забыли PIN?';
+
+  @override
+  String get profileChangePinSubtitle => 'Выберите новый PIN из 4 или 6 цифр';
+
+  @override
+  String get profileUseFingerprint => 'Использовать отпечаток на этом телефоне';
+
+  @override
+  String get profileFingerprintSubtitle =>
+      'PIN продолжает работать. На других устройствах своя настройка.';
+
+  @override
+  String get profilePinLength => 'Выберите длину PIN';
+
+  @override
+  String profilePinDigits(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count цифры',
+      many: '$count цифр',
+      few: '$count цифры',
+      one: '$count цифра',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get profileEditCurrentPin => 'Изменить текущий PIN';
+
+  @override
+  String get profileChangePinLength => 'Изменить длину PIN';
+
+  @override
+  String get profileRecoverPinTitle => 'Восстановление PIN профиля';
+
+  @override
+  String get profileRecoverPinBody =>
+      'Введите закрытый код восстановления, сохранённый при установке PIN.';
+
+  @override
+  String get posterLayoutPortrait => 'Портретный';
+
+  @override
+  String get posterLayoutLandscape => 'Альбомный';
+
+  @override
+  String get posterLandscapeHint =>
+      'В альбомном режиме используется кадр из видео, если он есть. Иначе плакат вписывается целиком без обрезки.';
+
+  @override
+  String get posterSize => 'Размер';
+
+  @override
+  String get posterSizeHint =>
+      'Размер карточек применяется к рядам и сеткам плакатов во всём приложении.';
+
+  @override
+  String get posterTitlePlacement => 'Положение названия';
+
+  @override
+  String get posterTitleAuto => 'Автоматически';
+
+  @override
+  String get posterTitleInside => 'Внутри изображения';
+
+  @override
+  String get posterTitleBelow => 'Под изображением';
+
+  @override
+  String get posterSizeSmall => 'Маленький';
+
+  @override
+  String get posterSizeLarge => 'Большой';
+
+  @override
+  String get navBarVisibility => 'Видимость панели';
+
+  @override
+  String get navBarGlassHint =>
+      'Затемняет стеклянный фон целиком, чтобы значки читались лучше.';
+
+  @override
+  String get navGlassTint => 'Оттенок стекла';
+
+  @override
+  String get navBarAdjustHint =>
+      'Настройте панель вкладок и кнопку режима вместе.';
+
+  @override
+  String get sourcePriorityDragHint =>
+      'Перетащите источник, чтобы закрепить его на месте. Остальные сортируются по тому, что реально срабатывало. Тайтл, закреплённый на своём экране, игнорирует этот список.';
+
+  @override
+  String get autoResolveHint =>
+      'Автовыбор перебирает источники по порядку и останавливается на первом, где есть тайтл. Чем меньше, тем быстрее запускается воспроизведение, когда тайтла нет нигде.';
+
+  @override
+  String get unpinAll => 'Открепить все';
+
+  @override
+  String get backgroundColour => 'Цвет фона';
+
+  @override
+  String get appFont => 'Шрифт приложения';
+
+  @override
+  String trackerAutoSyncHint(String tracker) {
+    return 'Когда вы начинаете смотреть аниме, оно помечается как «Смотрю», каждая просмотренная серия обновляет счётчик, а выставленный статус отправляется в $tracker. Только аниме.';
+  }
+
+  @override
+  String get appearanceBackgroundColour => 'Цвет фона';
+
+  @override
+  String get appearanceBackgroundColourHint =>
+      'Подложка под каждым экраном; пока включено, Home и Detail используют адаптивный оттенок. Держится тёмным ради читаемого текста.';
+
+  @override
+  String get appearanceFontFont => 'Шрифт';
+
+  @override
+  String get appearanceAppFont => 'Шрифт приложения';
+
+  @override
+  String get appearanceAppFontHint => 'Всё в приложении рисуется этим шрифтом';
+
+  @override
+  String stremioUpdateAddon(String name) {
+    return 'Обновить $name';
+  }
+
+  @override
+  String get stremioConfiguredUrl => 'Адрес дополнения';
+
+  @override
+  String get stremioPasteSettingsUrl =>
+      'Вставьте адрес со страницы настроек дополнения';
+
+  @override
+  String get stremioRemoveAddon => 'Удалить дополнение?';
+
+  @override
+  String get stremioNoSettingsPage =>
+      'У этого дополнения нет страницы настроек';
+
+  @override
+  String get stremioCouldNotOpenSettings =>
+      'Не удалось открыть страницу настроек';
+
+  @override
+  String get stremioAddonsTitle => 'Дополнения Stremio';
+
+  @override
+  String get stremioSyncPending => 'Синхронизация дополнения не завершена';
+
+  @override
+  String get stremioRetrySync => 'Повторить синхронизацию';
+
+  @override
+  String get stremioOverview => 'Обзор';
+
+  @override
+  String get stremioAddAddon => 'Добавить дополнение';
+
+  @override
+  String get stremioStatAddons => 'Дополнения';
+
+  @override
+  String get stremioStatActive => 'Активные';
+
+  @override
+  String get stremioStatCatalogues => 'Каталоги';
+
+  @override
+  String get stremioAddonUrl => 'Адрес дополнения';
+
+  @override
+  String get stremioNoAddons =>
+      'Дополнений пока нет. Добавьте дополнение, чтобы начать.';
+
+  @override
+  String stremioVersion(String version) {
+    return 'Версия $version';
+  }
+
+  @override
+  String get stremioHomeRows => 'Ряды на главной';
+
+  @override
+  String get stremioHomeRowsHint =>
+      'Скрыть ряды, оставив метаданные доступными';
+
+  @override
+  String get stremioFooter =>
+      'Дополнения дают каталоги, метаданные, ссылки и субтитры. Адреса дополнений хранятся только на этом устройстве.';
+
+  @override
+  String get stremioAddonRemoved => 'Дополнение удалено';
+
+  @override
+  String get stremioAddonInstalled => 'Дополнение установлено';
+
+  @override
+  String get stremioAddonRequestFailed => 'Запрос к дополнению не удался';
+
+  @override
+  String get stremioHomeRowShown => 'Ряд на главной показан';
+
+  @override
+  String get stremioHomeRowHidden => 'Ряд на главной скрыт';
+
+  @override
+  String get stremioAddonUpdated => 'Дополнение обновлено';
+
+  @override
+  String get mangayomiUpdatesAvailable =>
+      'Доступны обновления расширений Mangayomi';
+
+  @override
+  String sourcesAddedCount(int count) {
+    return 'Добавлено источников: $count';
+  }
+
+  @override
+  String couldNotAddRepository(String error) {
+    return 'Не удалось добавить репозиторий: $error';
+  }
+
+  @override
+  String get uninstallSourceTitle => 'Удалить источник?';
+
+  @override
+  String get uninstallSourceBody =>
+      'Удаляется скачанный код расширения. Записи в списке и истории остаются.';
+
+  @override
+  String get noInstalledSourcesFiltered =>
+      'Под выбранные фильтры нет установленных источников.';
+
+  @override
+  String noInstalledSourcesMatch(String query) {
+    return 'Нет установленных источников по запросу «$query».';
+  }
+
+  @override
+  String get couldNotLoadRepository => 'Не удалось загрузить репозиторий';
+
+  @override
+  String providersSourcesReady(int count) {
+    return 'Источников готово: $count';
+  }
+
+  @override
+  String providersEcosystemsSummary(int count, String active) {
+    return 'Экосистем: $count · активно: $active';
+  }
+
+  @override
+  String providersUpdatesAvailable(int count) {
+    return 'Доступно обновлений: $count';
+  }
+
+  @override
+  String get providersActiveBadge => 'АКТИВНО';
+
+  @override
+  String providersInlineUpdates(int count) {
+    return '· обновлений: $count';
+  }
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count результата',
+      many: '$count результатов',
+      few: '$count результата',
+      one: '$count результат',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchXofY(int on, int total) {
+    return '$on из $total';
+  }
+
+  @override
+  String get searchCatalogueFailed => 'Не удалось загрузить этот каталог';
+
+  @override
+  String get searchNoTitlesFound => 'Тайтлы не найдены';
+
+  @override
+  String get searchRetryLoadMore => 'Повторить загрузку';
+
+  @override
+  String get seriesChooseCover => 'Выбрать обложку';
+
+  @override
+  String seriesCoverTitleN(int n) {
+    return 'Название $n';
+  }
+
+  @override
+  String get seriesNoEpisodes => 'Серии не найдены';
+
+  @override
+  String get stremioBrowseCatalogues => 'Обзор каталогов';
+
+  @override
+  String get stremioBrowseAddonHint =>
+      'Выберите каталог дополнения для просмотра. Фильтры поиска — отдельно.';
+
+  @override
+  String get stremioNoBrowseCatalogues =>
+      'Нет каталогов дополнений, доступных для просмотра.';
+
+  @override
+  String get stremioBrowse => 'Обзор';
+
+  @override
+  String get stremioSearchFilters => 'Фильтры результатов поиска';
+
+  @override
+  String get metadataSourceCatalogue => 'Каталог источников';
+
+  @override
+  String get metadataSourceCatalogueHint =>
+      'Показывать списки установленных источников на главной';
+
+  @override
+  String get detailCloudflareProtected => 'Источник защищён Cloudflare';
+
+  @override
+  String get detailCloudflareSolveOnce =>
+      'Пройдите проверку Cloudflare один раз — дальше тайтл будет загружаться как обычно.';
+
+  @override
+  String get detailSearchForTitle => 'Искать этот тайтл?';
+
+  @override
+  String get detailSearchAllSources => 'Искать во всех источниках';
+
+  @override
+  String get detailInstallSourceHint =>
+      'Установите источник во вкладке «Источники», и здесь будет видно, у кого есть каждая серия.';
+
+  @override
+  String get detailNoLinks => 'Ссылок нет';
+
+  @override
+  String get detailNoPlayableLinks => 'Воспроизводимых ссылок нет';
+
+  @override
+  String get detailBestMatch => 'ЛУЧШЕЕ СОВПАДЕНИЕ';
+
+  @override
+  String get communityJoinTitle => 'Присоединяйтесь к сообществу Zangetsu';
+
+  @override
+  String get communityJoinBody => 'Обновления, запросы и помощь — заходите.';
+
+  @override
+  String get communityMaybeLater => 'Может, позже';
+
+  @override
+  String get klipyChooseGif => 'Выбрать GIF';
+
+  @override
+  String get klipySearch => 'Поиск в KLIPY';
+
+  @override
+  String get klipyUnavailable => 'Поиск GIF сейчас недоступен.';
+
+  @override
+  String get klipySignIn => 'Войдите, чтобы искать GIF.';
+
+  @override
+  String get klipyLoadFailed =>
+      'Не удалось загрузить GIF. Проверьте подключение.';
+
+  @override
+  String get playerEpisodesSheetTitle => 'Серии';
+
+  @override
+  String playerSeasonShort(int season) {
+    return 'S$season';
+  }
+
+  @override
+  String playerNoEpisodeMatches(String query) {
+    return 'Нет серий по запросу «$query»';
+  }
+
+  @override
+  String playerSeasonHeading(int season) {
+    return 'СЕЗОН $season';
+  }
+
+  @override
+  String get playerLoadingAddonSubtitles => 'Загрузка субтитров из дополнения…';
+
+  @override
+  String playerUpNextIn(int seconds) {
+    return 'Следующая через $seconds с';
+  }
+
+  @override
+  String get readerUpNext => 'ДАЛЬШЕ';
+
+  @override
+  String get readerFinished => 'ЗАВЕРШЕНО';
+
+  @override
+  String get trackerCouldNotSave =>
+      'Не удалось сохранить изменения. Попробуйте ещё раз.';
+
+  @override
+  String get trackerPrivate => 'Приватно';
+
+  @override
+  String get trackerPrivateAniListHint =>
+      'Эту запись видите только вы на AniList';
+
+  @override
+  String trackerOnName(String tracker) {
+    return 'в $tracker';
+  }
+
+  @override
+  String get trackerPrivateAniList => 'Приватно на AniList';
+
+  @override
+  String trackerProgressShort(String tracker, String kind, int progress) {
+    return '$tracker  ·  $kind $progress';
+  }
+
+  @override
+  String get trackerChapterShort => 'гл.';
+
+  @override
+  String get trackerEpisodeShort => 'эп.';
+
+  @override
+  String trackerEpAirsIn(int episode, String time) {
+    return 'Серия $episode выйдет через $time';
+  }
+
+  @override
+  String trackerMatched(String title) {
+    return 'Совпадение: $title';
+  }
+
+  @override
+  String switcherNoModeSources(String mode) {
+    return 'Источников ($mode) пока нет';
+  }
+
+  @override
+  String get switcherAutoResolve => 'Автовыбор';
+
+  @override
+  String get switcherAutoResolveHint =>
+      'Перебирать все установленные источники, пока не найдётся совпадение';
+
+  @override
+  String get switcherHoldSelectPin =>
+      'Удерживайте Select, чтобы закрепить источник сверху';
+
+  @override
+  String homeNoLabelSources(String label) {
+    return 'Источников ($label) пока нет';
+  }
+
+  @override
+  String homeAddSourceHint(String noun) {
+    return 'Добавьте источник в разделе «Источники», и здесь появятся ваши $noun.';
+  }
+
+  @override
+  String get shellCouldNotSwitchProfile =>
+      'Не удалось переключить профиль. Попробуйте ещё раз.';
+
+  @override
+  String get authEnterEmailReset =>
+      'Введите почту аккаунта — мы пришлём ссылку для смены пароля.';
+
+  @override
+  String get authGifTooLarge =>
+      'Этот GIF слишком большой для безопасной обработки. Возьмите файл поменьше.';
+
+  @override
+  String get authCouldNotReadGif => 'Не удалось прочитать этот GIF-файл.';
+
+  @override
+  String get reconnectLogoutWarning =>
+      'Библиотека ещё не сохранена в облаке, поэтому после выхода она останется только на этом устройстве.';
+
+  @override
+  String get reconnectSessionExpiredPassword =>
+      'Сессия истекла. Введите пароль, чтобы подключиться снова.';
+
+  @override
+  String get backupCouldNotSave =>
+      'Не удалось сохранить резервную копию. Текущие данные не изменились.';
+
+  @override
+  String get backupWhatIsSaved =>
+      'Сохраните источники, список и настройки — в файл на устройстве или в облако.';
+
+  @override
+  String backupLastCloudBackup(String date) {
+    return 'Последняя копия в облаке: $date';
+  }
+
+  @override
+  String updateVersion(String version) {
+    return 'Версия $version';
+  }
+
+  @override
+  String get mangayomiPasteIndexHint =>
+      'Вставьте подходящую ссылку index. Каждая категория сохраняется отдельно.';
+
+  @override
+  String get mangayomiHttpsRepoUrl => 'Адрес репозитория (HTTPS)';
+
+  @override
+  String get mangayomiRemoveRepoBody =>
+      'Установленные источники остаются на устройстве. Удаляется только запись репозитория.';
+
+  @override
+  String get readerMangayomiCloudflare =>
+      'Эта глава Mangayomi защищена Cloudflare.';
+
+  @override
+  String get filterAscending => 'По возрастанию';
+
+  @override
+  String get filterTypeUnsupported => 'Этот тип фильтра пока не поддерживается';
+
+  @override
+  String get tvSourcePickerTryAll =>
+      'Перебрать все установленные источники, пока не найдётся совпадение';
+
+  @override
+  String get tvSourcePickerAppleTvFail =>
+      'Не удалось загрузить этот источник на Apple TV';
+
+  @override
+  String roomParticipantsCount(int count) {
+    return 'Участники ($count)';
+  }
+
+  @override
+  String roomWatchingCount(int count) {
+    return 'Смотрят: $count';
+  }
+
+  @override
+  String partyCouldNotCreate(String error) {
+    return 'Не удалось создать комнату: $error';
+  }
+
+  @override
+  String sourceRemovedFromSearch(String name) {
+    return '$name убран из поиска';
+  }
+
+  @override
+  String seekerCastingTo(String device) {
+    return 'Трансляция на $device';
+  }
+
+  @override
+  String get tvWatch => 'Смотреть';
+
+  @override
+  String get tvMyList => 'Мой список';
+
+  @override
+  String get tvDetails => 'Подробнее';
+
+  @override
+  String get tvSelectSourceTitle => 'Выбрать источник';
+
+  @override
+  String get tvMoviesAndSeries => 'Фильмы и сериалы';
 }

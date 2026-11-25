@@ -502,19 +502,16 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Turn off Who's watching?"),
-        content: const Text(
-          'The app will open straight into the active profile — no PIN at launch. '
-          'Profile PINs stay on for switching profiles inside the app.',
-        ),
+        title: Text(context.l10n.profileTurnOffWhoTitle),
+        content: Text(context.l10n.profileTurnOffWhoBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Turn off'),
+            child: Text(context.l10n.turnOff),
           ),
         ],
       ),
@@ -531,18 +528,16 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete profile?'),
-        content: Text(
-          'Delete ${profile.name} and its saved lists and progress from this account?',
-        ),
+        title: Text(context.l10n.profileDeleteTitle),
+        content: Text(context.l10n.profileDeleteBody(profile.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete'),
+            child: Text(context.l10n.delete),
           ),
         ],
       ),
@@ -563,14 +558,12 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
     final restore = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('${profile.name} is on this phone only'),
-        content: const Text(
-          'This profile is missing from cloud sync. It may have been created offline or deleted on another device. Restore it only if you want it on all your devices. Its local data is safe either way.',
-        ),
+        title: Text(context.l10n.profileOnlyOnThisDevice(profile.name)),
+        content: Text(context.l10n.profileRecoveryBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Later'),
+            child: Text(context.l10n.later),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
@@ -582,8 +575,8 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
     if (!mounted || restore != true) return;
     if (!await _profiles.restoreRecoverable(profile.id) && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not restore profile. Try again later.'),
+        SnackBar(
+          content: Text(context.l10n.profileCouldNotRestore),
         ),
       );
     }
@@ -653,7 +646,10 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
             if (sl.isRegistered<AuthCubit>()) ...[
               Padding(
                 padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                child: Text('Account', style: AppText.headline),
+                child: Text(
+                  context.l10n.profileAccount,
+                  style: AppText.headline,
+                ),
               ),
               BlocProvider.value(
                 value: sl<AuthCubit>(),
@@ -669,7 +665,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      'Choose who is watching. Each profile keeps its own list and progress.',
+                      context.l10n.profileChooseWhoBody,
                       style: AppText.caption,
                     ),
                   ),
@@ -725,7 +721,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
             ),
             const SizedBox(height: 12),
             Text(
-              'Kids profiles hide adult-rated catalogue titles. Third-party source catalogs may not have age ratings, so this is not a parental lock.',
+              context.l10n.profileKidsDisclaimer,
               style: AppText.caption.copyWith(color: AppColors.textTertiary),
             ),
           ],
@@ -920,7 +916,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                             child: Column(
                               children: [
                                 Text(
-                                  "Who's watching?",
+                                  context.l10n.profileWhoIsWatching,
                                   textAlign: TextAlign.center,
                                   style: AppText.title.copyWith(
                                     fontSize: wide ? 34 : 28,
@@ -930,8 +926,10 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                                 const SizedBox(height: 7),
                                 Text(
                                   lastName == null
-                                      ? 'Pick up where you left off.'
-                                      : 'Ready for the next watch, $lastName?',
+                                      ? context.l10n.profilePickUpWhereLeftOff
+                                    : context.l10n.profileReadyForNextWatch(
+                                        lastName,
+                                      ),
                                   textAlign: TextAlign.center,
                                   style: AppText.caption.copyWith(
                                     color: AppColors.textSecondary,
@@ -1103,7 +1101,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Who's watching?",
+                                context.l10n.profileWhoIsWatching,
                                 style: AppText.title.copyWith(
                                   fontSize: 34,
                                   fontWeight: FontWeight.w700,
@@ -1236,7 +1234,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                       ),
                       if (profile.isKids)
                         Text(
-                          'KIDS',
+                          context.l10n.profileKidsBadge,
                           style: AppText.overline.copyWith(
                             color: focused ? AppColors.bg : AppColors.accent,
                           ),
@@ -1289,7 +1287,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
               ),
               const SizedBox(width: 12),
               Text(
-                'Add profile',
+                context.l10n.profileAddProfile,
                 style: AppText.headline.copyWith(
                   color: focused ? AppColors.bg : AppColors.textSecondary,
                   fontSize: 19,
@@ -1330,7 +1328,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
     return TextButton.icon(
       onPressed: _openProfileManager,
       icon: const Icon(Icons.edit_rounded, size: 18),
-      label: const Text('Manage profiles'),
+      label: Text(context.l10n.profileManageProfiles),
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -1466,7 +1464,7 @@ class _ViewerProfilesScreenState extends State<ViewerProfilesScreen>
                 if (profile.isKids) ...[
                   const SizedBox(height: 3),
                   Text(
-                    'KIDS',
+                    context.l10n.profileKidsBadge,
                     style: AppText.overline.copyWith(
                       color: AppColors.accent,
                       fontSize: 10,

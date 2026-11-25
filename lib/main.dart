@@ -60,7 +60,7 @@ import 'core/tv/tv_route_pop_guard.dart';
 import 'core/tv/tv_viewport.dart';
 import 'features/player/in_app_mini_player.dart';
 import 'features/player/native_player_freeze.dart';
-import 'l10n/app_localizations.dart';
+import 'l10n/l10n.dart';
 import 'core/ui/global_messenger.dart';
 import 'core/theme/theme_repaint_observer.dart';
 import 'features/auth/auth_cubit.dart';
@@ -95,26 +95,34 @@ Future<AuthRouteDecision> _selectLaunchAuthRoute() async {
       runApp(
         MaterialApp(
           theme: ThemeData.dark(useMaterial3: true),
-          home: Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('Connection settings unavailable'),
-                  const Padding(
-                    padding: EdgeInsets.all(24),
-                    child: Text(
-                      'Connect to the internet and try again.',
-                      textAlign: TextAlign.center,
+          // This screen is shown from a bare MaterialApp during launch, before
+          // the root app exists — it needs its own delegates or every label here
+          // would silently fall back to English in the Russian build.
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          locale: LocaleController.locale,
+          home: Builder(
+            builder: (context) => Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(context.l10n.bootConnectionUnavailable),
+                    Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Text(
+                        context.l10n.bootConnectToInternet,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  FilledButton(
-                    onPressed: () {
-                      if (!retry.isCompleted) retry.complete();
-                    },
-                    child: const Text('Try again'),
-                  ),
-                ],
+                    FilledButton(
+                      onPressed: () {
+                        if (!retry.isCompleted) retry.complete();
+                      },
+                      child: Text(context.l10n.tryAgain),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/profiles/klipy_gif_service.dart';
 import '../../core/theme/app_colors.dart';
+import '../../l10n/l10n.dart';
 
 Future<KlipyGif?> showProfileKlipyGifPicker(
   BuildContext context,
@@ -106,7 +107,7 @@ class _KlipyGifPickerState extends State<_KlipyGifPicker> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Choose a GIF',
+                        context.l10n.klipyChooseGif,
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
@@ -127,7 +128,7 @@ class _KlipyGifPickerState extends State<_KlipyGifPicker> {
                   onChanged: _search,
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
-                    hintText: 'Search KLIPY',
+                    hintText: context.l10n.klipySearch,
                     prefixIcon: const Icon(Icons.search_rounded),
                     filled: true,
                     fillColor: AppColors.settingsCard,
@@ -140,25 +141,25 @@ class _KlipyGifPickerState extends State<_KlipyGifPicker> {
                 const SizedBox(height: 12),
                 Expanded(
                   child: !widget.service.isConfigured
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                            'GIF search is unavailable right now.',
+                            context.l10n.klipyUnavailable,
                             textAlign: TextAlign.center,
                           ),
                         )
                       : !widget.service.isSignedIn
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                            'Sign in to search for GIFs.',
+                            context.l10n.klipySignIn,
                             textAlign: TextAlign.center,
                           ),
                         )
                       : _loading
                       ? const Center(child: CircularProgressIndicator())
                       : _failed
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                            'Could not load GIFs. Check your connection.',
+                            context.l10n.klipyLoadFailed,
                           ),
                         )
                       : _results.isEmpty

@@ -323,7 +323,7 @@ class _DetailCloudflareBlockedState extends State<_DetailCloudflareBlocked> {
             ),
             const SizedBox(height: 20),
             Text(
-              'This source is protected by Cloudflare',
+              context.l10n.detailCloudflareProtected,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.textPrimary,
@@ -333,8 +333,7 @@ class _DetailCloudflareBlockedState extends State<_DetailCloudflareBlocked> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Complete the Cloudflare check once and this title will load '
-              'normally from then on.',
+              context.l10n.detailCloudflareSolveOnce,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.textSecondary,

@@ -190,7 +190,7 @@ class _UpdateDialogState extends State<_UpdateDialog> {
             ),
             const SizedBox(height: 4),
             Text(
-              'Version ${widget.info.version}',
+              context.l10n.updateVersion(widget.info.version),
               style: AppText.caption.copyWith(color: AppColors.accent),
             ),
             const SizedBox(height: 14),

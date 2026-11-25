@@ -5,6 +5,7 @@ import '../models/media_item.dart';
 import '../playback/category_store.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
+import '../../l10n/l10n.dart';
 
 /// Tick which of the user's categories [item] belongs to.
 ///
@@ -38,7 +39,7 @@ Future<void> showCategoryPicker(BuildContext context, MediaItem item) async {
               padding: const EdgeInsets.fromLTRB(20, 18, 20, 6),
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: Text('Categories', style: AppText.title),
+                child: Text(context.l10n.categories, style: AppText.title),
               ),
             ),
             Flexible(
@@ -65,7 +66,7 @@ Future<void> showCategoryPicker(BuildContext context, MediaItem item) async {
             ListTile(
               leading: Icon(Icons.add_rounded, color: AppColors.accent),
               title: Text(
-                'New category',
+                context.l10n.newCategory,
                 style: AppText.body.copyWith(color: AppColors.accent),
               ),
               onTap: () async {
@@ -96,23 +97,23 @@ Future<ListCategory?> _promptNewCategory(
     context: context,
     builder: (ctx) => AlertDialog(
       backgroundColor: AppColors.surface,
-      title: Text('New category', style: AppText.title),
+      title: Text(context.l10n.newCategory, style: AppText.title),
       content: TextField(
         controller: controller,
         autofocus: true,
         style: AppText.body.copyWith(color: AppColors.textPrimary),
-        decoration: const InputDecoration(hintText: 'Persona, Gym, …'),
+        decoration: InputDecoration(hintText: context.l10n.personaGym),
         onSubmitted: (v) => Navigator.pop(ctx, v),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.cancel),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(ctx, controller.text),
           style: FilledButton.styleFrom(backgroundColor: AppColors.accent),
-          child: const Text('Create'),
+          child: Text(context.l10n.create),
         ),
       ],
     ),

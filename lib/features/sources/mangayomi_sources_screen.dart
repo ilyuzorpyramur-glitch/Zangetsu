@@ -130,7 +130,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
     if (count > 0 && count != _lastUpdateNotifyCount) {
       _lastUpdateNotifyCount = count;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Mangayomi extension updates available')),
+        SnackBar(content: Text(context.l10n.mangayomiUpdatesAvailable)),
       );
     }
   }
@@ -142,7 +142,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const ListTile(title: Text('Add repository')),
+            ListTile(title: Text(context.l10n.addRepository)),
             for (final (index, label, icon) in [
               (1, 'Anime', Icons.play_circle_outline_rounded),
               (2, 'Manga', Icons.menu_book_rounded),
@@ -174,7 +174,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Paste the matching index link. Each category is saved separately.',
+              context.l10n.mangayomiPasteIndexHint,
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 12),
@@ -183,7 +183,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
               keyboardType: TextInputType.url,
               onChanged: (value) => repositoryUrl = value.trim(),
               decoration: InputDecoration(
-                labelText: 'HTTPS repository URL',
+                labelText: context.l10n.mangayomiHttpsRepoUrl,
                 hintText: switch (typeIndex) {
                   1 => 'https://example.com/anime_index.json',
                   2 => 'https://example.com/manga_index.json',
@@ -196,11 +196,11 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, repositoryUrl),
-            child: const Text('Add'),
+            child: Text(context.l10n.add),
           ),
         ],
       ),
@@ -235,11 +235,15 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
         _typeTabs.animateTo(typeIndex);
         _tabs.animateTo(1);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${sources.length} sources added')),
+          SnackBar(
+            content: Text(context.l10n.sourcesAddedCount(sources.length)),
+          ),
         );
       }
     } catch (error) {
-      if (mounted) _error('Could not add repository: $error');
+      if (mounted) {
+        _error(context.l10n.couldNotAddRepository('$error'));
+      }
     }
   }
 
@@ -247,18 +251,16 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
     final remove = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Remove repository?'),
-        content: const Text(
-          'Installed sources stay on this device. Only this repository entry is removed.',
-        ),
+        title: Text(context.l10n.removeRepository2),
+        content: Text(context.l10n.mangayomiRemoveRepoBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Remove'),
+            child: Text(context.l10n.remove),
           ),
         ],
       ),
@@ -323,18 +325,16 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
     final remove = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Uninstall source?'),
-        content: const Text(
-          'This removes its downloaded extension code. Saved list and history entries stay.',
-        ),
+        title: Text(context.l10n.uninstallSourceTitle),
+        content: Text(context.l10n.uninstallSourceBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Uninstall'),
+            child: Text(context.l10n.uninstall),
           ),
         ],
       ),
@@ -358,7 +358,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
         actions: [
           if (_langPrefs != null)
             IconButton(
-              tooltip: 'Languages',
+              tooltip: context.l10n.languages,
               onPressed: () => _pickLanguages(isTv),
               icon: const Icon(Icons.language_rounded),
             ),
@@ -392,7 +392,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
               onPressed: _addRepository,
               icon: const Icon(Icons.add_rounded),
               label: Text(
-                'Add repository',
+                context.l10n.addRepository,
                 style: AppText.button.copyWith(color: Colors.white),
               ),
             ),
@@ -478,8 +478,10 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
           EmptyState(
             icon: Icons.extension_outlined,
             message: _query.isEmpty
-                ? 'No installed sources match the selected filters.'
-                : 'No installed sources match "${_search.text.trim()}".',
+                ? context.l10n.noInstalledSourcesFiltered
+                : context.l10n.noInstalledSourcesMatch(
+                    _search.text.trim(),
+                  ),
           ),
         ],
       );
@@ -751,14 +753,14 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
                     }
                     if (action == 'remove') _removeRepository(repository);
                   },
-                  itemBuilder: (_) => const [
+                  itemBuilder: (_) => [
                     PopupMenuItem(
                       value: 'check',
-                      child: Text('Check for updates'),
+                      child: Text(context.l10n.checkForUpdates),
                     ),
                     PopupMenuItem(
                       value: 'remove',
-                      child: Text('Remove repository'),
+                      child: Text(context.l10n.removeRepository),
                     ),
                   ],
                 ),
@@ -776,10 +778,10 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
                     children: [
                       if (error != null)
                         ListTile(
-                          title: const Text('Could not load repository'),
+                          title: Text(context.l10n.couldNotLoadRepository),
                           subtitle: Text(error.toString()),
                           trailing: IconButton(
-                            tooltip: 'Retry',
+                            tooltip: context.l10n.retry,
                             onPressed: _refreshRepositories,
                             icon: const Icon(Icons.refresh_rounded),
                           ),
@@ -903,7 +905,7 @@ class _MangayomiSourcesScreenState extends State<MangayomiSourcesScreen>
           minimumSize: const Size(96, 36),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
-        child: const Text('Installed'),
+        child: Text(context.l10n.installed),
       );
     }
     final isUpdate = installed != null;

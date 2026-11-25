@@ -226,7 +226,7 @@ class _EpisodesPanelState extends State<_EpisodesPanel> {
                   child: Row(
                     children: [
                       Text(
-                        'Episodes',
+                        context.l10n.watchEpisodes,
                         style: AppText.title.copyWith(fontSize: 17 * s),
                       ),
                       const SizedBox(width: 8),
@@ -294,7 +294,7 @@ class _EpisodesPanelState extends State<_EpisodesPanel> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    'S$selSeason',
+                                    context.l10n.playerSeasonShort(selSeason),
                                     style: AppText.caption.copyWith(
                                       color: AppColors.textPrimary,
                                       fontWeight: FontWeight.w700,
@@ -398,7 +398,7 @@ class _EpisodesPanelState extends State<_EpisodesPanel> {
                           child: Padding(
                             padding: EdgeInsets.all(pad),
                             child: Text(
-                              'No episode matches “$_query”',
+                              context.l10n.playerNoEpisodeMatches(_query),
                               textAlign: TextAlign.center,
                               style: AppText.caption.copyWith(
                                 color: AppColors.textTertiary,
@@ -418,7 +418,7 @@ class _EpisodesPanelState extends State<_EpisodesPanel> {
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(pad, 10, pad, 2),
                                   child: Text(
-                                    'SEASON ${it.season}',
+                                    context.l10n.playerSeasonHeading(it.season),
                                     style: AppText.caption.copyWith(
                                       color: AppColors.textTertiary,
                                       fontWeight: FontWeight.w700,

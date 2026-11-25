@@ -1275,7 +1275,7 @@ Future<void> _switchProfile(
   } catch (_) {
     if (context.mounted) {
       ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-        const SnackBar(content: Text("Couldn't switch profile. Try again.")),
+        SnackBar(content: Text(context.l10n.shellCouldNotSwitchProfile)),
       );
     }
   }
@@ -1591,7 +1591,7 @@ class _ProfileSwitcherSheet extends StatelessWidget {
                               color: AppColors.textSecondary,
                             ),
                           ),
-                          title: const Text('Add profile'),
+                          title: Text(context.l10n.profileAddProfile),
                           trailing: const Icon(Icons.chevron_right_rounded),
                           onTap: onAddProfile,
                         ),
@@ -1612,7 +1612,7 @@ class _ProfileSwitcherSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    'Zangetsu',
+                    context.l10n.zangetsu,
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: AppColors.textSecondary,
                       fontWeight: FontWeight.w600,

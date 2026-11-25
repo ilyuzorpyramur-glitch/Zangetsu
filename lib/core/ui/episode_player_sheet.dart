@@ -6,6 +6,7 @@ import '../playback/external_player.dart';
 import '../playback/source_selection.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
+import '../../l10n/l10n.dart';
 
 /// What a long-press on an episode chose: which player to open it in, this
 /// once. An empty [package] means the built-in player.
@@ -242,7 +243,7 @@ Future<PlayerChoice?> showEpisodePlayerSheet(
                 padding: const EdgeInsets.fromLTRB(20, 14, 20, 2),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('Play this episode with', style: AppText.headline),
+                  child: Text(context.l10n.playThisEpisodeWith, style: AppText.headline),
                 ),
               ),
               Padding(
@@ -290,7 +291,7 @@ Future<PlayerChoice?> showEpisodePlayerSheet(
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: Text(
-                      'Other apps',
+                      context.l10n.otherApps,
                       style: AppText.caption.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -370,7 +371,7 @@ Future<VideoSource?> showMirrorSheet(
                 padding: const EdgeInsets.fromLTRB(20, 14, 20, 2),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('Play mirror', style: AppText.headline),
+                  child: Text(context.l10n.playMirror, style: AppText.headline),
                 ),
               ),
               Padding(

@@ -7,6 +7,7 @@ import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 import '../tracker/tracker.dart';
 import 'global_messenger.dart';
+import '../../l10n/l10n.dart';
 
 /// Ask for a name and create it on AniList. Returns the new full set of list
 /// names, or null when cancelled or the write failed.
@@ -27,23 +28,23 @@ Future<List<String>?> _promptNewList(
     context: context,
     builder: (ctx) => AlertDialog(
       backgroundColor: AppColors.surface,
-      title: Text('New AniList list', style: AppText.title),
+      title: Text(context.l10n.newAniListList, style: AppText.title),
       content: TextField(
         controller: controller,
         autofocus: true,
         style: AppText.body.copyWith(color: AppColors.textPrimary),
-        decoration: const InputDecoration(hintText: 'Rewatching, Favourites, …'),
+        decoration: InputDecoration(hintText: context.l10n.rewatchingFavourites),
         onSubmitted: (v) => Navigator.pop(ctx, v),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.cancel),
         ),
         FilledButton(
           onPressed: () => Navigator.pop(ctx, controller.text),
           style: FilledButton.styleFrom(backgroundColor: AppColors.accent),
-          child: const Text('Create'),
+          child: Text(context.l10n.create),
         ),
       ],
     ),
@@ -104,7 +105,7 @@ Future<void> showAniListCustomListsSheet(
               padding: const EdgeInsets.fromLTRB(20, 18, 20, 2),
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: Text('AniList custom lists', style: AppText.title),
+                child: Text(context.l10n.anilistCustomLists, style: AppText.title),
               ),
             ),
             Padding(
@@ -112,7 +113,7 @@ Future<void> showAniListCustomListsSheet(
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
-                  'Saved to your AniList account',
+                  context.l10n.savedToYourAniListAccount,
                   style: AppText.caption,
                 ),
               ),
@@ -144,10 +145,10 @@ Future<void> showAniListCustomListsSheet(
             ListTile(
               leading: Icon(Icons.add_rounded, color: AppColors.accent),
               title: Text(
-                'New list',
+                context.l10n.newList,
                 style: AppText.body.copyWith(color: AppColors.accent),
               ),
-              subtitle: Text('Creates it on AniList', style: AppText.caption),
+              subtitle: Text(context.l10n.createsItOnAniList, style: AppText.caption),
               onTap: () async {
                 final made = await _promptNewList(ctx, service, kind);
                 if (made == null) return;

@@ -287,7 +287,7 @@ class ListStatusSheet extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 14, 20, 6),
                 child: Align(
                   alignment: AlignmentDirectional.centerStart,
-                  child: Text('Add to your list', style: AppText.headline),
+                  child: Text(context.l10n.addToYourList, style: AppText.headline),
                 ),
               ),
               for (var i = 0; i < statuses.length; i++)
@@ -346,7 +346,7 @@ class ListStatusSheet extends StatelessWidget {
                       Icons.folder_outlined,
                       color: AppColors.textSecondary,
                     ),
-                    title: const Text('Categories'),
+                    title: Text(context.l10n.categories),
                     trailing: const Icon(
                       Icons.chevron_right_rounded,
                       color: AppColors.textSecondary,
@@ -366,7 +366,7 @@ class ListStatusSheet extends StatelessWidget {
                       color: AppColors.accent,
                     ),
                     title: Text(
-                      'Remove from list',
+                      context.l10n.removeFromList,
                       style: AppText.body.copyWith(color: AppColors.accent),
                     ),
                     onTap: () => Navigator.pop(context, _kRemove),

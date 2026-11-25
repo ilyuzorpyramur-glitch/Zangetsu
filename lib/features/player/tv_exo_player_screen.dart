@@ -2685,8 +2685,8 @@ class _TvExoPlayerScreenState extends State<TvExoPlayerScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Episodes',
+            Text(
+              context.l10n.watchEpisodes,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,

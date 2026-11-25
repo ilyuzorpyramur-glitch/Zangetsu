@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/l10n.dart';
 
 /// One-time feedback while a changed auth connection is checked at launch.
 enum AuthConnectionPhase { idle, preparing, ready, failed }
@@ -76,7 +77,7 @@ class AuthConnectionScreen extends StatelessWidget {
                   FilledButton(
                     autofocus: true,
                     onPressed: onContinue,
-                    child: const Text('Continue'),
+                    child: Text(context.l10n.continueLabel),
                   ),
                 ],
               ],

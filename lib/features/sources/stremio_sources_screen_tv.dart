@@ -61,25 +61,25 @@ Widget _stremioTvConfigureDialog(
   TextEditingController controller,
   String name,
 ) => TvAlertDialog(
-  title: 'Update $name',
+  title: dialog.l10n.stremioUpdateAddon(name),
   body: TvTextField(
     controller: controller,
     keyboardType: TextInputType.url,
     autocorrect: false,
     enableSuggestions: false,
-    decoration: const InputDecoration(
-      labelText: 'URL настроенного аддона',
-      hintText: 'Вставьте URL со страницы настроек аддона',
+    decoration: InputDecoration(
+      labelText: dialog.l10n.stremioConfiguredUrl,
+      hintText: dialog.l10n.stremioPasteSettingsUrl,
     ),
   ),
   actions: [
     TvAlertAction(
-      label: 'Отмена',
+      label: dialog.l10n.cancel,
       autofocus: true,
       onTap: () => Navigator.of(dialog).pop(),
     ),
     TvAlertAction(
-      label: 'Сохранить',
+      label: dialog.l10n.save,
       primary: true,
       onTap: () => Navigator.of(dialog).pop(controller.text),
     ),
@@ -88,16 +88,16 @@ Widget _stremioTvConfigureDialog(
 
 Widget _stremioTvRemoveDialog(BuildContext dialog, String name) =>
     TvAlertDialog(
-      title: 'Удалить аддон?',
+      title: dialog.l10n.stremioRemoveAddon,
       body: Text(name),
       actions: [
         TvAlertAction(
-          label: 'Отмена',
+          label: dialog.l10n.cancel,
           autofocus: true,
           onTap: () => Navigator.of(dialog).pop(false),
         ),
         TvAlertAction(
-          label: 'Убрать',
+          label: dialog.l10n.remove,
           primary: true,
           onTap: () => Navigator.of(dialog).pop(true),
         ),

@@ -16,6 +16,7 @@ import '../tracker/tracker_binding_store.dart';
 import '../tracker/tracker_hub.dart';
 import '../tv/tv_focusable.dart';
 import 'global_messenger.dart';
+import '../../l10n/l10n.dart';
 
 /// Tracker sync sheet. Reads the user's current entry for one title from the
 /// connected trackers, lets them edit status / score / episode progress in one
@@ -287,8 +288,8 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
       if (!mounted) return;
       setState(() => _saving = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Could not save changes. Please try again.'),
+        SnackBar(
+          content: Text(context.l10n.trackerCouldNotSave),
         ),
       );
       return;
@@ -347,7 +348,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
                 ),
               ),
               const SizedBox(height: 16),
-              Text('Tracking', style: AppText.headline),
+              Text(context.l10n.tracking, style: AppText.headline),
               const SizedBox(height: 2),
               _connectedLine(),
               const SizedBox(height: 18),
@@ -388,18 +389,24 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Your trackers disagree',
+            context.l10n.yourTrackersDisagree,
             style: AppText.body.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 4),
           for (final e in _conflicts)
             Text(
-              '${e.trackerName}  ·  ${widget.reading ? "ch" : "ep"} ${e.progress}',
+              context.l10n.trackerProgressShort(
+                e.trackerName,
+                widget.reading
+                    ? context.l10n.trackerChapterShort
+                    : context.l10n.trackerEpisodeShort,
+                e.progress ?? 0,
+              ),
               style: AppText.caption,
             ),
           const SizedBox(height: 4),
           Text(
-            'Applying sets them all to the number below.',
+            context.l10n.applyingSetsThemAllToTheNumberBelow,
             style: AppText.caption,
           ),
         ],
@@ -424,8 +431,8 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
       if (_supportsPrivacy)
         SwitchListTile.adaptive(
           contentPadding: EdgeInsets.zero,
-          title: const Text('Private on AniList'),
-          subtitle: const Text('Only you can see this entry on AniList'),
+          title: Text(context.l10n.trackerPrivateAniList),
+          subtitle: Text(context.l10n.trackerPrivateAniListHint),
           value: _private,
           onChanged: _saving
               ? null
@@ -463,7 +470,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
             ),
             const SizedBox(width: 6),
             Text(
-              'Ep $_nextEp airs in ${airsIn(_nextAt!)}',
+              context.l10n.trackerEpAirsIn(_nextEp ?? 0, airsIn(_nextAt!)),
               style: AppText.caption,
             ),
           ],
@@ -493,13 +500,13 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
                 // way to tell a wrong auto-match from a right one.
                 if (_matchedTitle != null)
                   Text(
-                    'Matched: ${_matchedTitle!}',
+                    context.l10n.trackerMatched(_matchedTitle!),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppText.caption,
                   ),
                 Text(
-                  'Wrong title?  Change match',
+                  context.l10n.wrongTitleChangeMatch,
                   style: AppText.body.copyWith(color: AppColors.textSecondary),
                 ),
               ],
@@ -554,7 +561,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  'AniList custom lists',
+                  context.l10n.anilistCustomLists,
                   style:
                       AppText.body.copyWith(color: AppColors.textSecondary),
                 ),
@@ -690,7 +697,7 @@ class _TrackerSyncSheetState extends State<TrackerSyncSheet> {
                 valueColor: AlwaysStoppedAnimation(Colors.white),
               ),
             )
-          : Text('Apply', style: AppText.button.copyWith(color: Colors.white)),
+          : Text(context.l10n.apply, style: AppText.button.copyWith(color: Colors.white)),
     );
     return _focusable(
       onTap: _saving ? () {} : _apply,
@@ -848,7 +855,7 @@ class _TrackerMatchPickerState extends State<_TrackerMatchPicker> {
                         textInputAction: TextInputAction.search,
                         onSubmitted: (_) => _search(),
                         decoration: InputDecoration(
-                          hintText: 'Search the correct title…',
+                          hintText: context.l10n.searchTheCorrectTitle,
                           hintStyle: AppText.body,
                           filled: true,
                           fillColor: AppColors.surface2,
@@ -918,7 +925,7 @@ class _TrackerMatchPickerState extends State<_TrackerMatchPicker> {
     if (_results.isEmpty) {
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: 40),
-        child: Center(child: Text('No matches found', style: AppText.body)),
+        child: Center(child: Text(context.l10n.noMatchesFound, style: AppText.body)),
       );
     }
     return ListView.builder(

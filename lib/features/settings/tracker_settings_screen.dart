@@ -114,9 +114,7 @@ class _TrackerSettingsScreenState extends State<TrackerSettingsScreen> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
                 child: Text(
-                  'When you start an anime it’s marked Watching, each '
-                  'episode you finish updates the count, and a status you set on '
-                  'a title is pushed to ${_t.displayName}. Anime only.',
+                  context.l10n.trackerAutoSyncHint(_t.displayName),
                   style: AppText.caption,
                 ),
               ),

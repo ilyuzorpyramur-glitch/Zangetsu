@@ -207,7 +207,7 @@ class _ProfileLaunchGateState extends State<ProfileLaunchGate> {
                           );
                           if (mounted) _ensureGate();
                         },
-                        child: const Text('Sign in'),
+                        child: Text(context.l10n.signIn),
                       ),
                     FilledButton(
                       onPressed: _ensureGate,

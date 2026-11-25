@@ -10,6 +10,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
 import '../../core/tv/tv_alert_dialog.dart';
 import '../../core/tv/tv_text_field.dart';
+import '../../l10n/l10n.dart';
 
 part 'stremio_sources_screen_tv.dart';
 
@@ -40,6 +41,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
 
   Future<void> _run(Future<void> Function() action, String success) async {
     if (_busy) return;
+    final l10n = context.l10n;
     final focus = _isTv ? FocusManager.instance.primaryFocus : null;
     setState(() => _busy = true);
     try {
@@ -52,7 +54,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(_message(error))));
+      ).showSnackBar(SnackBar(content: Text(_message(l10n, error))));
     } finally {
       if (mounted) {
         setState(() => _busy = false);
@@ -69,9 +71,9 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
     }
   }
 
-  static String _message(Object error) {
+  static String _message(AppLocalizations l10n, Object error) {
     if (error is StremioInstallException) return error.message;
-    return 'Addon request failed';
+    return l10n.stremioAddonRequestFailed;
   }
 
   Future<void> _add() async {
@@ -79,7 +81,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
     await _run(() async {
       await _manager.install(_url.text);
       if (mounted) _url.clear();
-    }, 'Addon installed');
+    }, context.l10n.stremioAddonInstalled);
     if (_isTv && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _tvUrlFocus?.requestFocus();
@@ -94,30 +96,35 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
       builder: (dialog) => _isTv
           ? _stremioTvConfigureDialog(dialog, controller, installation.name)
           : AlertDialog(
-              title: Text('Update ${installation.name}'),
+              title: Text(
+                context.l10n.stremioUpdateAddon(installation.name),
+              ),
               content: TextField(
                 controller: controller,
                 autofocus: true,
-                decoration: const InputDecoration(
-                  labelText: 'Configured addon URL',
-                  hintText: 'Paste the URL from the addon settings page',
+                decoration: InputDecoration(
+                  labelText: context.l10n.stremioConfiguredUrl,
+                  hintText: context.l10n.stremioPasteSettingsUrl,
                 ),
               ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(dialog).pop(),
-                  child: const Text('Cancel'),
+                  child: Text(context.l10n.cancel),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.of(dialog).pop(controller.text),
-                  child: const Text('Save'),
+                  child: Text(context.l10n.save),
                 ),
               ],
             ),
     );
     controller.dispose();
     if (!mounted || url == null || url.trim().isEmpty) return;
-    await _run(() => _manager.configure(installation.id, url), 'Addon updated');
+    await _run(
+      () => _manager.configure(installation.id, url),
+      context.l10n.stremioAddonUpdated,
+    );
   }
 
   Future<void> _remove(StremioInstallation installation) async {
@@ -126,22 +133,23 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
       builder: (dialog) => _isTv
           ? _stremioTvRemoveDialog(dialog, installation.name)
           : AlertDialog(
-              title: const Text('Remove addon?'),
+              title: Text(context.l10n.stremioRemoveAddon),
               content: Text(installation.name),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(dialog).pop(false),
-                  child: const Text('Cancel'),
+                  child: Text(context.l10n.cancel),
                 ),
                 FilledButton(
                   onPressed: () => Navigator.of(dialog).pop(true),
-                  child: const Text('Remove'),
+                  child: Text(context.l10n.remove),
                 ),
               ],
             ),
     );
-    if (ok != true) return;
-    await _run(() => _manager.remove(installation.id), 'Addon removed');
+    if (ok != true || !mounted) return;
+    final l10n = context.l10n;
+    await _run(() => _manager.remove(installation.id), l10n.stremioAddonRemoved);
   }
 
   Future<void> _openConfiguration(StremioInstallation installation) async {
@@ -153,14 +161,14 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
         : Uri.tryParse(raw);
     if (uri == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('This addon has no settings page')),
+        SnackBar(content: Text(context.l10n.stremioNoSettingsPage)),
       );
       return;
     }
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not open the settings page')),
+        SnackBar(content: Text(context.l10n.stremioCouldNotOpenSettings)),
       );
     }
   }
@@ -171,7 +179,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
       backgroundColor: AppColors.bg,
       appBar: AppBar(
         backgroundColor: AppColors.bg,
-        title: Text('Stremio Addons', style: AppText.barTitle),
+        title: Text(context.l10n.stremioAddonsTitle, style: AppText.barTitle),
       ),
       body: ListenableBuilder(
         listenable: _manager,
@@ -201,7 +209,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Addon sync pending',
+                                context.l10n.stremioSyncPending,
                                 style: AppText.headline,
                               ),
                               const SizedBox(height: 4),
@@ -214,31 +222,34 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                                   sl<StremioSync>().refresh();
                                 },
                                 icon: const Icon(Icons.sync),
-                                label: const Text('Retry sync'),
+                                label: Text(context.l10n.stremioRetrySync),
                               ),
                             ],
                           ),
                         ),
                 ),
-              _sectionLabel('Overview'),
+              _sectionLabel(context.l10n.stremioOverview),
               _panel(
                 child: IntrinsicHeight(
                   child: Row(
                     children: [
-                      _stat('${all.length}', 'Addons'),
+                      _stat('${all.length}', context.l10n.stremioStatAddons),
                       const VerticalDivider(width: 1),
-                      _stat('${all.where((i) => i.enabled).length}', 'Active'),
+                      _stat(
+                        '${all.where((i) => i.enabled).length}',
+                        context.l10n.stremioStatActive,
+                      ),
                       const VerticalDivider(width: 1),
                       _stat(
                         '${all.where((i) => i.enabled).fold<int>(0, (sum, i) => sum + i.catalogs.length)}',
-                        'Catalogues',
+                        context.l10n.stremioStatCatalogues,
                       ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 22),
-              _sectionLabel('Add Addon'),
+              _sectionLabel(context.l10n.stremioAddAddon),
               _panel(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -255,8 +266,8 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                         autocorrect: false,
                         enableSuggestions: false,
                         onSubmitted: (_) => _busy ? null : _add(),
-                        decoration: const InputDecoration(
-                          hintText: 'Addon URL',
+                        decoration: InputDecoration(
+                          hintText: context.l10n.stremioAddonUrl,
                         ),
                       )
                     else
@@ -268,7 +279,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                         enableSuggestions: false,
                         onSubmitted: (_) => _busy ? null : _add(),
                         decoration: InputDecoration(
-                          hintText: 'Addon URL',
+                          hintText: context.l10n.stremioAddonUrl,
                           filled: true,
                           fillColor: AppColors.bg.withValues(alpha: .3),
                           border: OutlineInputBorder(
@@ -351,7 +362,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
               const SizedBox(height: 12),
               if (installations.isEmpty)
                 Text(
-                  'No addons yet. Add an addon to get started.',
+                  context.l10n.stremioNoAddons,
                   style: AppText.caption,
                 ),
               for (final installation in installations)
@@ -391,7 +402,9 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                                   Text(installation.name, style: AppText.title),
                                   const SizedBox(height: 6),
                                   Text(
-                                    'Version ${installation.version}',
+                                    context.l10n.stremioVersion(
+                                      installation.version,
+                                    ),
                                     style: AppText.caption,
                                   ),
                                 ],
@@ -498,16 +511,14 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                         ))
                           ExpansionTile(
                             tilePadding: EdgeInsets.zero,
-                            title: const Text('Home rows'),
-                            subtitle: const Text(
-                              'Hide rows while keeping metadata available',
-                            ),
+                            title: Text(context.l10n.stremioHomeRows),
+                            subtitle: Text(context.l10n.stremioHomeRowsHint),
                             children: [
                               for (final catalog in installation.catalogs)
                                 if (!catalog.extras.any((e) => e.isRequired))
                                   SwitchListTile(
                                     title: Text(
-                                      '${catalog.name} · ${catalog.type == 'series' ? 'Series' : 'Movies'}',
+                                      '${catalog.name} · ${catalog.type == 'series' ? context.l10n.series : context.l10n.movie}',
                                     ),
                                     value: installation.isCatalogVisible(
                                       catalog.type,
@@ -523,8 +534,8 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                                               visible,
                                             ),
                                             visible
-                                                ? 'Home row shown'
-                                                : 'Home row hidden',
+                                                ? context.l10n.stremioHomeRowShown
+                                                : context.l10n.stremioHomeRowHidden,
                                           ),
                                   ),
                             ],
@@ -536,8 +547,7 @@ class _StremioSourcesScreenState extends State<StremioSourcesScreen> {
                 ),
               const SizedBox(height: 8),
               Text(
-                'Addons supply catalogues, metadata, links and subtitles. '
-                'Configured URLs are stored only on this device.',
+                context.l10n.stremioFooter,
                 style: AppText.caption,
               ),
             ],
