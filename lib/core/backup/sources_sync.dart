@@ -301,15 +301,16 @@ class SourcesSync {
       if (previous != null) await previous;
       final payload = _codec.build();
       if (_isEmpty(payload)) return false;
+      final encoded = jsonEncode(payload);
       final revision =
           (knownRevision ?? await remote.currentRevision(uid)) + 1;
       await remote.upsertRow(
         userKey: uid,
-        payload: jsonEncode(payload),
+        payload: encoded,
         revision: revision,
       );
       _setAppliedRevision(uid, revision);
-      _lastPushed = payload;
+      _lastPushed = encoded;
       return true;
     } catch (_) {
       return false; // offline / backend refused — next trigger retries
