@@ -57,7 +57,7 @@ jobs:
             echo "No KEYSTORE_BASE64 secret — building with the debug key."
             exit 0
           fi
-          echo "$KEYSTORE_BASE64" | base64 -d > android/release.keystore
+          echo "$KEYSTORE_BASE64" | base64 -d > android/app/release.keystore
           {
             echo "storeFile=release.keystore"
             echo "storePassword=$STORE_PASSWORD"
