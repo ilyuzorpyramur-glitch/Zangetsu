@@ -54,6 +54,13 @@ class TitleRu extends ChangeNotifier {
 
   int _running = 0;
   DateTime _lastStart = DateTime.fromMillisecondsSinceEpoch(0);
+
+  /// Start times inside the last minute — Shikimori allows 90 requests/min
+  /// per IP, and the miss-retry pass can otherwise push a cold start past it.
+  /// Kept under the limit from the client side so one busy first launch never
+  /// flips the whole translation layer off for 30 minutes.
+  final List<DateTime> _recentStarts = [];
+  static const int _perMinute = 80;
   DateTime _blockedUntil = DateTime.fromMillisecondsSinceEpoch(0);
   Timer? _notifyTimer;
   bool _notifyPending = false;
@@ -205,10 +212,26 @@ class TitleRu extends ChangeNotifier {
     }
   }
 
+  /// True when one more request fits inside the per-minute budget.
+  bool _takeMinuteSlot() {
+    final now = DateTime.now();
+    _recentStarts.removeWhere(
+      (t) => now.difference(t) > const Duration(seconds: 60),
+    );
+    if (_recentStarts.length >= _perMinute) return false;
+    _recentStarts.add(now);
+    return true;
+  }
+
   void _drain() {
     if (!_ready) return;
     if (DateTime.now().isBefore(_blockedUntil)) {
       Timer(_blockedUntil.difference(DateTime.now()), _drain);
+      return;
+    }
+    if (_jobs.isEmpty) return;
+    if (!_takeMinuteSlot()) {
+      Timer(const Duration(seconds: 3), _drain);
       return;
     }
     while (_running < _maxConcurrent && _jobs.isNotEmpty) {
