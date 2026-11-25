@@ -44,6 +44,10 @@ class TitleRu extends ChangeNotifier {
   final Set<String> _queued = {};
   final Set<String> _failed = {};
   final Queue<_TitleJob> _jobs = Queue<_TitleJob>();
+  /// Re-checks of titles the cache remembers as "no Russian name found".
+  /// Drained only when no live lookup is waiting, so a backlog never delays a
+  /// home row the user is looking at right now.
+  final Queue<_TitleJob> _retryJobs = Queue<_TitleJob>();
   /// Films/series don't touch Shikimori, so their lookups (TMDB only) run on a
   /// faster lane instead of waiting behind a throttled anime queue.
   final Queue<_TitleJob> _fastJobs = Queue<_TitleJob>();
@@ -147,15 +151,15 @@ class TitleRu extends ChangeNotifier {
     for (final entry in _cache.entries) {
       if (entry.value.isEmpty) misses.add(entry.key);
     }
+    debugPrint(
+      '[title-ru] init: known=${_cache.length}, misses=${misses.length}',
+    );
     if (misses.isEmpty) return;
-    // Old installations carry a few hundred misses; spread them so the queue
-    // never blocks today's rows behind a backlog.
-    for (final key in misses.take(120)) {
+    for (final key in misses) {
       if (_queued.contains(key)) continue;
       _queued.add(key);
-      _jobs.add(_TitleJob(key, null, true));
+      _retryJobs.add(_TitleJob(key, null, true));
     }
-    debugPrint('[title-ru] retrying ${misses.length} cached misses');
     _scheduleDrain();
   }
 
@@ -229,13 +233,16 @@ class TitleRu extends ChangeNotifier {
       Timer(_blockedUntil.difference(DateTime.now()), _drain);
       return;
     }
-    if (_jobs.isEmpty) return;
+    if (_jobs.isEmpty && _retryJobs.isEmpty) return;
     if (!_takeMinuteSlot()) {
       Timer(const Duration(seconds: 3), _drain);
       return;
     }
-    while (_running < _maxConcurrent && _jobs.isNotEmpty) {
-      final job = _jobs.removeFirst();
+    while (_running < _maxConcurrent) {
+      final job = _jobs.isNotEmpty
+          ? _jobs.removeFirst()
+          : (_retryJobs.isNotEmpty ? _retryJobs.removeFirst() : null);
+      if (job == null) return;
       _running++;
       _lastStart = DateTime.now();
       unawaited(_runJob(job));
@@ -275,9 +282,15 @@ class TitleRu extends ChangeNotifier {
     }
   }
 
+  int _logged = 0;
+
   void _store(String original, String? russian) {
     final k = _key(original);
     final value = russian ?? '';
+    if (_logged < 15) {
+      _logged++;
+      debugPrint('[title-ru] "$original" -> "${value.isEmpty ? '-' : value}"');
+    }
     if (_cache[k] == value) return;
     _cache[k] = value;
     unawaited(_box?.put(k, value) ?? Future<void>.value());
