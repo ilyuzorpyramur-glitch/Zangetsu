@@ -75,6 +75,8 @@ class TitleRu extends ChangeNotifier {
       debugPrint('[title-ru] cache unavailable: $e');
     }
     _ready = true;
+    // Give the first frame time to draw before a backlog of retries starts.
+    Timer(const Duration(seconds: 8), _retryKnownMisses);
   }
 
   String _key(String title) => title.trim().toLowerCase();
@@ -90,7 +92,7 @@ class TitleRu extends ChangeNotifier {
 
   /// Queue a lookup for [title]. Safe to call from `build` — it only enqueues
   /// and returns immediately.
-  void request(String title, {int? year, bool anime = true}) {
+  void request(String title, {int? year, bool anime = true, int? malId}) {
     if (!_ready) return;
     final t = title.trim();
     if (t.length < 2 || t.length > 120) return;
@@ -106,29 +108,60 @@ class TitleRu extends ChangeNotifier {
       return;
     }
     final k = _key(t);
-    if (_cache.containsKey(k) || _queued.contains(k) || _failed.contains(k)) {
-      return;
-    }
+    if (_queued.contains(k) || _failed.contains(k)) return;
+    // A known answer is final — EXCEPT a cached "nothing found": those are
+    // retried once per session below (see [_retryKnownMisses]) so a title that
+    // used to stay English turns Russian after the matcher improved. A known
+    // Russian name never re-asks.
+    final known = _cache[k];
+    if (known != null && known.isNotEmpty) return;
     _queued.add(k);
     if (anime) {
-      _jobs.add(_TitleJob(t, year, true));
+      _jobs.add(_TitleJob(t, year, true, 0, malId));
       _scheduleDrain();
     } else {
-      _fastJobs.add(_TitleJob(t, year, false));
+      _fastJobs.add(_TitleJob(t, year, false, 0, malId));
       _drainFast();
     }
+  }
+
+  /// Re-ask every title the cache remembers as "no Russian name found".
+  ///
+  /// The cache stores an empty string for a miss so a home row asks once and
+  /// not on every rebuild. The catch: a miss caused by a weak match (long
+  /// romanised name, a typo in the catalogue) used to be permanent, and the
+  /// owner saw the same few titles in English forever. Misses are cheap to
+  /// retry — they are already rate-limited by the queue — so they are queued
+  /// again on every start, in the background, worst case one extra request
+  /// per title per launch.
+  void _retryKnownMisses() {
+    if (!_ready) return;
+    final misses = <String>[];
+    for (final entry in _cache.entries) {
+      if (entry.value.isEmpty) misses.add(entry.key);
+    }
+    if (misses.isEmpty) return;
+    // Old installations carry a few hundred misses; spread them so the queue
+    // never blocks today's rows behind a backlog.
+    for (final key in misses.take(120)) {
+      if (_queued.contains(key)) continue;
+      _queued.add(key);
+      _jobs.add(_TitleJob(key, null, true));
+    }
+    debugPrint('[title-ru] retrying ${misses.length} cached misses');
+    _scheduleDrain();
   }
 
   /// Look [title] up right now and return the Russian name (null when nothing
   /// convincing was found). Used by callers that can await, e.g. the detail
   /// screen's first paint.
-  Future<String?> resolveNow(String title, {int? year, bool anime = true}) async {
+  Future<String?> resolveNow(String title, {int? year, bool anime = true, int? malId}) async {
     if (!_ready) return null;
     final t = title.trim();
     if (t.isEmpty) return null;
     final cached = _cache[_key(t)];
     if (cached != null) return cached.isEmpty ? null : cached;
-    final found = await _lookup(t, year: year, anime: anime);
+    final found = await _lookup(t, year: year, anime: anime, malId: malId);
     _store(t, found);
     return found;
   }
@@ -140,7 +173,8 @@ class TitleRu extends ChangeNotifier {
       _fastRunning++;
       unawaited(() async {
         try {
-          final found = await _lookupTmdb(job.title, year: job.year);
+          var found = await _lookupTmdb(job.title, year: job.year);
+          found ??= await _lookupByMalId(job.malId);
           _store(job.title, found);
         } catch (e) {
           _failed.add(_key(job.title));
@@ -188,7 +222,12 @@ class TitleRu extends ChangeNotifier {
 
   Future<void> _runJob(_TitleJob job) async {
     try {
-      final found = await _lookup(job.title, year: job.year, anime: job.anime);
+      final found = await _lookup(
+        job.title,
+        year: job.year,
+        anime: job.anime,
+        malId: job.malId,
+      );
       _store(job.title, found);
     } on DioException catch (e) {
       final status = e.response?.statusCode;
@@ -241,7 +280,44 @@ class TitleRu extends ChangeNotifier {
     super.dispose();
   }
 
-  Future<String?> _lookup(String title, {int? year, bool anime = true}) async {
+  /// Shikimori entry by MyAnimeList id — the exact answer, no matching at all.
+  Future<String?> _lookupByMalId(int? malId) async {
+    if (malId == null || malId <= 0) return null;
+    try {
+      final res = await _dio.get<dynamic>(
+        '$_shikimoriBase/api/animes/$malId',
+        options: Options(
+          headers: {
+            'User-Agent': 'HataruZangetsu/2.3.6',
+            'Accept': 'application/json',
+          },
+          responseType: ResponseType.json,
+          receiveTimeout: _requestTimeout,
+          sendTimeout: _requestTimeout,
+        ),
+      );
+      final data = res.data;
+      if (data is! Map) return null;
+      final russian = (data['russian'] as String?)?.trim();
+      if (russian == null || russian.isEmpty) return null;
+      if (!_cyrillic.hasMatch(russian)) return null;
+      final kind = (data['kind'] as String?) ?? '';
+      if (kind == 'pv' || kind == 'cm' || kind == 'music') return null;
+      return russian;
+    } catch (e) {
+      debugPrint('[title-ru] shikimori by id $malId: $e');
+      return null;
+    }
+  }
+
+  Future<String?> _lookup(
+    String title, {
+    int? year,
+    bool anime = true,
+    int? malId,
+  }) async {
+    final exact = await _lookupByMalId(malId);
+    if (exact != null) return exact;
     if (anime) {
       try {
         final shiki = DateTime.now().isBefore(_shikiOffUntil)
@@ -275,13 +351,44 @@ class TitleRu extends ChangeNotifier {
     return null;
   }
 
+  /// Search queries to try, longest first. Long romanised names ("Tsuihou
+  /// sareta Cheat Fuyo Majutsushi wa …") are often spelled differently in the
+  /// catalogue than in Shikimori, so a full-string search misses while its
+  /// first few words hit the right entry — and the reverse happens too, which
+  /// is why the full title stays first.
+  List<String> _shikiQueries(String title) {
+    final out = <String>[];
+    void add(String v) {
+      final t = v.trim().replaceAll(RegExp(r'\s+'), ' ');
+      if (t.length < 2) return;
+      if (out.any((e) => e.toLowerCase() == t.toLowerCase())) return;
+      out.add(t);
+    }
+
+    add(title);
+    // "Title (2026)" / "Title — Season 2" style decoration confuses the search.
+    add(title.replaceAll(RegExp(r'\s*[\(\[][^\)\]]*[\)\]]\s*$'), ''));
+    final words = title.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
+    if (words.length > 5) add(words.take(5).join(' '));
+    if (words.length > 3) add(words.take(3).join(' '));
+    return out.take(3).toList();
+  }
+
   Future<String?> _lookupShikimori(String title, {int? year}) async {
+    for (final query in _shikiQueries(title)) {
+      final found = await _lookupShikimoriQuery(query, year: year);
+      if (found != null) return found;
+    }
+    return null;
+  }
+
+  Future<String?> _lookupShikimoriQuery(String title, {int? year}) async {
     try {
       final res = await _dio.get<dynamic>(
         '$_shikimoriBase/api/animes',
         queryParameters: {
           'search': title,
-          'limit': 6,
+          'limit': 8,
           'order': 'ranked',
         },
         options: Options(
@@ -298,6 +405,7 @@ class TitleRu extends ChangeNotifier {
       final data = res.data;
       if (data is! List) return null;
       _ShikiCandidate? best;
+      var bestYearExact = false;
       for (final raw in data) {
         if (raw is! Map) continue;
         final russian = (raw['russian'] as String?)?.trim();
@@ -316,11 +424,13 @@ class TitleRu extends ChangeNotifier {
           final s = _similarity(title, n);
           if (s > score) score = s;
         }
+        var yearExact = false;
         final airedYear = int.tryParse('${raw['aired_on']}'.split('-').first);
         if (year != null && airedYear != null) {
           final delta = (airedYear - year).abs();
           if (delta == 0) {
             score += 0.12;
+            yearExact = true;
           } else if (delta == 1) {
             score += 0.04;
           } else if (delta > 2) {
@@ -328,16 +438,24 @@ class TitleRu extends ChangeNotifier {
           }
         }
         final candidate = _ShikiCandidate(russian, score);
-        if (best == null || candidate.score > best.score) best = candidate;
+        if (best == null || candidate.score > best.score) {
+          best = candidate;
+          bestYearExact = yearExact;
+        }
       }
-      if (best == null || best.score < 0.62) return null;
+      if (best == null) return null;
+      // A weaker string match is good enough when the year is the same: the
+      // catalogue and Shikimori disagree on long romaji titles far more often
+      // than they disagree on the year a show aired.
+      final threshold = bestYearExact ? 0.50 : 0.62;
+      if (best.score < threshold) return null;
       return best.russian;
     } on DioException catch (e) {
       if (e.response?.statusCode == 429) rethrow;
-      debugPrint('[title-ru] shikimori "${title}": $e');
+      debugPrint('[title-ru] shikimori "$title": $e');
       return null;
     } catch (e) {
-      debugPrint('[title-ru] shikimori "${title}": $e');
+      debugPrint('[title-ru] shikimori "$title": $e');
       return null;
     }
   }
@@ -399,12 +517,22 @@ class TitleRu extends ChangeNotifier {
 }
 
 class _TitleJob {
-  const _TitleJob(this.title, this.year, this.anime, [this.attempts = 0]);
+  const _TitleJob(
+    this.title,
+    this.year,
+    this.anime, [
+    this.attempts = 0,
+    this.malId,
+  ]);
 
   final String title;
   final int? year;
   final bool anime;
   final int attempts;
+
+  /// MyAnimeList id when the row carries one. A by-id lookup is exact, so it
+  /// answers before any search does.
+  final int? malId;
 }
 
 class _ShikiCandidate {
@@ -466,6 +594,7 @@ class RuTitleText extends StatefulWidget {
     super.key,
     this.year,
     this.anime = true,
+    this.malId,
     this.style,
     this.maxLines,
     this.overflow = TextOverflow.ellipsis,
@@ -475,6 +604,10 @@ class RuTitleText extends StatefulWidget {
   final String title;
   final int? year;
   final bool anime;
+
+  /// MyAnimeList id when the caller has one — an exact Shikimori lookup that
+  /// does not depend on matching the title string at all.
+  final int? malId;
   final TextStyle? style;
   final int? maxLines;
   final TextOverflow overflow;
@@ -495,13 +628,20 @@ class _RuTitleTextState extends State<RuTitleText> {
   @override
   void didUpdateWidget(RuTitleText oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.title != widget.title || oldWidget.year != widget.year) {
+    if (oldWidget.title != widget.title ||
+        oldWidget.year != widget.year ||
+        oldWidget.malId != widget.malId) {
       _request();
     }
   }
 
   void _request() {
-    TitleRu.instance.request(widget.title, year: widget.year, anime: widget.anime);
+    TitleRu.instance.request(
+      widget.title,
+      year: widget.year,
+      anime: widget.anime,
+      malId: widget.malId,
+    );
   }
 
   void _onTranslations() {

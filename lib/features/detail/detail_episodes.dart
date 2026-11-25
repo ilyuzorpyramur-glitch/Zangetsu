@@ -1555,7 +1555,7 @@ class _EpisodeRow extends StatelessWidget {
         ? ep.unavailable!
         : [
             if (ep.runtimeMinutes != null) '${ep.runtimeMinutes} мин',
-            if (ep.date != null && ep.date!.trim().isNotEmpty) ep.date!.trim(),
+            ?airDateLabel(context.l10n, ep.date),
           ].join('  ·  ');
 
     // Prefer the real AniZip/TMDB title when the source only gave a generic
@@ -1705,17 +1705,49 @@ class _EpisodeRow extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        heading,
-                        style: AppText.body.copyWith(
-                          color: titleColor,
-                          fontWeight: isResume
-                              ? FontWeight.w800
-                              : FontWeight.w700,
+                      if (isMovie || titleText.isEmpty)
+                        Text(
+                          heading,
+                          style: AppText.body.copyWith(
+                            color: titleColor,
+                            fontWeight: isResume
+                                ? FontWeight.w800
+                                : FontWeight.w700,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      else
+                        // "3. " stays numeric; the title itself goes through the
+                        // same machine-translation layer as episode synopses
+                        // (the catalogues ship episode names in English only).
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '$epNum. ',
+                              style: AppText.body.copyWith(
+                                color: titleColor,
+                                fontWeight: isResume
+                                    ? FontWeight.w800
+                                    : FontWeight.w700,
+                              ),
+                            ),
+                            Expanded(
+                              child: RuMetaText(
+                                titleText,
+                                style: AppText.body.copyWith(
+                                  color: titleColor,
+                                  fontWeight: isResume
+                                      ? FontWeight.w800
+                                      : FontWeight.w700,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                       if (metaLine.isNotEmpty) ...[
                         const SizedBox(height: 4),
                         Text(

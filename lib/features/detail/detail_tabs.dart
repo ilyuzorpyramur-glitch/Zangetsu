@@ -239,6 +239,42 @@ class _AvatarFallback extends StatelessWidget {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Relation labels — the catalogue answers in English ("Recommended", "Sequel",
+// "Side story"…). Same rule as the rest of the Russian metadata layer: only
+// when the interface is Russian, otherwise the original wording stands.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const Map<String, String> _relationVocab = {
+  'recommended': 'Рекомендации',
+  'recommendation': 'Рекомендации',
+  'related': 'Связанное',
+  'sequel': 'Продолжение',
+  'prequel': 'Предыстория',
+  'side story': 'Ответвление',
+  'parent story': 'Основная история',
+  'full story': 'Полная история',
+  'alternative setting': 'Альтернативная версия',
+  'alternative version': 'Альтернативная версия',
+  'alternative': 'Альтернатива',
+  'spin off': 'Спин-офф',
+  'spinoff': 'Спин-офф',
+  'summary': 'Краткое содержание',
+  'character': 'Персонаж',
+  'adaptation': 'Адаптация',
+  'other': 'Другое',
+  'series': 'Сериал',
+  'movie': 'Фильм',
+};
+
+/// Russian wording for a relation tag, or [raw] when the language is not
+/// Russian / the tag is something new.
+String relationLabel(String raw) {
+  if (!MetaRu.isRussian) return raw;
+  final key = raw.trim().toLowerCase().replaceAll(RegExp(r'[_\-]+'), ' ');
+  return _relationVocab[key] ?? raw;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Relations tab — related/recommended titles; tap searches the active source.
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -404,7 +440,7 @@ class _RelationsTab extends StatelessWidget {
           const SizedBox(height: 6),
           if (r.relation != null && r.relation!.isNotEmpty)
             Text(
-              r.relation!.toUpperCase(),
+              relationLabel(r.relation!).toUpperCase(),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: AppText.caption.copyWith(
@@ -414,8 +450,9 @@ class _RelationsTab extends StatelessWidget {
                 letterSpacing: 0.4,
               ),
             ),
-          Text(
+          RuTitleText(
             r.title,
+            malId: r.malId,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: AppText.caption.copyWith(color: AppColors.textPrimary),
@@ -424,11 +461,15 @@ class _RelationsTab extends StatelessWidget {
       );
       // TV path: D-pad-navigable TvFocusable wrapper.
       if (tvFocus) {
-        final hasRelationTag = r.relation != null && r.relation!.isNotEmpty;
+        final tag = (r.relation != null && r.relation!.isNotEmpty)
+            ? relationLabel(r.relation!)
+            : null;
         return TvFocusable(
           key: ValueKey('tv-rel-$i'),
           onTap: () => onOpen(r),
-          semanticLabel: hasRelationTag ? '${r.relation}, ${r.title}' : r.title,
+          semanticLabel: tag != null
+              ? '$tag, ${TitleRu.instance.display(r.title)}'
+              : TitleRu.instance.display(r.title),
           // visual is shared with the phone branch below — exclude it here
           // instead of touching it.
           child: ExcludeSemantics(child: visual),

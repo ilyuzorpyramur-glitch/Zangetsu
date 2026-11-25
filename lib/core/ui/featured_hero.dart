@@ -450,6 +450,7 @@ class _FeaturedHeroState extends State<FeaturedHero> {
 
   Widget _titleText() => RuTitleText(
     widget.item.title,
+    malId: widget.item.malId,
     textAlign: TextAlign.center,
     style: AppText.largeTitle.copyWith(
       fontSize: 30,
