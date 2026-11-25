@@ -129,16 +129,28 @@ class SourcesSync {
   final List<StreamSubscription<BoxEvent>> _subs = [];
   AppLifecycleListener? _lifecycle;
   Timer? _debounceTimer;
+  Timer? _reconcileTimer;
   Future<void>? _inFlight;
+  String? _lastPushed;
 
   /// Starts the delta push: any watched box change (or app going to the
   /// background) schedules one debounced upload. Safe to call twice.
   void attach() {
     if (_subs.isNotEmpty) return;
     for (final name in _watchedBoxes) {
-      if (!Hive.isBoxOpen(name)) continue;
-      _subs.add(Hive.box(name).watch().listen((_) => _schedulePush()));
+      final events = _watchOf(name);
+      if (events != null) {
+        _subs.add(events.listen((_) => _schedulePush()));
+      }
     }
+    // Safety net: if a box was opened with a type [_watchOf] doesn't know, or
+    // a manager writes through something Hive doesn't broadcast, a slow
+    // reconciliation still converges the cloud row. It only uploads when the
+    // payload actually changed, so an idle app stays quiet.
+    _reconcileTimer = Timer.periodic(
+      const Duration(minutes: 5),
+      (_) => unawaited(_pushIfChanged()),
+    );
     for (final signal in _signals) {
       signal.addListener(_schedulePush);
     }
@@ -159,6 +171,42 @@ class SourcesSync {
     }
     _lifecycle?.dispose();
     _debounceTimer?.cancel();
+    _reconcileTimer?.cancel();
+  }
+
+  /// Change stream of an already-open box.
+  ///
+  /// `Hive.box(name)` without a type argument throws when that box was opened
+  /// with one (`Box<Map>`, `Box<String>`, …) — the app opens each of
+  /// [_watchedBoxes] with its own concrete type, so there is no single
+  /// accessor. Try the shapes the app actually uses and fall back to the
+  /// periodic reconciliation above rather than letting a watcher take the
+  /// whole boot down.
+  Stream<BoxEvent>? _watchOf(String name) {
+    if (!Hive.isBoxOpen(name)) return null;
+    for (final watch in <Stream<BoxEvent> Function()>[
+      () => Hive.box(name).watch(),
+      () => Hive.box<Map>(name).watch(),
+      () => Hive.box<String>(name).watch(),
+      () => Hive.box<List>(name).watch(),
+      () => Hive.box<dynamic>(name).watch(),
+    ]) {
+      try {
+        return watch();
+      } catch (_) {
+        // Wrong type argument for this box — try the next shape.
+      }
+    }
+    return null;
+  }
+
+  /// Pushes only when the built payload differs from the last uploaded one.
+  Future<void> _pushIfChanged() async {
+    final uid = _currentUserId();
+    if (uid == null || _remote == null) return;
+    final current = jsonEncode(_codec.build());
+    if (current == _lastPushed) return;
+    await _push(uid);
   }
 
   void _schedulePush() {
@@ -261,6 +309,7 @@ class SourcesSync {
         revision: revision,
       );
       _setAppliedRevision(uid, revision);
+      _lastPushed = payload;
       return true;
     } catch (_) {
       return false; // offline / backend refused — next trigger retries
