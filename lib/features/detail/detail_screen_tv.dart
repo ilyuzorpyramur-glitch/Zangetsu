@@ -265,7 +265,7 @@ class _DetailScreenTvState extends State<DetailScreenTv> {
       }
       if (index >= episodes.length ||
           StremioRef.parse(episodes[index].url) != ref) {
-        showAppToast(context, 'Episode changed — pick the link again');
+        showAppToast(context, 'Серия сменилась — выбери ссылку заново');
         return null;
       }
       return picked;
@@ -1382,7 +1382,7 @@ class _TvEpisodeListState extends State<_TvEpisodeList> {
               : ep.title;
           final heading = displayTitle.isNotEmpty
               ? '$epNum. $displayTitle'
-              : 'Episode $epNum';
+              : 'Серия $epNum';
           return TvListFocusable(
             key: ValueKey('tv-ep-$fullIndex'),
             onTap: () => widget.onOpen(fullIndex),

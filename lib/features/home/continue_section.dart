@@ -19,7 +19,7 @@ import '../../core/ui/placement_slide.dart';
 String watchGhostKey(HistoryEntry e) => '${e.sourceId}::${e.showId}';
 String readGhostKey(ReadEntry e) => '${e.sourceId}::${e.showId}';
 
-/// Home's "Continue Watching" / "Continue Reading" sliver. Anime mode renders
+/// Home's "Продолжить просмотр" / "Продолжить чтение" sliver. Anime mode renders
 /// the original [WatchHistory]-backed row exactly as before; reading modes
 /// (manga/novel) swap in a [ReadHistory]-backed row with the same card chrome.
 /// Split out of [_HomeView] purely so it's independently widget-testable —
@@ -212,7 +212,7 @@ class ContinueWatchingRow extends StatelessWidget {
     }
     return SliverToBoxAdapter(
       child: ContentRow(
-        title: 'Continue Watching',
+        title: 'Продолжить просмотр',
         // Compact 16:9 landscape card — same design, just smaller/tighter.
         itemWidth: 190,
         itemHeight: 107,
@@ -232,7 +232,7 @@ class ContinueWatchingRow extends StatelessWidget {
             progress: e.progress,
             cellWidth: 190,
             subtitle: e.episodeNumber != null
-                ? 'Episode ${e.episodeNumber!.toInt()}'
+                ? 'Серия ${e.episodeNumber!.toInt()}'
                 : null,
             onTap: () => onResume(e),
             onLongPress: () => onLongPress(e),
@@ -279,7 +279,7 @@ class ContinueReadingRow extends StatelessWidget {
     }
     return SliverToBoxAdapter(
       child: ContentRow(
-        title: 'Continue Reading',
+        title: 'Продолжить чтение',
         // Compact horizontal "keep reading" chip (cover + title + chapter +
         // slim progress bar, NOT the landscape Continue Watching card nor a
         // full portrait poster — smaller and its own shape for reading.

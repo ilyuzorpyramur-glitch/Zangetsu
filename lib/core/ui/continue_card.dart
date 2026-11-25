@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'image_fade.dart';
+import '../i18n/title_ru.dart';
 import '../aniyomi/aniyomi_image_provider.dart';
 import '../mihon/mihon_image_provider.dart';
 import '../theme/app_colors.dart';
@@ -128,10 +129,9 @@ class _ContinueCardState extends State<ContinueCard> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      RuTitleText(
                         widget.title,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                         style: AppText.body.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
@@ -255,10 +255,9 @@ class _ContinueReadingCardState extends State<ContinueReadingCard> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      RuTitleText(
                         widget.title,
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                         style: AppText.body.copyWith(
                           fontWeight: FontWeight.w700,
                           fontSize: 13,

@@ -14,6 +14,7 @@ import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
 import 'app_localizations_ja.dart';
 import 'app_localizations_pt.dart';
+import 'app_localizations_ru.dart';
 import 'app_localizations_tr.dart';
 import 'app_localizations_zh.dart';
 
@@ -112,6 +113,7 @@ abstract class AppLocalizations {
     Locale('it'),
     Locale('ja'),
     Locale('pt'),
+    Locale('ru'),
     Locale('tr'),
     Locale('zh'),
     Locale('zh', 'TW'),
@@ -10077,6 +10079,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edge-to-edge portrait video'**
   String get portraitVideoEdgeToEdge;
+
+  /// No description provided for @profileInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get profileInProgress;
+
+  /// No description provided for @profileCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get profileCompleted;
+
+  /// No description provided for @profileAddBio.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a bio'**
+  String get profileAddBio;
+
+  /// No description provided for @profileKidsProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Kids profile'**
+  String get profileKidsProfile;
+
+  /// No description provided for @profileEditProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEditProfile;
+
+  /// No description provided for @profileMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile menu'**
+  String get profileMenu;
+
+  /// No description provided for @donateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Donate'**
+  String get donateTitle;
+
+  /// No description provided for @profileComingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'More features are on their way with Zoro… he just got lost again.'**
+  String get profileComingSoon;
 }
 
 class _AppLocalizationsDelegate
@@ -10099,6 +10149,7 @@ class _AppLocalizationsDelegate
     'it',
     'ja',
     'pt',
+    'ru',
     'tr',
     'zh',
   ].contains(locale.languageCode);
@@ -10140,6 +10191,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsJa();
     case 'pt':
       return AppLocalizationsPt();
+    case 'ru':
+      return AppLocalizationsRu();
     case 'tr':
       return AppLocalizationsTr();
     case 'zh':

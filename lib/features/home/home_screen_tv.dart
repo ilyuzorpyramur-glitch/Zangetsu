@@ -1,3 +1,5 @@
+import '../../core/i18n/meta_ru.dart';
+import '../../core/i18n/title_ru.dart';
 import '../../core/metadata/streaming_service.dart';
 import '../../core/zmode/metadata_provider_prefs.dart';
 import '../../core/zmode/tmdb_catalogue.dart';
@@ -200,7 +202,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
       return stremioHeroItems(sections);
     }
     for (final section in sections) {
-      if (section.title.startsWith('Trending')) return section.items;
+      if (section.title.startsWith('В тренде')) return section.items;
     }
     return sections.first.items;
   }
@@ -265,7 +267,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         tab(
-                          'Anime',
+                          'Аниме',
                           'tv-home-tab-anime',
                           !_sourceCatalogueSelected &&
                               ZModePrefs.streamKind == StreamKind.anime,
@@ -274,7 +276,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                           ),
                         ),
                         tab(
-                          'Movies & TV',
+                          'Фильмы и сериалы',
                           'tv-home-tab-movie',
                           !_sourceCatalogueSelected &&
                               ZModePrefs.streamKind == StreamKind.movie,
@@ -283,7 +285,7 @@ class _HomeScreenTvState extends State<HomeScreenTv> {
                           ),
                         ),
                         tab(
-                          'Source Catalogue',
+                          'Каталог источников',
                           'tv-home-tab-source',
                           _sourceCatalogueSelected &&
                               !HomeCataloguePrefs.stremioSelected,

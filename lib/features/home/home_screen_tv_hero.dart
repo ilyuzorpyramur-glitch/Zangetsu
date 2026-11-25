@@ -241,23 +241,23 @@ class _TvHeroState extends State<_TvHero> {
                           _playBtn(),
                           () => widget.onPlay(item),
                           autofocus: true,
-                          semanticLabel: 'Play',
+                          semanticLabel: 'Смотреть',
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(
                           _glassBtn(
                             inList ? Icons.check_rounded : Icons.add_rounded,
-                            'My List',
+                            'Мой список',
                             active: inList,
                           ),
                           () => widget.onToggleList(item),
-                          semanticLabel: 'My List',
+                          semanticLabel: 'Мой список',
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(
-                          _glassBtn(Icons.info_outline_rounded, 'Info'),
+                          _glassBtn(Icons.info_outline_rounded, 'Подробнее'),
                           () => widget.onInfo(item),
-                          semanticLabel: 'Info',
+                          semanticLabel: 'Подробнее',
                         ),
                         const SizedBox(width: 14),
                         widget.wrapButton(
@@ -307,8 +307,9 @@ class _TvHeroState extends State<_TvHero> {
     );
   }
 
-  Widget _titleText() => Text(
+  Widget _titleText() => RuTitleText(
     _item.title,
+    anime: _item.type == ProviderType.anime,
     style: AppText.largeTitle.copyWith(
       fontSize: 52,
       height: 1.0,
@@ -316,7 +317,6 @@ class _TvHeroState extends State<_TvHero> {
       fontWeight: FontWeight.w800,
     ),
     maxLines: 2,
-    overflow: TextOverflow.ellipsis,
   );
 
   Widget _metaLine(MediaItem item) {
@@ -325,22 +325,32 @@ class _TvHeroState extends State<_TvHero> {
       builder: (context, snap) {
         final m = snap.data;
         if (m == null) return const SizedBox(height: 16);
-        final parts = <String>[...m.genres.take(3)];
-        if (m.episodeCount > 1) {
-          parts.add('${m.episodeCount} Episodes');
-        } else if ((m.year ?? '').isNotEmpty) {
-          parts.add(m.year!);
-        }
-        if (parts.isEmpty) return const SizedBox(height: 16);
-        return Text(
-          parts.join('   ·   ').toUpperCase(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppText.caption.copyWith(
-            color: Colors.white.withValues(alpha: 0.9),
-            fontWeight: FontWeight.w700,
-            letterSpacing: 1.6,
-          ),
+        return ListenableBuilder(
+          listenable: MetaRu.instance,
+          builder: (context, _) {
+            for (final g in m.genres.take(3)) {
+              MetaRu.instance.request(g);
+            }
+            final parts = <String>[
+              ...m.genres.take(3).map(MetaRu.instance.text),
+            ];
+            if (m.episodeCount > 1) {
+              parts.add('${m.episodeCount} Серии');
+            } else if ((m.year ?? '').isNotEmpty) {
+              parts.add(m.year!);
+            }
+            if (parts.isEmpty) return const SizedBox(height: 16);
+            return Text(
+              parts.join('   ·   ').toUpperCase(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppText.caption.copyWith(
+                color: Colors.white.withValues(alpha: 0.9),
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.6,
+              ),
+            );
+          },
         );
       },
     );
@@ -359,7 +369,7 @@ class _TvHeroState extends State<_TvHero> {
         Icon(Icons.play_arrow_rounded, color: AppColors.bg, size: 24),
         const SizedBox(width: 8),
         Text(
-          'Play',
+          'Смотреть',
           style: TextStyle(
             fontFamily: AppText.fontFamily,
             fontFamilyFallback: AppText.fontFamilyFallback,

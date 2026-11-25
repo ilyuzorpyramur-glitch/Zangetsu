@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/i18n/meta_ru.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
 import '../../core/tv/tv_focusable.dart';
@@ -589,7 +590,7 @@ class _TvGenrePickerState extends State<_TvGenrePicker> {
                 child: TvListFocusable(
                   key: ValueKey('tv-genre-${genres[i]}'),
                   autofocus: i == 0,
-                  semanticLabel: genres[i],
+                  semanticLabel: MetaRu.instance.text(genres[i]),
                   onTap: () => setState(() {
                     _sel.contains(genres[i])
                         ? _sel.remove(genres[i])
@@ -628,7 +629,7 @@ class _TvGenrePickerState extends State<_TvGenrePicker> {
                           const SizedBox(width: 14),
                           Expanded(
                             child: Text(
-                              g,
+                              MetaRu.instance.text(g),
                               style: AppText.headline.copyWith(
                                 fontSize: 18,
                                 color: on

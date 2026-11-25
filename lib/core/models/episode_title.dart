@@ -47,8 +47,8 @@ String? episodePresenceDetails(Episode ep, {int? fallbackNumber}) {
   final n = episodeNumberInt(ep) ?? fallbackNumber;
   final title = episodeDisplayTitle(ep, number: n);
   if (n == null) return title;
-  if (title == null) return 'Episode $n';
-  return 'Episode $n · $title';
+  if (title == null) return 'Серия $n';
+  return 'Серия $n · $title';
 }
 
 /// True when [title] is empty or only a generic "Episode N" / "S1 · E2" marker.

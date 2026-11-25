@@ -9,20 +9,20 @@ extension WatchStatusX on WatchStatus {
 
   /// Human label for the sheet + section headers.
   String get label => switch (this) {
-    WatchStatus.planning => 'Plan to Watch',
-    WatchStatus.watching => 'Watching',
-    WatchStatus.completed => 'Completed',
-    WatchStatus.paused => 'Paused',
-    WatchStatus.dropped => 'Dropped',
+    WatchStatus.planning => 'В планах',
+    WatchStatus.watching => 'Смотрю',
+    WatchStatus.completed => 'Завершено',
+    WatchStatus.paused => 'Отложено',
+    WatchStatus.dropped => 'Брошено',
   };
 
   /// Short label for filter chips / section headers.
   String get shortLabel => switch (this) {
-    WatchStatus.planning => 'Planning',
-    WatchStatus.watching => 'Watching',
-    WatchStatus.completed => 'Completed',
-    WatchStatus.paused => 'Paused',
-    WatchStatus.dropped => 'Dropped',
+    WatchStatus.planning => 'Планы',
+    WatchStatus.watching => 'Смотрю',
+    WatchStatus.completed => 'Завершено',
+    WatchStatus.paused => 'Отложено',
+    WatchStatus.dropped => 'Брошено',
   };
 
   /// AniList `MediaListStatus` value.
@@ -61,8 +61,8 @@ extension WatchStatusX on WatchStatus {
 String labelFor(WatchStatus s, {required bool reading}) {
   if (!reading) return s.label;
   return switch (s) {
-    WatchStatus.watching => 'Reading',
-    WatchStatus.planning => 'Plan to Read',
+    WatchStatus.watching => 'Читаю',
+    WatchStatus.planning => 'В планах',
     WatchStatus.completed || WatchStatus.paused || WatchStatus.dropped => s.label,
   };
 }
@@ -75,7 +75,7 @@ String labelFor(WatchStatus s, {required bool reading}) {
 String shortLabelFor(WatchStatus s, {required bool reading}) {
   if (!reading) return s.shortLabel;
   return switch (s) {
-    WatchStatus.watching => 'Reading',
+    WatchStatus.watching => 'Читаю',
     WatchStatus.planning ||
     WatchStatus.completed ||
     WatchStatus.paused ||

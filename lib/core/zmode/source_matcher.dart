@@ -470,7 +470,7 @@ class SourceMatcher {
     // is how you end up reading someone else's numbering.
     //
     // The sweep below is a one-time bootstrap for reading: it runs when
-    // nothing is remembered yet, and whatever matches is kept. "Auto Resolve"
+    // nothing is remembered yet, and whatever matches is kept. "Автовыбор"
     // in the per-title picker clears that memory (see [clearAuto]), so
     // sweeping stays reachable on purpose.
     final isReading = c.kind == ZKind.manga || c.kind == ZKind.novel;
@@ -571,7 +571,7 @@ class SourceMatcher {
   /// The order mirrors [_resolve] exactly, and has to: this is what the Detail
   /// screen NAMES on the row, what the Cloudflare shield acts on, and what
   /// "Wrong title?" compares against. Reading stopped sweeping, so leaving it
-  /// out here labelled every manga "Auto Resolve" while a fixed source was
+  /// out here labelled every manga "Автовыбор" while a fixed source was
   /// quietly serving it — the row saying one thing and the chapters coming
   /// from another is the exact confusion this whole area keeps producing.
   String? sourceForTitle(ZCanonical c) {
@@ -661,7 +661,7 @@ class SourceMatcher {
     _sourceChanged(c);
   }
 
-  /// The picker's "Auto Resolve": drops this title's own pin AND the kind's
+  /// The picker's "Автовыбор": drops this title's own pin AND the kind's
   /// explicit default, so this title (and every other unpinned title of the
   /// kind) genuinely sweeps again. A per-title pin alone isn't enough here —
   /// a kind default set earlier (e.g. via [chooseSource]) would otherwise
@@ -670,7 +670,7 @@ class SourceMatcher {
     await clearTitlePin(c);
     await _prefs.clear(c.kind);
     // Reading remembers the source that last matched and starts there instead
-    // of sweeping. Picking "Auto Resolve" has to forget that too, or the very
+    // of sweeping. Picking "Автовыбор" has to forget that too, or the very
     // next resolve snaps straight back to it and the choice does nothing.
     await _prefs.clearLastGood(c.kind);
     await _store.clearLastPlayed(c);

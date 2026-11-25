@@ -303,7 +303,7 @@ class _FeaturedBannerPanelsState extends State<FeaturedBannerPanels> {
                     icon: Icons.info_outline_rounded,
                     size: 32,
                     onTap: () => widget.onInfo(item),
-                    semanticLabel: 'Details',
+                    semanticLabel: 'Подробнее',
                   ),
                   const SizedBox(height: 8),
                   BannerCircleButton(

@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../l10n/l10n.dart';
+import '../i18n/meta_ru.dart';
+import '../i18n/title_ru.dart';
 import '../app_mode.dart';
 import '../di/injector.dart';
 import '../models/media_detail.dart';
@@ -106,10 +109,10 @@ class _MediaInfoSheetState extends State<_MediaInfoSheet> {
   bool _togglingList = false;
 
   String? _statusLabel(MediaStatus s) => switch (s) {
-    MediaStatus.ongoing => 'Ongoing',
-    MediaStatus.completed => 'Completed',
-    MediaStatus.hiatus => 'Hiatus',
-    MediaStatus.cancelled => 'Cancelled',
+    MediaStatus.ongoing => 'Онгоинг',
+    MediaStatus.completed => 'Завершён',
+    MediaStatus.hiatus => 'Пауза',
+    MediaStatus.cancelled => 'Отменён',
     MediaStatus.unknown => null,
   };
 
@@ -205,11 +208,10 @@ class _MediaInfoSheetState extends State<_MediaInfoSheet> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        RuTitleText(
           widget.title,
           style: AppText.largeTitle.copyWith(fontSize: 23, height: 1.08, color: Colors.white),
           maxLines: 2,
-          overflow: TextOverflow.ellipsis,
         ),
         if (widget.englishTitle != null && widget.englishTitle!.isNotEmpty && widget.englishTitle != widget.title) ...[
           const SizedBox(height: 4),
@@ -302,22 +304,37 @@ class _MediaInfoSheetState extends State<_MediaInfoSheet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (genres.isNotEmpty) ...[
-                    Wrap(spacing: 7, runSpacing: 7, children: genres.map((g) => _genrePill(g)).toList()),
+                    ListenableBuilder(
+                      listenable: MetaRu.instance,
+                      builder: (context, _) => Wrap(
+                        spacing: 7,
+                        runSpacing: 7,
+                        children: genres
+                            .map((g) => _genrePill(MetaRu.instance.text(g)))
+                            .toList(),
+                      ),
+                    ),
                     const SizedBox(height: 14),
                   ],
-                  Text(
-                    (desc != null && desc.isNotEmpty) ? desc : 'No description available.',
+                  RuMetaText(
+                    (desc != null && desc.isNotEmpty)
+                        ? desc
+                        : 'Описание пока недоступно.',
+                    synopsis: desc != null && desc.isNotEmpty,
+                    malId: d?.malId,
+                    tmdbId: d?.tmdbId,
+                    tmdbIsTv: d?.tmdbIsTv ?? false,
                     style: AppText.body.copyWith(height: 1.4),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
                   if (d != null && d.studios.isNotEmpty) ...[
                     const SizedBox(height: 14),
-                    _metaLine('Studio', d.studios.take(3).join(', ')),
+                    _metaLine(context.l10n.studio, d.studios.take(3).join(', ')),
                   ],
                   if (d != null && d.cast.isNotEmpty) ...[
                     const SizedBox(height: 8),
-                    _metaLine('Cast', d.cast.take(4).join(', ')),
+                    _metaLine(context.l10n.cast, d.cast.take(4).join(', ')),
                   ],
                 ],
               );
@@ -402,14 +419,14 @@ class _MediaInfoSheetState extends State<_MediaInfoSheet> {
               children: [
                 _IconAction(
                   icon: _inList ? Icons.check_rounded : Icons.add_rounded,
-                  label: 'My List',
+                  label: 'Мой список',
                   active: _inList,
                   busy: _togglingList,
                   onTap: _toggleList,
                 ),
                 _IconAction(
                   icon: Icons.info_outline_rounded,
-                  label: 'Details',
+                  label: 'Подробнее',
                   onTap: () {
                     Navigator.pop(context);
                     widget.onOpenDetail();
@@ -418,7 +435,7 @@ class _MediaInfoSheetState extends State<_MediaInfoSheet> {
                 if (widget.onRemoveFromContinue != null)
                   _IconAction(
                     icon: Icons.delete_outline_rounded,
-                    label: 'Remove',
+                    label: 'Убрать',
                     destructive: true,
                     onTap: () {
                       Navigator.pop(context);

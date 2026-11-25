@@ -4,7 +4,7 @@ import '../theme/app_text.dart';
 import 'placement_slide.dart';
 import 'reveal_item.dart';
 
-/// An edge-bleed horizontal content row with an optional header and "See All" link.
+/// An edge-bleed horizontal content row with an optional header and "Показать все" link.
 ///
 /// Content scrolls lazily via [ListView.builder] so items off-screen are never
 /// built. Left/right padding is 16 px; items spill off the right edge to signal
@@ -200,7 +200,7 @@ class _Header extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsetsDirectional.only(start: 8),
                     child: Text(
-                      'See All',
+                      'Показать все',
                       style: AppText.caption.copyWith(color: AppColors.accent),
                     ),
                   ),

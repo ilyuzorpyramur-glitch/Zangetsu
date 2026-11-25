@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../i18n/meta_ru.dart';
 import '../app_mode.dart';
 import '../cache/app_image_cache.dart';
 import '../di/injector.dart';
@@ -12,6 +13,7 @@ import '../playback/playback_prefs.dart';
 import 'image_fade.dart';
 import '../aniyomi/aniyomi_image_provider.dart';
 import '../mihon/mihon_image_provider.dart';
+import '../i18n/title_ru.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 
@@ -520,7 +522,7 @@ class _PosterCardState extends State<PosterCard> {
                                   const SizedBox(width: 4),
                                 if (showGenre)
                                   _PosterTag(
-                                    widget.genres.first,
+                                    MetaRu.instance.text(widget.genres.first),
                                     maxWidth: widget.cellWidth * 0.3,
                                   ),
                                 if (showGenre && showAdult)
@@ -675,10 +677,9 @@ class _PosterCardTitleState extends State<PosterCardTitle> {
     return _text();
   }
 
-  Widget _text() => Text(
+  Widget _text() => RuTitleText(
     widget.title,
     maxLines: widget.maxLines,
-    overflow: TextOverflow.ellipsis,
     style:
         widget.textStyle ??
         AppText.caption.copyWith(

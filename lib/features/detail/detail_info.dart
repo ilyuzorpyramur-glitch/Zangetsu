@@ -66,9 +66,18 @@ class _CreditLine extends StatelessWidget {
 // ─────────────────────────────────────────────────────────────────────────────
 
 class _Description extends StatelessWidget {
-  const _Description({required this.text, required this.onReadMore});
+  const _Description({
+    required this.text,
+    required this.onReadMore,
+    this.malId,
+    this.tmdbId,
+    this.tmdbIsTv = false,
+  });
 
   final String text;
+  final int? malId;
+  final int? tmdbId;
+  final bool tmdbIsTv;
 
   /// Jumps to the Details tab (full synopsis) — no inline expansion.
   final VoidCallback onReadMore;
@@ -81,8 +90,12 @@ class _Description extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          RuMetaText(
             text,
+            synopsis: true,
+            malId: malId,
+            tmdbId: tmdbId,
+            tmdbIsTv: tmdbIsTv,
             style: AppText.body,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,

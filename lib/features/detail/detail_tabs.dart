@@ -175,7 +175,7 @@ class _CastTab extends StatelessWidget {
             ),
             if (m.role != null && m.role!.isNotEmpty)
               Text(
-                m.role!,
+                MetaRu.instance.text(m.role),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
@@ -470,13 +470,15 @@ class _DetailsTab extends StatelessWidget {
             style: AppText.caption.copyWith(color: AppColors.textTertiary),
           ),
           const SizedBox(height: 10),
-          Wrap(
+          ListenableBuilder(
+            listenable: MetaRu.instance,
+            builder: (context, _) => Wrap(
             spacing: 6,
             runSpacing: 6,
             children: genres
                 .map(
                   (g) => _FilterChip(
-                    text: g,
+                    text: MetaRu.instance.text(g),
                     // Tappable only on a metadata title, which is what the
                     // catalogue behind the tap can actually answer for. A
                     // source reports its genres as plain strings and filters
@@ -495,6 +497,7 @@ class _DetailsTab extends StatelessWidget {
                   ),
                 )
                 .toList(),
+            ),
           ),
         ],
         ..._tagChips(context),
@@ -505,7 +508,14 @@ class _DetailsTab extends StatelessWidget {
             style: AppText.caption.copyWith(color: AppColors.textTertiary),
           ),
           const SizedBox(height: 8),
-          Text(desc, style: AppText.body),
+          RuMetaText(
+            desc,
+            synopsis: true,
+            malId: detail?.malId,
+            tmdbId: detail?.tmdbId,
+            tmdbIsTv: detail?.tmdbIsTv ?? false,
+            style: AppText.body,
+          ),
         ],
       ],
     );
@@ -527,9 +537,10 @@ class _DetailsTab extends StatelessWidget {
 
     final aired = dates();
     return [
-      if (d.format != null) _DetailRow(label: l10n.format, value: d.format!),
+      if (d.format != null)
+        _DetailRow(label: l10n.format, value: MetaRu.instance.text(d.format)),
       if (d.durationMins != null)
-        _DetailRow(label: l10n.duration, value: '${d.durationMins} min'),
+        _DetailRow(label: l10n.duration, value: '${d.durationMins} мин'),
       if (d.score != null)
         _DetailRow(label: l10n.score, value: '${d.score! / 10} / 10'),
       if (d.popularity != null)
@@ -537,7 +548,10 @@ class _DetailsTab extends StatelessWidget {
       if (d.favourites != null)
         _DetailRow(label: l10n.favourites, value: _thousands(d.favourites!)),
       if (d.sourceMaterial != null)
-        _DetailRow(label: l10n.sourceMaterial, value: d.sourceMaterial!),
+        _DetailRow(
+          label: l10n.sourceMaterial,
+          value: MetaRu.instance.text(d.sourceMaterial),
+        ),
       if (d.country != null)
         _DetailRow(label: l10n.country, value: _countryName(d.country!)),
       if (aired != null) _DetailRow(label: l10n.aired, value: aired),
@@ -586,12 +600,12 @@ class _DetailsTab extends StatelessWidget {
   /// The handful that actually appear on animation and comics. Anything else
   /// keeps its code rather than being guessed at.
   static String _countryName(String code) => switch (code.toUpperCase()) {
-    'JP' => 'Japan',
-    'KR' => 'South Korea',
-    'CN' => 'China',
-    'TW' => 'Taiwan',
-    'US' => 'United States',
-    _ => code.toUpperCase(),
+    'JP' => 'Япония',
+    'KR' => 'Южная Корея',
+    'CN' => 'Китай',
+    'TW' => 'Тайвань',
+    'US' => 'США',
+    _ => MetaRu.instance.text(code),
   };
 }
 
@@ -607,6 +621,14 @@ class _SpoilerTags extends StatefulWidget {
 class _SpoilerTagsState extends State<_SpoilerTags> {
   bool _showSpoilers = false;
 
+  /// Tag name in Russian, with AniList's rank kept as-is. The raw English
+  /// name still drives the browse filter.
+  String _tagLabel(MediaTag t) {
+    MetaRu.instance.request(t.name);
+    final name = MetaRu.instance.text(t.name);
+    return t.rank == null ? name : '$name  ${t.rank}%';
+  }
+
   @override
   Widget build(BuildContext context) {
     final safe = widget.tags.where((t) => !t.isSpoiler).toList();
@@ -615,17 +637,20 @@ class _SpoilerTagsState extends State<_SpoilerTags> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Wrap(
+        ListenableBuilder(
+          listenable: MetaRu.instance,
+          builder: (context, _) => Wrap(
           spacing: 6,
           runSpacing: 6,
           children: [
             for (final t in shown)
               _FilterChip(
-                text: t.rank == null ? t.name : '${t.name}  ${t.rank}%',
+                text: _tagLabel(t),
                 accent: t.isSpoiler,
                 onTap: () => _browseBy(context, MetaFilters(tags: [t.name])),
               ),
           ],
+          ),
         ),
         if (spoilers.isNotEmpty && !_showSpoilers)
           Padding(

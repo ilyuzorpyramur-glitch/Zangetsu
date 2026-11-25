@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../i18n/meta_ru.dart';
 import '../di/injector.dart';
 import '../metadata/title_logo_service.dart';
 import '../models/media_item.dart';
@@ -162,24 +163,33 @@ class BannerMetaLine extends StatelessWidget {
       builder: (context, snap) {
         final m = snap.data;
         if (m == null) return const SizedBox.shrink();
-        final parts = <String>[...m.genres.take(compact ? 1 : 2)];
-        if (m.episodeCount > 1) {
-          parts.add('${m.episodeCount} ${reading ? 'Chapters' : 'Episodes'}');
-        } else if (m.year != null && m.year!.isNotEmpty) {
-          parts.add(m.year!);
-        }
-        if (parts.isEmpty) return const SizedBox.shrink();
-        return Text(
-          parts.join('  ·  ').toUpperCase(),
-          textAlign: align,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppText.caption.copyWith(
-            fontSize: compact ? 8.5 : 9.5,
-            color: Colors.white.withValues(alpha: compact ? 0.78 : 0.64),
-            fontWeight: FontWeight.w500,
-            letterSpacing: compact ? 1.4 : 2.1,
-          ),
+        return ListenableBuilder(
+          listenable: MetaRu.instance,
+          builder: (context, _) {
+            final shown = m.genres.take(compact ? 1 : 2).toList();
+            for (final g in shown) {
+              MetaRu.instance.request(g);
+            }
+            final parts = <String>[for (final g in shown) MetaRu.instance.text(g)];
+            if (m.episodeCount > 1) {
+              parts.add('${m.episodeCount} ${reading ? 'Главы' : 'Серии'}');
+            } else if (m.year != null && m.year!.isNotEmpty) {
+              parts.add(m.year!);
+            }
+            if (parts.isEmpty) return const SizedBox.shrink();
+            return Text(
+              parts.join('  ·  ').toUpperCase(),
+              textAlign: align,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppText.caption.copyWith(
+                fontSize: compact ? 8.5 : 9.5,
+                color: Colors.white.withValues(alpha: compact ? 0.78 : 0.64),
+                fontWeight: FontWeight.w500,
+                letterSpacing: compact ? 1.4 : 2.1,
+              ),
+            );
+          },
         );
       },
     );

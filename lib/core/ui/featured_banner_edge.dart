@@ -357,7 +357,7 @@ class _FeaturedBannerEdgeState extends State<FeaturedBannerEdge>
                               borderRadius: BorderRadius.circular(24),
                               child: Center(
                                 child: Text(
-                                  'View Details',
+                                  'Подробнее',
                                   style: TextStyle(
                                     color: AppColors.bg,
                                     fontSize: 15,

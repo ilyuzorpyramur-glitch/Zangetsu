@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../i18n/meta_ru.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 
@@ -38,7 +39,7 @@ class GenreChips extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(width: 8),
         itemBuilder: (context, index) {
           final genre = kGenres[index];
-          return _GenreChip(label: genre, onTap: () => onTap(genre));
+          return _GenreChip(label: MetaRu.instance.text(genre), onTap: () => onTap(genre));
         },
       ),
     );

@@ -68,18 +68,18 @@ Widget _stremioTvConfigureDialog(
     autocorrect: false,
     enableSuggestions: false,
     decoration: const InputDecoration(
-      labelText: 'Configured addon URL',
-      hintText: 'Paste the URL from the addon settings page',
+      labelText: 'URL настроенного аддона',
+      hintText: 'Вставьте URL со страницы настроек аддона',
     ),
   ),
   actions: [
     TvAlertAction(
-      label: 'Cancel',
+      label: 'Отмена',
       autofocus: true,
       onTap: () => Navigator.of(dialog).pop(),
     ),
     TvAlertAction(
-      label: 'Save',
+      label: 'Сохранить',
       primary: true,
       onTap: () => Navigator.of(dialog).pop(controller.text),
     ),
@@ -88,16 +88,16 @@ Widget _stremioTvConfigureDialog(
 
 Widget _stremioTvRemoveDialog(BuildContext dialog, String name) =>
     TvAlertDialog(
-      title: 'Remove addon?',
+      title: 'Удалить аддон?',
       body: Text(name),
       actions: [
         TvAlertAction(
-          label: 'Cancel',
+          label: 'Отмена',
           autofocus: true,
           onTap: () => Navigator.of(dialog).pop(false),
         ),
         TvAlertAction(
-          label: 'Remove',
+          label: 'Убрать',
           primary: true,
           onTap: () => Navigator.of(dialog).pop(true),
         ),

@@ -94,18 +94,18 @@ class MalCatalogue implements AnimeCatalogue {
           // Both seasonal rows come from ONE request (see [home]) — MAL has no
           // per-season ranking, so the season endpoint is fetched once and
           // read two ways: newest first, and most-listed first.
-          ('Recently released', _recentRow),
-          ('Trending', 'airing'),
-          ('Popular this season', _seasonRow),
-          ('Upcoming next season', 'upcoming'),
-          ('All-time popular', 'bypopularity'),
-          ('Top rated', 'all'),
+          ('Недавно вышло', _recentRow),
+          ('В тренде', 'airing'),
+          ('Популярное в этом сезоне', _seasonRow),
+          ('Скоро выйдет', 'upcoming'),
+          ('Популярное за всё время', 'bypopularity'),
+          ('Лучшие', 'all'),
           ('Most favorited', 'favorite'),
         ]
       : const [
-          ('Trending', 'bypopularity'),
-          ('Popular', 'bypopularity'),
-          ('Top rated', 'all'),
+          ('В тренде', 'bypopularity'),
+          ('Популярное', 'bypopularity'),
+          ('Лучшие', 'all'),
         ];
 
   /// Row ids for the two rows served by the season endpoint rather than

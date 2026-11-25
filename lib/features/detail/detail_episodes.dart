@@ -1554,7 +1554,7 @@ class _EpisodeRow extends StatelessWidget {
         // Episode.unavailable).
         ? ep.unavailable!
         : [
-            if (ep.runtimeMinutes != null) '${ep.runtimeMinutes} min',
+            if (ep.runtimeMinutes != null) '${ep.runtimeMinutes} мин',
             if (ep.date != null && ep.date!.trim().isNotEmpty) ep.date!.trim(),
           ].join('  ·  ');
 
@@ -1759,7 +1759,7 @@ class _EpisodeRow extends StatelessWidget {
             // Full-width synopsis under the whole row (under the image too).
             if (desc != null) ...[
               const SizedBox(height: 8),
-              Text(
+              RuMetaText(
                 desc,
                 style: AppText.caption.copyWith(
                   color: AppColors.textSecondary,

@@ -171,7 +171,7 @@ class HowItWorksScreen extends StatelessWidget {
                 ),
               ),
               icon: const Icon(Icons.replay_rounded),
-              label: const Text('Replay onboarding'),
+              label: const Text('Пройти обучение заново'),
             ),
           ),
         ],

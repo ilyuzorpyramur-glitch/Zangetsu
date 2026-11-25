@@ -424,7 +424,7 @@ class _PlayerTvControlsState extends State<PlayerTvControls> {
                                         playing
                                             ? Icons.pause_rounded
                                             : Icons.play_arrow_rounded,
-                                        playing ? 'Pause' : 'Play',
+                                        playing ? 'Пауза' : 'Смотреть',
                                         () {
                                           widget.onTogglePlay();
                                           _scheduleHide();
@@ -440,7 +440,7 @@ class _PlayerTvControlsState extends State<PlayerTvControls> {
                                   if (showInfoButton)
                                     _barButton(
                                       Icons.info_outline_rounded,
-                                      'Info',
+                                      'Подробнее',
                                       () {
                                         widget.onInfo!();
                                         _scheduleHide(); // reset idle timer

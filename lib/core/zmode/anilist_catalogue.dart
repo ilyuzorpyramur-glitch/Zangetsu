@@ -138,12 +138,12 @@ class AniListCatalogue implements AnimeCatalogue {
         // the manga floor pushed this row back to titles years old. Verified
         // against the live API: >1000 returned 2023 entries, >50 returns the
         // current month.
-        ('Recently released', recent(k == ZKind.novel ? 50 : 1000)),
-        ('Trending', 'sort:TRENDING_DESC'),
-        ('Popular', 'sort:POPULARITY_DESC'),
-        ('Top rated', 'sort:SCORE_DESC'),
-        ('Action', 'genre_in:["Action"],sort:POPULARITY_DESC'),
-        ('Romance', 'genre_in:["Romance"],sort:POPULARITY_DESC'),
+        ('Недавно вышло', recent(k == ZKind.novel ? 50 : 1000)),
+        ('В тренде', 'sort:TRENDING_DESC'),
+        ('Популярное', 'sort:POPULARITY_DESC'),
+        ('Лучшие', 'sort:SCORE_DESC'),
+        ('Экшн', 'genre_in:["Action"],sort:POPULARITY_DESC'),
+        ('Романтика', 'genre_in:["Romance"],sort:POPULARITY_DESC'),
       ];
     }
     final (nextSeason, nextYear) = switch (season) {
@@ -153,21 +153,21 @@ class AniListCatalogue implements AnimeCatalogue {
       _ => ('WINTER', now.year + 1),
     };
     return [
-      ('Recently released', recent(2000)),
-      ('Trending', 'sort:TRENDING_DESC'),
+      ('Недавно вышло', recent(2000)),
+      ('В тренде', 'sort:TRENDING_DESC'),
       (
-        'Popular this season',
+        'Популярное в этом сезоне',
         'sort:POPULARITY_DESC,season:$season,seasonYear:${now.year}',
       ),
       (
-        'Upcoming next season',
+        'Скоро выйдет',
         'sort:POPULARITY_DESC,season:$nextSeason,seasonYear:$nextYear,'
             'status:NOT_YET_RELEASED',
       ),
-      ('All-time popular', 'sort:POPULARITY_DESC'),
-      ('Top rated', 'sort:SCORE_DESC'),
-      ('Action', 'genre_in:["Action"],sort:POPULARITY_DESC'),
-      ('Romance', 'genre_in:["Romance"],sort:POPULARITY_DESC'),
+      ('Популярное за всё время', 'sort:POPULARITY_DESC'),
+      ('Лучшие', 'sort:SCORE_DESC'),
+      ('Экшн', 'genre_in:["Action"],sort:POPULARITY_DESC'),
+      ('Романтика', 'genre_in:["Romance"],sort:POPULARITY_DESC'),
     ];
   }
 

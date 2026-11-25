@@ -5829,4 +5829,29 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get portraitVideoEdgeToEdge => 'Edge-to-edge portrait video';
+
+  @override
+  String get profileInProgress => 'In progress';
+
+  @override
+  String get profileCompleted => 'Completed';
+
+  @override
+  String get profileAddBio => 'Add a bio';
+
+  @override
+  String get profileKidsProfile => 'Kids profile';
+
+  @override
+  String get profileEditProfile => 'Edit profile';
+
+  @override
+  String get profileMenu => 'Profile menu';
+
+  @override
+  String get donateTitle => 'Donate';
+
+  @override
+  String get profileComingSoon =>
+      'More features are on their way with Zoro… he just got lost again.';
 }

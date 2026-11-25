@@ -8,6 +8,8 @@ import 'image_fade.dart';
 import 'mobile_hero_art.dart';
 import 'poster_palette.dart';
 
+import '../i18n/meta_ru.dart';
+import '../i18n/title_ru.dart';
 import '../di/injector.dart';
 import 'native_cover_provider.dart';
 import '../metadata/title_logo_service.dart';
@@ -432,7 +434,7 @@ class _FeaturedHeroState extends State<FeaturedHero> {
                       _circleBtn(
                         Icons.info_outline_rounded,
                         widget.onInfo,
-                        semanticLabel: 'Details',
+                        semanticLabel: 'Подробнее',
                       ),
                       widget.onInfo,
                     ),
@@ -446,7 +448,7 @@ class _FeaturedHeroState extends State<FeaturedHero> {
     );
   }
 
-  Widget _titleText() => Text(
+  Widget _titleText() => RuTitleText(
     widget.item.title,
     textAlign: TextAlign.center,
     style: AppText.largeTitle.copyWith(
@@ -455,7 +457,6 @@ class _FeaturedHeroState extends State<FeaturedHero> {
       letterSpacing: -0.6,
     ),
     maxLines: 2,
-    overflow: TextOverflow.ellipsis,
   );
 
   /// If a [widget.wrapButton] decorator was provided (TV), wraps [w] with it;
@@ -471,27 +472,37 @@ class _FeaturedHeroState extends State<FeaturedHero> {
       builder: (context, snap) {
         final m = snap.data;
         if (m == null) return const SizedBox.shrink();
-        final parts = <String>[...m.genres.take(3)];
-        if (m.episodeCount > 1) {
-          // Reading modes count chapters, not episodes (same shared
-          // Episode model underneath — display wording only).
-          parts.add(
-            '${m.episodeCount} ${widget.reading ? 'Chapters' : 'Episodes'}',
-          );
-        } else if (m.year != null && m.year!.isNotEmpty) {
-          parts.add(m.year!);
-        }
-        if (parts.isEmpty) return const SizedBox.shrink();
-        return Text(
-          parts.join('   ·   ').toUpperCase(),
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: AppText.caption.copyWith(
-            color: Colors.white.withValues(alpha: 0.92),
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.8,
-          ),
+        return ListenableBuilder(
+          listenable: MetaRu.instance,
+          builder: (context, _) {
+            for (final g in m.genres.take(3)) {
+              MetaRu.instance.request(g);
+            }
+            final parts = <String>[
+              ...m.genres.take(3).map(MetaRu.instance.text),
+            ];
+            if (m.episodeCount > 1) {
+              // Reading modes count chapters, not episodes (same shared
+              // Episode model underneath — display wording only).
+              parts.add(
+                '${m.episodeCount} ${widget.reading ? 'Главы' : 'Серии'}',
+              );
+            } else if (m.year != null && m.year!.isNotEmpty) {
+              parts.add(m.year!);
+            }
+            if (parts.isEmpty) return const SizedBox.shrink();
+            return Text(
+              parts.join('   ·   ').toUpperCase(),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppText.caption.copyWith(
+                color: Colors.white.withValues(alpha: 0.92),
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.8,
+              ),
+            );
+          },
         );
       },
     );

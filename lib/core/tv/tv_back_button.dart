@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/l10n.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text.dart';
 import 'tv_focusable.dart';
@@ -18,7 +19,7 @@ class TvBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TvFocusable(
       autofocus: autofocus,
-      semanticLabel: 'Back',
+      semanticLabel: context.l10n.back,
       onTap: onPressed ?? () => Navigator.of(context).maybePop(),
       // Excluded — semanticLabel above already announces "Back"; without
       // this the nested Text was a second sibling node and TalkBack read
@@ -36,7 +37,7 @@ class TvBackButton extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'Back',
+                context.l10n.back,
                 style: AppText.body.copyWith(color: AppColors.textPrimary),
               ),
             ],

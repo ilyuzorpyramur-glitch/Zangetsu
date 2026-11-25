@@ -15,6 +15,8 @@ import 'package:media_kit_video/media_kit_video.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/i18n/meta_ru.dart';
+import '../../core/i18n/title_ru.dart';
 import '../../core/zmode/season_chain.dart';
 import '../../core/zmode/metadata_provider_prefs.dart';
 import '../../core/ui/poster_card.dart';
@@ -655,18 +657,18 @@ class _DetailViewState extends State<_DetailView>
 
   /// Plain-text titles (the Title artwork toggle only swaps in a logo once
   /// one has actually resolved — and back to text if it fails to load).
-  Widget _headerTitleText(String title) => Text(
+  Widget _headerTitleText(String title) => RuTitleText(
     title,
+    anime: widget.item.type == ProviderType.anime,
     style: AppText.largeTitle.copyWith(fontSize: 28),
     maxLines: 2,
-    overflow: TextOverflow.ellipsis,
   );
 
-  Widget _barTitleText(String title) => Text(
+  Widget _barTitleText(String title) => RuTitleText(
     title,
+    anime: widget.item.type == ProviderType.anime,
     style: AppText.headline,
     maxLines: 1,
-    overflow: TextOverflow.ellipsis,
   );
 
   /// Best-effort TMDB title-logo lookup (no-op unless the toggle is on).
@@ -1453,7 +1455,7 @@ class _DetailViewState extends State<_DetailView>
       }
       if (index >= episodes.length ||
           StremioRef.parse(episodes[index].url) != ref) {
-        _snack('Episode changed — pick the link again');
+        _snack('Серия сменилась — выбери ссылку заново');
         return null;
       }
       return picked;
@@ -1904,7 +1906,7 @@ class _DetailViewState extends State<_DetailView>
     if (m == null || m <= 0) return context.l10n.movie;
     return m >= 60
         ? '${context.l10n.movie} · ${m ~/ 60}h ${m % 60}m'
-        : '${context.l10n.movie} · $m min';
+        : '${context.l10n.movie} · $m мин';
   }
 
   /// Walk episodes and return the best resume target index. PRESERVED.
@@ -2581,7 +2583,7 @@ class _DetailViewState extends State<_DetailView>
     // For anime (or anything without cast) surface Genres instead of an empty
     // Starring line — never show an empty label.
     final genresLine = (starring == null && detail.genres.isNotEmpty)
-        ? detail.genres.take(4).join(', ')
+        ? detail.genres.take(4).map(MetaRu.instance.text).join(', ')
         : null;
 
     // Friendly provider name + its origin repo, so the user can tell which repo
@@ -2844,6 +2846,9 @@ class _DetailViewState extends State<_DetailView>
                     padding: const EdgeInsets.fromLTRB(16, 18, 16, 0),
                     child: _Description(
                       text: cleanSynopsis(detail.description) ?? '',
+                      malId: detail.malId,
+                      tmdbId: detail.tmdbId,
+                      tmdbIsTv: detail.tmdbIsTv,
                       // "Read more" reveals the Details tab (full synopsis) rather
                       // than expanding inline; the header stays clamped to 3 lines.
                       onReadMore: () => _revealTab(3),

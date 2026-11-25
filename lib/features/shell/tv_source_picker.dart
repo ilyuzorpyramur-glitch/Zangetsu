@@ -39,7 +39,7 @@ class TvSourcePicker extends StatelessWidget {
   /// changing [ActiveSourceCubit] — used by Z Mode's per-title source selector.
   final ValueChanged<String>? onPick;
 
-  /// When set, an "Auto Resolve" row is shown above the source list — Z
+  /// When set, an "Автовыбор" row is shown above the source list — Z
   /// Mode's per-title selector only. Picking it sweeps every candidate for
   /// this title instead of asking one fixed source.
   final VoidCallback? onAutoResolve;
@@ -63,7 +63,7 @@ class TvSourcePicker extends StatelessWidget {
       }
     }
 
-    addSection('Anime', buckets.anime);
+    addSection('Аниме', buckets.anime);
     addSection('Movies & Series', buckets.movies);
     addSection('NSFW', buckets.nsfw);
 
@@ -90,7 +90,7 @@ class TvSourcePicker extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
               child: Text(
-                'Select Source',
+                'Выбрать источник',
                 style: AppText.title.copyWith(color: AppColors.textPrimary),
               ),
             ),
@@ -98,7 +98,7 @@ class TvSourcePicker extends StatelessWidget {
             if (onAutoResolve != null) ...[
               TvListFocusable(
                 autofocus: autoSelected,
-                semanticLabel: 'Auto Resolve',
+                semanticLabel: 'Автовыбор',
                 onTap: () {
                   onAutoResolve!();
                   Navigator.of(context).pop();
@@ -116,7 +116,7 @@ class TvSourcePicker extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Auto Resolve', style: AppText.headline),
+                            Text('Автовыбор', style: AppText.headline),
                             Padding(
                               padding: const EdgeInsets.only(top: 2),
                               child: Text(

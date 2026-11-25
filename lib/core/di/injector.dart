@@ -19,6 +19,8 @@ import '../logging/log_report_service.dart';
 import '../mangayomi/mangayomi_manager.dart';
 import '../announce/announcement_service.dart';
 import '../cache/app_image_cache.dart';
+import '../i18n/meta_ru.dart';
+import '../i18n/title_ru.dart';
 import '../platform/apple_tv.dart';
 import '../platform/app_paths.dart';
 import '../playback/category_store.dart';
@@ -258,6 +260,12 @@ Future<void> initDependencies({bool Function()? isOffline}) async {
   // Cache of the signed-in user so the logged-in UI appears INSTANTLY on boot
   // (AuthCubit reads it before the network session check). See AuthCubit.restore.
   await openBoxSafely(AuthCubit.cacheBoxName);
+  // Russian titles for English catalogue metadata (Shikimori / TMDB), cached
+  // on disk. Started here so the cache is warm before the first card builds.
+  await TitleRu.instance.init();
+  // Russian metadata (synopsis / genres / tags) — official RU sources first,
+  // machine translation as the fallback, cached on disk next to the titles.
+  await MetaRu.instance.init();
   await ProviderDownloader.init();
 
   // Supabase is already Supabase.initialize()d in main.dart; this is just the

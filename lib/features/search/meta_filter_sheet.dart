@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/i18n/meta_ru.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text.dart';
 import '../../core/zmode/metadata_filters.dart';
@@ -446,7 +447,7 @@ class _MetaFilterSheetState extends State<_MetaFilterSheet> {
                               ),
                             ),
                             child: Text(
-                              g,
+                              MetaRu.instance.text(g),
                               style: AppText.caption.copyWith(
                                 color: sel.contains(g)
                                     ? AppColors.accent

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/cache/app_image_cache.dart';
+import '../../l10n/l10n.dart';
 import '../../core/di/injector.dart';
 import '../../core/models/watch_status.dart';
 import '../../core/playback/list_status_store.dart';
@@ -75,7 +76,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.settings_outlined),
-              title: const Text('App settings'),
+              title: Text(context.l10n.appSettingsBundle),
               onTap: () {
                 Navigator.of(sheetContext).pop();
                 _openSettings(context);
@@ -87,7 +88,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                 builder: (_, state) => state.isLoggedIn
                     ? ListTile(
                         leading: const Icon(Icons.tv_outlined),
-                        title: const Text('Pair a TV'),
+                        title: Text(context.l10n.pairATV),
                         onTap: () {
                           Navigator.of(sheetContext).pop();
                           Navigator.of(context).push(PairTvScreen.route());
@@ -97,7 +98,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
               ),
             ListTile(
               leading: const Icon(Icons.favorite_outline_rounded),
-              title: const Text('Donate'),
+              title: Text(context.l10n.donateTitle),
               onTap: () {
                 Navigator.of(sheetContext).pop();
                 Navigator.of(context).push<void>(
@@ -196,7 +197,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 8),
                                   IconButton(
-                                    tooltip: 'Edit profile',
+                                    tooltip: context.l10n.profileEditProfile,
                                     onPressed: () => openViewerProfileEditor(
                                       context,
                                       _profiles,
@@ -210,7 +211,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                                 ],
                               ),
                               if (profile.isKids)
-                                Text('Kids profile', style: AppText.caption),
+                                Text(context.l10n.profileKidsProfile, style: AppText.caption),
                               GestureDetector(
                                 onTap: () => openViewerProfileEditor(
                                   context,
@@ -219,7 +220,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                                 ),
                                 child: Text(
                                   profile.bio.isEmpty
-                                      ? 'Add a bio'
+                                      ? context.l10n.profileAddBio
                                       : profile.bio,
                                   style: AppText.body.copyWith(
                                     fontSize: 14,
@@ -233,11 +234,11 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 26),
-                        _stats(saved.length, inProgress, completed),
+                        _stats(context, saved.length, inProgress, completed),
                         const SizedBox(height: 30),
                         Divider(height: 1, color: AppColors.hairline),
                         const SizedBox(height: 22),
-                        _comingSoonCard(),
+                        _comingSoonCard(context),
                       ],
                     ),
                   ),
@@ -260,7 +261,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
               Text('Profile', style: AppText.title),
               const Spacer(),
               IconButton(
-                tooltip: 'Profile menu',
+                tooltip: context.l10n.profileMenu,
                 onPressed: () => _openMenu(context),
                 style: IconButton.styleFrom(
                   foregroundColor: AppColors.textPrimary,
@@ -386,7 +387,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  tooltip: 'Profile menu',
+                  tooltip: context.l10n.profileMenu,
                   onPressed: () => _openMenu(context),
                   style: IconButton.styleFrom(
                     foregroundColor: AppColors.textPrimary,
@@ -433,15 +434,15 @@ class ViewerProfileHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _stats(int saved, int inProgress, int completed) => Row(
+  Widget _stats(BuildContext context, int saved, int inProgress, int completed) => Row(
     children: [
-      _stat('$saved', 'My List'),
-      _stat('$inProgress', 'In progress'),
-      _stat('$completed', 'Completed'),
+      _stat('$saved', context.l10n.myList),
+      _stat('$inProgress', context.l10n.profileInProgress),
+      _stat('$completed', context.l10n.profileCompleted),
     ],
   );
 
-  Widget _comingSoonCard() => Center(
+  Widget _comingSoonCard(BuildContext context) => Center(
     key: const ValueKey('zoro-coming-soon-section'),
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -460,7 +461,7 @@ class ViewerProfileHomeScreen extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'More features are on their way with Zoro… he just got lost again.',
+          context.l10n.profileComingSoon,
           textAlign: TextAlign.center,
           style: AppText.body.copyWith(color: AppColors.textSecondary),
         ),

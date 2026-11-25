@@ -177,16 +177,16 @@ class _TvPlaybackErrorDialog extends StatelessWidget {
       ),
       actions: [
         TvAlertAction(
-          label: 'Close',
+          label: 'Закрыть',
           onTap: () => Navigator.pop(context, TvPlaybackErrorAction.close),
         ),
         TvAlertAction(
-          label: 'Select Source',
+          label: 'Выбрать источник',
           onTap: () =>
               Navigator.pop(context, TvPlaybackErrorAction.selectSource),
         ),
         TvAlertAction(
-          label: 'Try Next Source',
+          label: 'Следующий источник',
           primary: true,
           autofocus: true,
           onTap: () => Navigator.pop(context, TvPlaybackErrorAction.tryNext),

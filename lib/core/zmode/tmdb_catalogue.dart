@@ -49,16 +49,16 @@ class TmdbCatalogue implements VideoCatalogue {
   static const _rows = [
     // What's out right now leads (and feeds the hero banner, which Home
     // repeats as a row); discovery rows follow, Trending first among them.
-    ('Now playing', '/movie/now_playing'),
+    ('Сейчас в кино', '/movie/now_playing'),
     // The series half of "what's out right now" — /movie/now_playing has no
     // /tv twin, and on_the_air is the closest param-free endpoint: shows with
     // an episode airing this week.
-    ('Airing now', '/tv/on_the_air'),
-    ('Trending', '/trending/all/week'),
-    ('Popular movies', '/movie/popular'),
-    ('Popular series', '/tv/popular'),
-    ('Top rated', '/movie/top_rated'),
-    ('Upcoming', '/movie/upcoming'),
+    ('Сейчас в эфире', '/tv/on_the_air'),
+    ('В тренде', '/trending/all/week'),
+    ('Популярные фильмы', '/movie/popular'),
+    ('Популярные сериалы', '/tv/popular'),
+    ('Лучшие', '/movie/top_rated'),
+    ('Скоро в кино', '/movie/upcoming'),
   ];
 
   /// All rows fired concurrently — TMDB has no aliased multi-query like

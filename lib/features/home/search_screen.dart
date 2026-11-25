@@ -10,6 +10,7 @@ import '../search/meta_filter_sheet.dart';
 import 'phone_voice_search_sheet.dart';
 import 'stremio_discover_sheet.dart';
 import 'voice_search_artwork.dart';
+import '../../core/i18n/meta_ru.dart';
 import '../../core/ui/app_toast.dart';
 import '../../core/zmode/zmode_module.dart';
 import '../../core/zmode/zmode_ids.dart';
@@ -1399,7 +1400,7 @@ class _SearchViewState extends State<_SearchView>
             Padding(
               padding: const EdgeInsetsDirectional.only(end: 8),
               child: _ActiveFilterChip(
-                label: label,
+                label: MetaRu.instance.text(label),
                 onRemove: () {
                   setState(() => _metaFilters = without);
                   _applyMetaFilters();

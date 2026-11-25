@@ -1029,7 +1029,7 @@ class _TvExoPlayerScreenState extends State<TvExoPlayerScreen> {
     // is just 'zm' under Z Mode. Info row, not a setting: selecting it is a
     // no-op.
     options.add(TvMenuOption(
-      label: 'Provider',
+      label: 'Провайдер',
       trailing: _playingProviderId(),
       showCheck: false,
       onSelect: () {},

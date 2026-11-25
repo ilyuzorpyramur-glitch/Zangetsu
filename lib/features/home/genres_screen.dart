@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/i18n/meta_ru.dart';
 import '../../core/di/injector.dart';
 import '../../core/mode/content_mode_cubit.dart';
 import '../../core/models/home_section.dart';
@@ -286,7 +287,7 @@ class _GenreTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Center(
               child: Text(
-                genre,
+                MetaRu.instance.text(genre),
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

@@ -413,7 +413,7 @@ class _OnbAccountPageState extends State<OnbAccountPage> {
         children: [
           const _LogoRow(),
           const SizedBox(height: 28),
-          Text('You are signed in', style: AppText.title),
+          Text('Вы вошли в аккаунт', style: AppText.title),
           const SizedBox(height: 8),
           Text(
             auth.displayName,
@@ -558,13 +558,13 @@ class _OnbAccountPageState extends State<OnbAccountPage> {
                       borderRadius: BorderRadius.circular(26),
                     ),
                   ),
-                  child: const Text('Continue without account'),
+                  child: const Text('Продолжить без аккаунта'),
                 ),
               ),
               const SizedBox(height: 14),
               Text(
-                'Your data will only be stored on this phone. An account '
-                'syncs My List and history across devices.',
+                'Данные хранятся только на этом телефоне. Аккаунт '
+                'синхронизирует «Мой список» и историю между устройствами.',
                 textAlign: TextAlign.center,
                 style: AppText.caption.copyWith(color: AppColors.textTertiary),
               ),
