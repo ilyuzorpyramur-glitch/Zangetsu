@@ -396,6 +396,15 @@ class TitleRu extends ChangeNotifier {
       // A film/series miss in TMDB may still be an anime season entry.
       return _lookupShikimori(title, year: year);
     }
+    // Last structured attempt: AniList resolves the catalogue's own spelling
+    // (typos, English marketing titles) to a MAL id, and Shikimori answers
+    // exactly by id. This is what catches titles whose name alone matches
+    // nothing on either side.
+    final anilistMalId = await _aniListMalId(title, year: year);
+    if (anilistMalId != null) {
+      final byId = await _lookupByMalId(anilistMalId);
+      if (byId != null) return byId;
+    }
     // Last resort: repair an obvious spelling artefact and ask once more.
     final repaired = _collapseRuns(title);
     if (repaired != title) {
@@ -423,12 +432,15 @@ class TitleRu extends ChangeNotifier {
     add(title);
     // "Title (2026)" / "Title — Season 2" style decoration confuses the search.
     add(title.replaceAll(RegExp(r'\s*[\(\[][^\)\]]*[\)\]]\s*$'), ''));
+    // "Shangri-La Frontier 3rd Season" is one entry in Shikimori, filed under
+    // the base name; searching the season suffix answers the wrong rows.
+    add(stripSeasonSuffix(title));
     final words = title.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
     if (words.length > 5) add(words.take(5).join(' '));
     if (words.length > 3) add(words.take(3).join(' '));
     final repaired = _collapseRuns(title);
     if (repaired != title) add(repaired);
-    return out.take(4).toList();
+    return out.take(5).toList();
   }
 
   Future<String?> _lookupShikimori(String title, {int? year}) async {
@@ -478,7 +490,13 @@ class TitleRu extends ChangeNotifier {
         var score = 0.0;
         for (final n in names) {
           if (n.isEmpty) continue;
-          final s = _similarity(title, n);
+          // Full-string similarity alone rejects titles that agree for their
+          // first words and diverge later — a catalogue typo ("Chiat" for
+          // "Cheat") or a long official subtitle. When the first ~28
+          // characters match, it is the same show.
+          final s = _similarity(title, n) > _prefixSimilarity(title, n, 28)
+              ? _similarity(title, n)
+              : _prefixSimilarity(title, n, 28);
           if (s > score) score = s;
         }
         var yearExact = false;
@@ -515,6 +533,44 @@ class TitleRu extends ChangeNotifier {
       debugPrint('[title-ru] shikimori "$title": $e');
       return null;
     }
+  }
+
+  /// MAL id for [title] as AniList spells it, or null.
+  Future<int?> _aniListMalId(String title, {int? year}) async {
+    final queries = <String>{
+      title,
+      stripSeasonSuffix(title),
+      title.split(RegExp(r'\s+')).take(3).join(' '),
+    }.where((q) => q.trim().length > 2).toList();
+    for (final q in queries) {
+      try {
+        final res = await _dio.post<dynamic>(
+          'https://graphql.anilist.co',
+          data: {
+            'query':
+                'query(\$s:String){Media(search:\$s,type:ANIME){id idMal}}',
+            'variables': {'s': q},
+          },
+          options: Options(
+            contentType: Headers.jsonContentType,
+            headers: {'Accept': 'application/json'},
+            responseType: ResponseType.json,
+            receiveTimeout: _requestTimeout,
+            sendTimeout: _requestTimeout,
+          ),
+        );
+        final body = res.data;
+        final data = body is Map ? body['data'] : null;
+        final media = data is Map ? data['Media'] : null;
+        final id = media is Map
+            ? (media['idMal'] as num?)?.toInt()
+            : null;
+        if (id != null && id > 0) return id;
+      } catch (e) {
+        debugPrint('[title-ru] anilist "$q": $e');
+      }
+    }
+    return null;
   }
 
   Future<String?> _lookupTmdb(String title, {int? year}) async {
@@ -604,6 +660,36 @@ class _ShikiCandidate {
 /// Catalogue names regularly carry a doubled or tripled letter that the
 /// services behind them do not ("Grotesqqque" vs "Grotesque"), and a single
 /// extra character is enough for a search box to answer nothing at all.
+/// Removes a trailing season/part marker: "Shangri-La Frontier 3rd Season" →
+/// "Shangri-La Frontier", "Attack on Titan Final Season Part 3" → "Attack on
+/// Titan". Shikimori files every season under the franchise's base name.
+String stripSeasonSuffix(String title) {
+  final re = RegExp(
+    r'[\s:,-]+((\d+)(st|nd|rd|th)?[\s-]+(season|part|cour)|(season|part|cour)[\s-]*\d+|final[\s-]+season|the[\s-]+final[\s-]+season|season[\s-]+\d+|\d+)$',
+    caseSensitive: false,
+  );
+  var out = title.trim();
+  // Strip repeatedly: "… Season 3 Part 2" has two markers.
+  for (var i = 0; i < 3; i++) {
+    final next = out.replaceFirst(re, '').trim();
+    if (next == out || next.length < 3) break;
+    out = next;
+  }
+  return out;
+}
+
+/// Similarity over the first [chars] characters of both normalised strings.
+double _prefixSimilarity(String a, String b, int chars) {
+  final x = _normalize(a);
+  final y = _normalize(b);
+  if (x.isEmpty || y.isEmpty) return 0;
+  if (x.length <= chars || y.length <= chars) return _similarity(a, b);
+  return _similarity(
+    x.substring(0, chars),
+    y.substring(0, chars),
+  );
+}
+
 String _collapseRuns(String value) =>
     value.replaceAllMapped(RegExp(r'(.)\1+'), (m) => m[1]!);
 
