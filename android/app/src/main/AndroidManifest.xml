@@ -97,7 +97,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
-            <!-- Tracker OAuth redirects (AniList / MyAnimeList / Simkl) sent back
+            <!-- Tracker OAuth redirects (AniList / MyAnimeList / Simkl / Shikimori) sent back
                  to zangetsu://<host> and captured by app_links. -->
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW"/>
@@ -107,6 +107,7 @@
                 <data android:scheme="zangetsu" android:host="mal-auth"/>
                 <data android:scheme="zangetsu" android:host="simkl-auth"/>
                 <data android:scheme="zangetsu" android:host="mangabaka-auth"/>
+                <data android:scheme="zangetsu" android:host="shikimori-auth"/>
                 <!-- Shared-title deep link: zangetsu://open?d=…&t=… (see OpenLinkService). -->
                 <data android:scheme="zangetsu" android:host="open"/>
                 <data android:scheme="zangetsu" android:host="room"/>

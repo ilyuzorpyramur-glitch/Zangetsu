@@ -79,7 +79,15 @@ jobs:
           # The proprietary Discord SDK is gitignored, so CI builds without it
           # (same switch the upstream nightly uses).
           ZANGETSU_NO_DISCORD: "1"
-        run: flutter build apk --release --split-per-abi
+          # Tracker OAuth apps: keep the credentials out of the tree and inject
+          # them as compile-time defines. Absent secrets => empty strings, and
+          # the app is expected to hide/disable that tracker.
+          SHIKIMORI_CLIENT_ID: ${{ secrets.SHIKIMORI_CLIENT_ID }}
+          SHIKIMORI_CLIENT_SECRET: ${{ secrets.SHIKIMORI_CLIENT_SECRET }}
+        run: >-
+          flutter build apk --release --split-per-abi
+          --dart-define=SHIKIMORI_CLIENT_ID=$SHIKIMORI_CLIENT_ID
+          --dart-define=SHIKIMORI_CLIENT_SECRET=$SHIKIMORI_CLIENT_SECRET
 
       - name: Collect APKs
         run: |

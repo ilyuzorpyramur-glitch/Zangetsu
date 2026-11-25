@@ -75,6 +75,27 @@ class Environment {
   static String get malRedirectUri =>
       '$trackerRedirectScheme://$malRedirectHost';
 
+  // Shikimori — OAuth2 authorization-code against Doorkeeper, so the token
+  // exchange needs the client secret. The application (2649) belongs to the
+  // owner; both values arrive ONLY as build-time defines from encrypted repo
+  // secrets, never from this file. A local `flutter run` has them empty, so a
+  // Shikimori row that cannot authenticate should stay hidden or disabled.
+  static const String shikimoriClientId = String.fromEnvironment(
+    'SHIKIMORI_CLIENT_ID',
+    defaultValue: '',
+  );
+  static const String shikimoriClientSecret = String.fromEnvironment(
+    'SHIKIMORI_CLIENT_SECRET',
+    defaultValue: '',
+  );
+  static const String shikimoriRedirectHost = 'shikimori-auth';
+  static String get shikimoriRedirectUri =>
+      '${trackerRedirectScheme}://$shikimoriRedirectHost';
+  static const String shikimoriAuthorizeUrl =
+      'https://shikimori.io/oauth/authorize';
+  static const String shikimoriTokenUrl = 'https://shikimori.io/oauth/token';
+  static const String shikimoriApi = 'https://shikimori.io/api';
+
   // Simkl wants these on EVERY request (url params + a real User-Agent), or
   // the call is invisible in their debug log and they can't help when
   // something breaks. See https://api.simkl.org/conventions/headers.
