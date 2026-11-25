@@ -98,7 +98,17 @@ class MetaRu extends ChangeNotifier {
         if (value is String) _cache['$key'] = value;
       }
     } catch (e) {
+      // See TitleRu: a corrupt box is unreadable, so rebuild it instead of
+      // re-translating everything on every launch.
       debugPrint('[meta-ru] cache unavailable: $e');
+      try {
+        if (Hive.isBoxOpen(boxName)) await Hive.box(boxName).close();
+        await Hive.deleteBoxFromDisk(boxName);
+        _box = await Hive.openBox(boxName);
+        debugPrint('[meta-ru] corrupt cache rebuilt');
+      } catch (e2) {
+        debugPrint('[meta-ru] cache rebuild failed: $e2');
+      }
     }
     _ready = true;
   }

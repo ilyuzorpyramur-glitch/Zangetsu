@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../i18n/meta_ru.dart';
+import '../i18n/title_ru.dart';
 import '../di/injector.dart';
+import '../../l10n/l10n.dart';
 import '../metadata/title_logo_service.dart';
 import '../models/media_item.dart';
 import '../stremio/stremio_ref.dart';
@@ -123,8 +125,12 @@ class _BannerTitleLogoState extends State<BannerTitleLogo> {
     );
   }
 
-  Widget _text() => Text(
+  // The banner shows the TMDB title art when it has one; otherwise this text
+  // IS the title on screen — so it goes through the same Russian-title layer
+  // as every card and header, and repaints when the translation lands.
+  Widget _text() => RuTitleText(
     widget.item.title,
+    malId: widget.item.malId,
     textAlign: widget.align,
     maxLines: 2,
     overflow: TextOverflow.ellipsis,
@@ -172,7 +178,10 @@ class BannerMetaLine extends StatelessWidget {
             }
             final parts = <String>[for (final g in shown) MetaRu.instance.text(g)];
             if (m.episodeCount > 1) {
-              parts.add('${m.episodeCount} ${reading ? 'Главы' : 'Серии'}');
+              parts.add(
+                '${m.episodeCount} '
+                '${reading ? context.l10n.chapters : context.l10n.episodes}',
+              );
             } else if (m.year != null && m.year!.isNotEmpty) {
               parts.add(m.year!);
             }

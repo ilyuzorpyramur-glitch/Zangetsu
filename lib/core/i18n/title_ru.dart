@@ -83,7 +83,19 @@ class TitleRu extends ChangeNotifier {
         if (value is String) _cache['$key'] = value;
       }
     } catch (e) {
+      // A half-written box (the app killed mid-flush) makes Hive throw on
+      // read, and every title would then be re-requested on every launch
+      // while nothing at all was cached — the "some titles are always
+      // English" symptom. The file is unreadable anyway, so rebuild it once.
       debugPrint('[title-ru] cache unavailable: $e');
+      try {
+        if (Hive.isBoxOpen(boxName)) await Hive.box(boxName).close();
+        await Hive.deleteBoxFromDisk(boxName);
+        _box = await Hive.openBox(boxName);
+        debugPrint('[title-ru] corrupt cache rebuilt');
+      } catch (e2) {
+        debugPrint('[title-ru] cache rebuild failed: $e2');
+      }
     }
     _ready = true;
     // Give the first frame time to draw before a backlog of retries starts.
