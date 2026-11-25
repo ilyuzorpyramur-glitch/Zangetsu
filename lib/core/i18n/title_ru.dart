@@ -348,6 +348,13 @@ class TitleRu extends ChangeNotifier {
       // A film/series miss in TMDB may still be an anime season entry.
       return _lookupShikimori(title, year: year);
     }
+    // Last resort: repair an obvious spelling artefact and ask once more.
+    final repaired = _collapseRuns(title);
+    if (repaired != title) {
+      final again = await _lookupShikimori(repaired, year: year);
+      if (again != null) return again;
+      return _lookupTmdb(repaired, year: year);
+    }
     return null;
   }
 
@@ -371,7 +378,9 @@ class TitleRu extends ChangeNotifier {
     final words = title.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
     if (words.length > 5) add(words.take(5).join(' '));
     if (words.length > 3) add(words.take(3).join(' '));
-    return out.take(3).toList();
+    final repaired = _collapseRuns(title);
+    if (repaired != title) add(repaired);
+    return out.take(4).toList();
   }
 
   Future<String?> _lookupShikimori(String title, {int? year}) async {
@@ -541,6 +550,14 @@ class _ShikiCandidate {
   final String russian;
   final double score;
 }
+
+/// Title with runs of the same letter collapsed ("Grotesqqque" → "Grotesque").
+///
+/// Catalogue names regularly carry a doubled or tripled letter that the
+/// services behind them do not ("Grotesqqque" vs "Grotesque"), and a single
+/// extra character is enough for a search box to answer nothing at all.
+String _collapseRuns(String value) =>
+    value.replaceAllMapped(RegExp(r'(.)\1+'), (m) => m[1]!);
 
 String _normalize(String value) {
   final lower = value.toLowerCase();
